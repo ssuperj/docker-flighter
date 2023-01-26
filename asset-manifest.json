@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/flighter/static/css/main.31d6cfe0.css",
-    "main.js": "/flighter/static/js/main.a3fe5f0e.js",
+    "main.js": "/flighter/static/js/main.a4bf4aad.js",
     "index.html": "/flighter/index.html",
-    "main.a3fe5f0e.js.map": "/flighter/static/js/main.a3fe5f0e.js.map"
+    "main.a4bf4aad.js.map": "/flighter/static/js/main.a4bf4aad.js.map"
   },
   "entrypoints": [
     "static/css/main.31d6cfe0.css",
-    "static/js/main.a3fe5f0e.js"
+    "static/js/main.a4bf4aad.js"
   ]
 }
