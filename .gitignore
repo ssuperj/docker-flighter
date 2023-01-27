@@ -38,3 +38,4 @@ out/
 
 ### my ###
 .DS_Store
+application.yml
