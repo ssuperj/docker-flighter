@@ -39,8 +39,7 @@ const globalStyles = createGlobalStyle`
     body {
     font-family: LINESeedKR_Rg, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
         "Helvetica Neue", sans-serif;
-    font-size: 30px;
-    background: black;
+    font-size: 14px;
     }
  `;
 export default globalStyles;
