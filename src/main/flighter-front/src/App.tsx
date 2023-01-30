@@ -1,10 +1,10 @@
-import AppRouter from "./pages/Router";
+import Router from "./pages/Router";
 import GlobalStyles from "./components/GlobalStyles";
 
 const App = () => {
   return (
     <>
-      <AppRouter />
+      <Router />
       <GlobalStyles />
     </>
   );
