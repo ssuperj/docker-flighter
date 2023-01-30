@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
+import styles from "../css/header.module.css";
 
 function Header(props: any) {
   return (
     <>
-      <Link to="/">
-        <h1>헤더입니다</h1>
-      </Link>
+      <Link to="/"></Link>
+      <h1 className={styles.h1}>flighter</h1>
     </>
   );
 }
