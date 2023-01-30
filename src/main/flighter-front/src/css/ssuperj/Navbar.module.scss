@@ -1,10 +1,36 @@
 .nav {
   background-color: var(--color-r-m);
+
   a {
     color: var(--color-l-g);
   }
-}
 
-// .logo {
-//   width: 100px;
-// }
+  .logo {
+    color: white;
+    margin-right: 20px;
+  }
+
+  .btn {
+    border: none;
+    &:focus {
+      border: none;
+      outline: none;
+    }
+  }
+
+  .search__btn {
+    color: var(--color-r-m);
+    border: none;
+    background-color: white;
+    &:hover {
+      background-color: white;
+    }
+    svg {
+      color: var(--color-r-m);
+      &:hover {
+        transition: 1s transform;
+        transform: scale(1.1);
+      }
+    }
+  }
+}

@@ -1,1 +1,1 @@
-.nav{background-color:var(--color-r-m)}.nav a{color:var(--color-l-g)}
+.nav{background-color:var(--color-r-m)}.nav a{color:var(--color-l-g)}.nav .logo{color:#fff;margin-right:20px}.nav .btn{border:none}.nav .btn:focus{border:none;outline:none}.nav .search__btn{color:var(--color-r-m);border:none;background-color:#fff}.nav .search__btn:hover{background-color:#fff}.nav .search__btn svg{color:var(--color-r-m)}.nav .search__btn svg:hover{transition:1s transform;transform:scale(1.1)}

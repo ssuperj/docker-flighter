@@ -50,5 +50,26 @@ const globalStyles = createGlobalStyle`
         "Helvetica Neue", sans-serif;
     font-size: 14px;
     }
+    .form-control {
+    border: none;
+    caret-color: #FF385C;
+    }
+    .form-control:focus {
+    box-shadow: none;
+    outline: #FFB6C1;
+    border-color: var(--color-l-m);
+    &::placeholder {
+        transition: 0.3s color;
+        color: white;
+    }
+    }
+    .navbar-toggler:focus {
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
+    .navbar-nav .nav-link.active,.navbar-nav .nav-link, #navbarScrollingDropdown {
+        color: white;
+    }
  `;
 export default globalStyles;
