@@ -1,0 +1,12 @@
+브랜치 네이밍 규칙
+    main
+    develop
+    feature-(issue_number)
+    release-(version_number)
+    Hotfix-(Issue_number)
+
+이미지 네이밍.
+    컴포넌트 유형(접두사) + 이름 + 상태(접미사). png (확장자)
+    Ex)
+    btn-pirmary-normal.png
+    ic-like-hover.png
