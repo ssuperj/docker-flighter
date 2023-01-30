@@ -31,10 +31,12 @@ const globalStyles = createGlobalStyle`
         --font-th: LINESeedKR_Th;
 
         //color
-        --color-main: #FF385C;
-        --color-dg: #717171;
-        --color-rg: #B0B0B0;
-        --color-lg: #EBEBEB;
+        --color-d-m: #E31C5F;
+        --color-r-m: #FF385C;
+        --color-l-m: #FFB6C1;
+        --color-d-g: #717171;
+        --color-r-g: #B0B0B0;
+        --color-l-g: #EBEBEB;
     }
     * {
     box-sizing: border-box;
