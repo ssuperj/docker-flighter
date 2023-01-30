@@ -25,9 +25,16 @@ const globalStyles = createGlobalStyle`
     src: url(${LINESeedKR_Th}) format("truetype");
     }
     :root {
+        //font
         --font-rg: LINESeedKR_Rg;
         --font-bd: LINESeedKR_Bd;
         --font-th: LINESeedKR_Th;
+
+        //color
+        --color-main: #FF385C;
+        --color-dg: #717171;
+        --color-rg: #B0B0B0;
+        --color-lg: #EBEBEB;
     }
     * {
     box-sizing: border-box;
