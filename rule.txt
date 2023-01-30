@@ -10,3 +10,10 @@
     Ex)
     btn-pirmary-normal.png
     ic-like-hover.png
+
+깃 커밋 규칙
+    (동사 영어) + (구체적으로 뭘했는지 한글 or 영어)
+    Ex)
+    git commit -m 'add navigation var'
+    git commit -m 'add 네비게이션 바'
+    git commit -m 'change 배경색 톤업'

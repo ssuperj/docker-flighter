@@ -4,7 +4,7 @@ function Header(props: any) {
   return (
     <>
       <Link to="/">
-        <h1>헤더입니다.</h1>
+        <h1>헤더입니다</h1>
       </Link>
     </>
   );
