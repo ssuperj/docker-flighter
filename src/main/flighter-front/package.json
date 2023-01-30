@@ -12,15 +12,21 @@
     "@types/node": "^16.18.11",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/react-responsive": "^8.0.5",
     "apollo-server": "^3.11.1",
+    "bootstrap": "^5.2.3",
     "gh-pages": "^5.0.0",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
+    "react-responsive": "^9.0.2",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "styled-components": "^5.3.6",
+    "styled-reset": "^4.4.5",
     "typescript": "^4.9.4",
     "web-vitals": "^2.1.4"
   },
@@ -50,5 +56,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://ssuperj.github.io/flighter-front"
+  "homepage": "https://ssuperj.github.io/flighter-front",
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
+  }
 }
