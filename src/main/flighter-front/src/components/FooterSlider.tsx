@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import styled from "styled-components";
 
-export default class AutoPlay extends Component {
+const StyledWrap = styled.div``;
+
+export default class FooterSlider extends Component {
   render() {
     const settings = {
       dots: true,
@@ -14,8 +17,7 @@ export default class AutoPlay extends Component {
       cssEase: "linear",
     };
     return (
-      <div>
-        <h2>Auto Play</h2>
+      <StyledWrap>
         <Slider {...settings}>
           <div>
             <h3>1</h3>
@@ -36,7 +38,7 @@ export default class AutoPlay extends Component {
             <h3>6</h3>
           </div>
         </Slider>
-      </div>
+      </StyledWrap>
     );
   }
 }
