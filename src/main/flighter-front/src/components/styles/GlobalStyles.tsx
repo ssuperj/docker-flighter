@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import fontStyles from "./FontStyles";
 import variableStyles from "./VariableStyles";
-import bootstrapStyles from "./BootstrapStyles";
 
 const globalStyles = createGlobalStyle`
   ${reset};
@@ -20,6 +19,5 @@ const globalStyles = createGlobalStyle`
   }
   ${fontStyles};
   ${variableStyles};
-  ${bootstrapStyles};
 `;
 export default globalStyles;
