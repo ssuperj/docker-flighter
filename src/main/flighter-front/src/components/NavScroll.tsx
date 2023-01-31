@@ -51,21 +51,23 @@ const StyledWrap = styled.div`
     animation: 1s infinite ${textShaking};
   }
 
-  .dropdown .dropdown-menu {
-    display: block;
-    opacity: 0;
-    -webkit-transition: all 200ms ease-in;
-    -moz-transition: all 200ms ease-in;
-    -ms-transition: all 200ms ease-in;
-    -o-transition: all 200ms ease-in;
-    transition: all 200ms ease-in;
-    background-color: var(--color-r-m);
-    border: 0.25px solid white;
+  .show > .dropdown-menu {
+    max-height: 900px;
+    visibility: visible;
   }
 
-  .dropdown:hover .dropdown-menu {
+  .dropdown-menu {
     display: block;
-    opacity: 1;
+    max-height: 0;
+    visibility: hidden;
+    transition: all 0.25s;
+    overflow: hidden;
+    border: 0.25px solid white;
+    background-color: var(--color-r-m);
+  }
+
+  .dropdown-item {
+    color: white;
   }
 
   .dropdown-item:hover {
