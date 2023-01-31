@@ -1,41 +1,48 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const StyledWrap = styled.div``;
+const StyledWrap = styled.div`
+  .slick-dots {
+    bottom: -40px;
+  }
+`;
 
 export default class FooterSlider extends Component {
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
-      slidesToShow: 3,
+      slidesToShow: 5,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 2000,
-      autoplaySpeed: 2000,
+      speed: 5000,
+      autoplaySpeed: 0,
       cssEase: "linear",
     };
     return (
       <StyledWrap>
         <Slider {...settings}>
           <div>
-            <h3>1</h3>
+            <img src={process.env.PUBLIC_URL + "/images/bg-rome-normal.jpg"} width="220" alt="" />
           </div>
           <div>
-            <h3>2</h3>
+            <img src={process.env.PUBLIC_URL + "/images/bg-japan-normal.jpg"} width="220" alt="" />
           </div>
           <div>
-            <h3>3</h3>
+            <img src={process.env.PUBLIC_URL + "/images/bg-kempen-normal.jpg"} width="220" alt="" />
           </div>
           <div>
-            <h3>4</h3>
+            <img src={process.env.PUBLIC_URL + "/images/bg-mountain-normal.jpg"} width="220" alt="" />
           </div>
           <div>
-            <h3>5</h3>
+            <img src={process.env.PUBLIC_URL + "/images/bg-river-normal.jpg"} width="220" alt="" />
           </div>
           <div>
-            <h3>6</h3>
+            <img src={process.env.PUBLIC_URL + "/images/bg-india-normal.jpg"} width="220" alt="" />
+          </div>
+          <div>
+            <img src={process.env.PUBLIC_URL + "/images/bg-street-normal.jpg"} width="220" alt="" />
           </div>
         </Slider>
       </StyledWrap>
