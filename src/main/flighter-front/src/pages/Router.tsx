@@ -12,7 +12,6 @@ const BodyWrap = styled.div`
   min-height: 100%;
   position: relative;
   padding-bottom: 250px;
-  padding-bottom: 60px;
 `;
 
 const AppRouter = () => {

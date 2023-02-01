@@ -1,11 +1,7 @@
-import MyPageNav from '../components/MyPageNav';
+import MyPageNav from "../components/MyPageNav";
 
 function MyPage(props: any) {
-  return (
-    <>
-      <MyPageNav />
-    </>
-  );
+  return <MyPageNav />;
 }
 
 export default MyPage;
