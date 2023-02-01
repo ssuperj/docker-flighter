@@ -20,7 +20,7 @@ export default class FooterSlider extends Component {
       speed: 5000,
       autoplaySpeed: 0,
       cssEase: "linear",
-      arrows: false
+      arrows: false,
     };
     return (
       <StyledWrap>
