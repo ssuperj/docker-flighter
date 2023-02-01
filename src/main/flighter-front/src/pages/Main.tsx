@@ -1,27 +1,26 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import MainTitle from "../components/MainTitle";
+import SearchBox from "../components/SearchBox";
 
 const MainWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   main {
-    background-color: red;
-    width: 2000px;
-    height: 2000px;
+    background: url("flighter-front/images/bg-beach-main.jpg") no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 550px;
   }
 `;
 
 const Main = (props: any) => {
   return (
     <MainWrap>
-      <main></main>
-      <h3>안녕하세요. 메인페이지 입니다.</h3>
-      <ul>
-        <Link to="/product/1">
-          <li>1번상품</li>
-        </Link>
-        <Link to="/product/2">
-          <li>2번상품</li>
-        </Link>
-      </ul>
+      <MainTitle />
+      <main>
+        <SearchBox></SearchBox>
+      </main>
     </MainWrap>
   );
 };

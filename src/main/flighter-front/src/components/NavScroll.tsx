@@ -12,7 +12,6 @@ import { textShaking } from "./styles/AnimationStyles";
 
 const StyledWrap = styled.div`
   .navbar {
-    /* background-color: var(--color-r-m); */
     background: linear-gradient(170deg, var(--color-r-m), LightPink);
   }
 
