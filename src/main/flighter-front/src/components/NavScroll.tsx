@@ -12,7 +12,8 @@ import { textShaking } from "./styles/AnimationStyles";
 
 const StyledWrap = styled.div`
   .navbar {
-    background-color: var(--color-r-m);
+    /* background-color: var(--color-r-m); */
+    background: linear-gradient(170deg, var(--color-r-m), LightPink);
   }
 
   .fa-paper-plane {
@@ -63,7 +64,7 @@ const StyledWrap = styled.div`
     transition: all 0.25s;
     overflow: hidden;
     border: 0.25px solid white;
-    background-color: var(--color-r-m);
+    background: linear-gradient(50deg, var(--color-r-m), LightPink);
   }
 
   .dropdown-item {
@@ -108,14 +109,14 @@ const StyledWrap = styled.div`
 
   .btn {
     margin-left: 5px;
-    color: var(--color-r-m);
+    color: lightpink;
     border: none;
     background-color: white;
     &:hover {
       background-color: white;
     }
     svg {
-      color: var(--color-r-m);
+      color: lightpink;
       &:hover {
         transition: 1s transform;
         transform: scale(1.1);

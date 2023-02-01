@@ -6,7 +6,7 @@ import { PC } from "./MediaQuery";
 const FooterWrap = styled.div`
   position: relative;
   transform: translateY(-100%);
-  background: linear-gradient(140deg, var(--color-r-m), pink);
+  background: linear-gradient(140deg, var(--color-r-m), lightpink);
   padding: 20px 0px;
 `;
 

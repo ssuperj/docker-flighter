@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import ModalParam from "./ModalParam";
 
 const FooterCopyWrap = styled.div`
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 0px;
+  padding: 12px 0px;
   font-size: 16px;
   .svg-inline--fa {
     transition: 0.5s all;
@@ -20,7 +21,7 @@ const FooterCopyWrap = styled.div`
   }
 `;
 
-function CopyRIght(props: any) {
+function CopyRIght() {
   return (
     <FooterCopyWrap>
       <p>&#169; 2023 Copyright Flighter</p>
@@ -30,9 +31,12 @@ function CopyRIght(props: any) {
       <Link to="https://www.google.com/search?q=flighter">
         <FontAwesomeIcon icon={faGoogle} size="2x" />
       </Link>
-      <Link to="https://www.google.com/search?q=flighter">
-        <FontAwesomeIcon icon={faEnvelope} size="2x" />
-      </Link>
+      <ModalParam
+        render={() => <FontAwesomeIcon icon={faEnvelope} size="2x" />}
+        title="Official Email"
+        content="Hello, send email here! poqwer95@naver.com"
+        btnContent="Copy"
+      ></ModalParam>
     </FooterCopyWrap>
   );
 }
