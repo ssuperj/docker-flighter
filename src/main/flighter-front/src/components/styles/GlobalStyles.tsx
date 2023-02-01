@@ -8,6 +8,9 @@ const globalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+  html, body, #root {
+    height: 100%
+  }
   a {
     text-decoration: none;
     color: inherit;
@@ -19,5 +22,6 @@ const globalStyles = createGlobalStyle`
   }
   ${fontStyles};
   ${variableStyles};
+
 `;
 export default globalStyles;
