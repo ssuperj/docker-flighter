@@ -6,6 +6,7 @@ const MainWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 50px;
   main {
     background: url("flighter-front/images/bg-beach-main.jpg") no-repeat center center;
     background-size: cover;
