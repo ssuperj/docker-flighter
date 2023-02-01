@@ -20,7 +20,8 @@ const StyledWrap = styled.div`
 
   .navlink:hover,
   .navlink.active {
-    background-color: var(--color-r-m);
+    background-color: var(--color-r-m) ;
+    opacity: 0.8;
     color: var(--color-l-g);
   }
 `;
