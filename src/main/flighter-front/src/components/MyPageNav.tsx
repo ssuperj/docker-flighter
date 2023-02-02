@@ -1,15 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
-import UserInfo from "./UserInfo";
+import Passport from "./Passport";
 import ReserveInfo from "./ReserveInfo";
+import UserInfo from "./UserInfo";
+import Withdrawal from "./Withdrawal";
 
 const StyledWrap = styled.div`
-  margin-top: 80px;
   display: flex;
   justify-content: center;
 
   .Nav {
+    margin-top: 80px;
+    margin-bottom: 30px;
     width: 80%;
   }
 
@@ -23,6 +26,10 @@ const StyledWrap = styled.div`
     background-color: var(--color-r-m) ;
     opacity: 0.8;
     color: var(--color-l-g);
+  }
+  hr {
+    margin-top: 0 auto;
+    width: 80%;
   }
 `;
 
@@ -42,7 +49,7 @@ function MyPageNav() {
       <StyledWrap>
         <Nav fill variant="tabs" defaultActiveKey="link-1" className="Nav">
           <Nav.Item className="navItem">
-            <Nav.Link href="#userinfo" onClick={nav1} className="navlink" eventKey="link-1">
+            <Nav.Link href="#passport" onClick={nav1} className="navlink" eventKey="link-1">
               내 정보
             </Nav.Link>
           </Nav.Item>
@@ -64,9 +71,14 @@ function MyPageNav() {
         </Nav>
       </StyledWrap>
       <MyPageWrap>
-        {nav === 1 && <UserInfo />}
+        {nav === 1 && <Passport />}
         {nav === 2 && <ReserveInfo />}
+        {nav === 3 && <UserInfo />}
+        {nav === 4 && <Withdrawal />}
       </MyPageWrap>
+      <StyledWrap>
+        <hr />
+      </StyledWrap>
     </div>
   );
 }

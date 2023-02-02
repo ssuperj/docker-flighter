@@ -1,135 +1,83 @@
 import styled from "styled-components";
+import Button from "react-bootstrap/Button";
 
-const StyledWrap = styled.div`
+const StyleWrap = styled.div`
   .container {
-    display: inline-flex;
     justify-content: center;
-    position: relative;
-  }
+    text-align: center;
+    width: auto;
+    margin-bottom: 30px;
 
-  span {
-    position: absolute;
-    margin-top: 10px;
-    font-size: 18px;
-    color: var(--color-r-m) ;
-    opacity: 0.8;
-  }
+    .title {
+      margin-top: 10px;
+      font-size: 18px;
+      color: var(--color-r-m) ;
+      font-family: var(--font-bd);
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
 
-  .img {
-    width: 500px;
-    left: 50%;
-  }
+    .content {
 
-  .stampBox {
-    position: absolute;
-    padding: 60px 0 50px 85px;
-    width: 524px;
-    height: 345px;
-  }
-
-  .stamp {
-    width: 90px;
-    margin-right: 5px;
-  }
-
-  .info {
-    position: absolute;
-    margin-top: 345px;
-    width: 500px;
-    height: 345px;
-    font-size: 14px;
-
-    .profile {
-      position: absolute;
-      margin-top: 81px;
-      margin-left: 75px;
-      width: 110px;
-      height: 152px;
-    }
-    .name {
-      padding-top: 83px;
-      padding-left: 250px;
-    }
-    .birth {
-      padding-top: 6px;
-      padding-left: 290px;
-    }
-    .sex {
-      padding-top: 6px;
-      padding-left: 240px;
-    }
-    .country {
-      padding-top: 6px;
-      padding-left: 260px;
-    }
-    .dateOfIssue {
-      position: absolute;
-      padding-top: 22px;
-      padding-left: 270px;
-      font-size: 13px;
-    }
-    .type {
-      position: absolute;
-      padding-top: 21px;
-      padding-left: 370px;
-    }
-    .validUntil {
-      position: absolute;
-      padding-top: 44px;
-      padding-left: 265px;
-      font-size: 13px;
-    }
-    .series {
-      padding-top: 44px;
-      padding-left: 380px;
-    }
-    .signature {
-      position: absolute;
-      padding-top: 7px;
-      padding-left: 260px;
+      table {
+        margin-bottom: 30px;
+        tr {
+          height: 30px;
+          th {
+            text-align: justify;
+            width: 100px;
+          }
+          td {
+            input:focus {
+              caret-color: var(--color-r-m);
+              outline-color: var(--color-r-m);
+            }
+          }
+        }
+      }
     }
   }
 `;
 
 function UserInfo() {
   return (
-    <StyledWrap>
+    <StyleWrap>
       <div className="container">
-        <span>My PASSPORT</span>
-        <img
-          className="img"
-          src={`${process.env.PUBLIC_URL}/images/mypage-passport2-normal.png`}
-          alt="passport"
-        />
-        <div className="stampBox">
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          {/* <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" /> */}
-        </div>
-        <div className="info">
-          {/* <img className="profile" src={`${process.env.PUBLIC_URL}/images/mypage-profile2-normal.png`} alt="profile" /> */}
-          <p className="name">Part JungHeum</p>
-          <p className="birth">1996. 06. 18</p>
-          <p className="sex">Male</p>
-          <p className="country">Korea</p>
-          <p className="dateOfIssue">2023.02.01</p>
-          <p className="type">mola</p>
-          <p className="validUntil">2028.02.01</p>
-          <p className="series">mola</p>
-          <p className="signature">mola</p>
-        </div>
+        <h1 className="title">USER INFO</h1><br />
+        <form className="content">
+          <table>
+            <tr>
+              <th><label>이 &nbsp; 름</label></th>
+              <td><input type="text" value={"홍길동"} /></td>
+            </tr>
+            <tr>
+              <th><label>아이디</label></th>
+              <td><input type="text" value={"qwe123"} disabled /></td>
+            </tr>
+            <tr>
+              <th><label>비밀번호</label></th>
+              <td><input type="password" value={""} /></td>
+            </tr>
+            <tr>
+              <th><label>비밀번호 확인</label></th>
+              <td><input type="password" value={""} /></td>
+            </tr>
+            <tr>
+              <th><label>이메일</label></th>
+              <td><input type="password" value={""} /></td>
+            </tr>
+          </table>
+          <Button 
+            type="submit"
+            style={{ backgroundColor: "var(--color-r-m)", border: "none", opacity: "0.8" }}
+            href="/flighter-front"
+            variant="secondary">
+              수정완료
+            </Button>
+        </form>
       </div>
-    </StyledWrap>
-  );
+    </StyleWrap>
+  )
 }
 
 export default UserInfo;
