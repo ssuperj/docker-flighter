@@ -1,12 +1,21 @@
 {
   "files": {
-    "main.css": "/flighter/static/css/main.31d6cfe0.css",
-    "main.js": "/flighter/static/js/main.a4bf4aad.js",
-    "index.html": "/flighter/index.html",
-    "main.a4bf4aad.js.map": "/flighter/static/js/main.a4bf4aad.js.map"
+    "main.css": "/flighter-front/static/css/main.c0ef94ff.css",
+    "main.js": "/flighter-front/static/js/main.9e0ba193.js",
+    "static/media/AnandaBlack.ttf": "/flighter-front/static/media/AnandaBlack.93e9d2c9e1e0c7b13803.ttf",
+    "static/media/LINESeedKR-Rg.woff2": "/flighter-front/static/media/LINESeedKR-Rg.ebf20fbf55119848bf8d.woff2",
+    "static/media/LINESeedKR-Bd.woff2": "/flighter-front/static/media/LINESeedKR-Bd.866a16ff8afadafcbd0c.woff2",
+    "static/media/LINESeedKR-Th.woff2": "/flighter-front/static/media/LINESeedKR-Th.a399ab4d4761d13111c4.woff2",
+    "static/media/slick.svg": "/flighter-front/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/flighter-front/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/flighter-front/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/flighter-front/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/flighter-front/index.html",
+    "main.c0ef94ff.css.map": "/flighter-front/static/css/main.c0ef94ff.css.map",
+    "main.9e0ba193.js.map": "/flighter-front/static/js/main.9e0ba193.js.map"
   },
   "entrypoints": [
-    "static/css/main.31d6cfe0.css",
-    "static/js/main.a4bf4aad.js"
+    "static/css/main.c0ef94ff.css",
+    "static/js/main.9e0ba193.js"
   ]
 }
