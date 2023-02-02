@@ -1,0 +1,60 @@
+.container {
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+}
+
+.img {
+  width: 500px;
+  left: 50%;
+}
+
+.stampBox {
+  position: absolute;
+  margin-top: 80px;
+  margin-left: 50px;
+  width: 700px;
+}
+
+.stamp {
+  width: 160px;
+  margin-right: 5px;
+}
+
+.info {
+  position: absolute;
+  bottom: 255px;
+  right: 260px;
+  font-size: 18px;
+
+  .name {
+    padding-left: 40px;
+  }
+  .birth {
+    margin-top: 13px;
+    padding-left: 100px;
+  }
+  .sex {
+    margin-top: 15px;
+    padding-left: 25px;
+  }
+  .country {
+    margin-top: 13px;
+    padding-left: 65px;
+  }
+  .dateOfIssue {
+    position: absolute;
+    margin-top: 39px;
+    padding-left: 90px;
+  }
+  .type {
+    position: absolute;
+    margin-top: 38px;
+    padding-left: 250px;
+  }
+  .validUntil {
+    position: absolute;
+    margin-top: 73px;
+    left: 50%;
+  }
+}
