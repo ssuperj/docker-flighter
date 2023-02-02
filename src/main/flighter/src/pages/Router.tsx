@@ -11,9 +11,6 @@ const BodyWrap = styled.div`
   min-height: 100%;
   position: relative;
   padding-bottom: 250px;
-  @media screen and (max-width: 992px) {
-    padding-bottom: 100px;
-  }
 `;
 
 const AppRouter = () => {

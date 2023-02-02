@@ -1,6 +1,6 @@
 import { keyframes } from "styled-components";
 
-export const textShaking = keyframes`
+const textShaking = keyframes`
   0% {
     transform: translateX(-1px);
   }
@@ -11,4 +11,13 @@ export const textShaking = keyframes`
     transform: translateX(-1px);
   }
 `;
-export default textShaking;
+
+const fadeOut = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+export { textShaking, fadeOut };

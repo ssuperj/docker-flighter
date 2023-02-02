@@ -10,7 +10,6 @@ const StyledWrap = styled.div`
 
 export default class FooterSlider extends Component {
   render() {
-    console.log(process.env.PUBLIC_URL);
     const settings = {
       dots: false,
       infinite: true,
