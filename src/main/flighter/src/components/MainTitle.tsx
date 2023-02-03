@@ -3,7 +3,7 @@ import TypeIt from "typeit-react";
 
 const TitleWrap = styled.div`
   span {
-    margin: 40px 0px;
+    margin: 70px 0px;
     font-weight: 700;
     font-size: 40px;
     background: linear-gradient(to right top, var(--color-r-m), lightpink);
@@ -25,9 +25,10 @@ const MainTitle = (props: any) => {
           speed: 50,
           waitUntilVisible: true,
           deleteSpeed: 40,
+          loop: true,
         }}
         getBeforeInit={(instance) => {
-          instance.type("You need a rest of your life").pause(750).delete(19).pause(500).type("Flighter!!");
+          instance.type("You need a rest of your life").pause(750).delete(19).pause(500).type("Flighter!!").pause(500);
           return instance;
         }}
       ></TypeIt>

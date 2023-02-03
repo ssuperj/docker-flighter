@@ -40,8 +40,10 @@ function SearchDrop(props: any) {
     <Wrapper isBlock={props.isBlock}>
       <InputGroup>
         <DropdownButton variant="outline-secondary" title={props.text} id="input-group-dropdown-1">
-          {props.item.map((value: any) => (
-            <Dropdown.Item href="#">{value.title}</Dropdown.Item>
+          {props.item.map((value: any, index: string) => (
+            <Dropdown.Item href="#" key={index}>
+              {value.title}
+            </Dropdown.Item>
           ))}
         </DropdownButton>
         <Form.Control aria-label="Text input with dropdown button" />

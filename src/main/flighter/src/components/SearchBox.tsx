@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightArrowLeft, faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import { textShaking, fadeOut } from "./styles/AnimationStyles";
 import Calendar from "./Calendar";
-import Button from "react-bootstrap/esm/Button";
 
 const SearchWrap = styled.div`
   display: flex;
