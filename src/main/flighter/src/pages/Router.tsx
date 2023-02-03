@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
 import Main from "./Main";
-import Product from "./Product";
 import MyPage from "./MyPage";
 import NotFound from "../errors/NotFound";
 import Footer from "../components/Footer";
@@ -12,6 +11,9 @@ const BodyWrap = styled.div`
   min-height: 100%;
   position: relative;
   padding-bottom: 250px;
+  @media screen and (max-width: 992px) {
+    padding-bottom: 100px;
+  }
 `;
 
 const AppRouter = () => {
@@ -21,7 +23,6 @@ const AppRouter = () => {
       <BodyWrap>
         <Routes>
           <Route path="/" element={<Main />}></Route>
-          <Route path="/product/*" element={<Product />}></Route>
           <Route path="/mypage/*" element={<MyPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>

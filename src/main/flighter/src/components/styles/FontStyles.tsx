@@ -2,6 +2,7 @@ import { css } from "styled-components";
 import LINESeedKR_Rg from "../../fonts/LINESeedKR-Rg.woff2";
 import LINESeedKR_Bd from "../../fonts/LINESeedKR-Bd.woff2";
 import LINESeedKR_Th from "../../fonts/LINESeedKR-Th.woff2";
+import AnandaBlack from "../../fonts/AnandaBlack.ttf";
 
 const fontStyles = css`
   @font-face {
@@ -21,6 +22,12 @@ const fontStyles = css`
     src: local("LINESeedKR_Th"), local("LINESeedKR_Th");
     font-style: normal;
     src: url(${LINESeedKR_Th}) format("truetype");
+  }
+  @font-face {
+    font-family: "AnandaBlack";
+    src: local("AnandaBlack"), local("AnandaBlack");
+    font-style: normal;
+    src: url(${AnandaBlack}) format("truetype");
   }
 `;
 export default fontStyles;
