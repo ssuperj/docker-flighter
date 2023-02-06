@@ -92,6 +92,68 @@ const StyledWrap = styled.div`
       padding-left: 260px;
     }
   }
+
+  @media (max-width: 450px) {
+    .container {
+
+      .img {
+        width: 411px;
+      }
+      .stampBox {
+        width: 350px;
+        height: 280px;
+        padding: 50px 0 50px 30px;
+
+        .stamp {
+          width: 75px;
+        }
+      }
+      .info {
+        width: 390px;
+        margin-top: 315px;
+        font-size: 12px;
+
+        .name {
+          padding-top: 66px;
+          padding-left: 190px;
+        }
+        .birth {
+          padding-top: 5px;
+          padding-left: 225px;
+        }
+        .sex {
+          padding-top: 4px;
+          padding-left: 185px;
+        }
+        .country {
+          padding-top: 4px;
+          padding-left: 205px;
+        }
+        .dateOfIssue {
+          padding-top: 18px;
+          padding-left: 215px;
+          font-size: 10px;
+        }
+        .type {
+          padding-top: 17px;
+          padding-left: 300px;
+        }
+        .validUntil {
+          padding-top: 36px;
+          padding-left: 207px;
+          font-size: 10px;
+        }
+        .series {
+          padding-top: 35px;
+          padding-left: 305px;
+        }
+        .signature {
+          padding-top: 6px;
+          padding-left: 205px;
+        }
+      }
+    }
+  }
 `;
 
 function UserInfo() {
@@ -105,7 +167,6 @@ function UserInfo() {
           alt="passport"
         />
         <div className="stampBox">
-          {/* <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
@@ -116,7 +177,8 @@ function UserInfo() {
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" /> */}
+          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
+          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
         </div>
         <div className="info">
           {/* <img className="profile" src={`${process.env.PUBLIC_URL}/images/mypage-profile2-normal.png`} alt="profile" /> */}

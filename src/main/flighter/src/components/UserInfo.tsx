@@ -6,7 +6,7 @@ const StyleWrap = styled.div`
     justify-content: center;
     text-align: center;
     width: auto;
-    margin-bottom: 30px;
+    margin-bottom: 80px;
 
     .title {
       margin-top: 10px;
@@ -14,16 +14,20 @@ const StyleWrap = styled.div`
       color: var(--color-r-m) ;
       font-family: var(--font-bd);
       opacity: 0.8;
-      margin-bottom: 30px;
+      margin-bottom: 80px;
     }
 
     .content {
-      border: 1px solid var(--color-l-g);
+      border: 1px solid var(--color-l-m);
       border-radius: 25px;
-      padding: 40px;
+      padding: 50px;
 
       img {
-        margin-bottom: 30px;
+        margin-bottom: 70px;
+      }
+
+      input {
+        width: 120px;
       }
 
       table {
@@ -73,7 +77,7 @@ function UserInfo() {
             </tr>
             <tr>
               <th><label>이메일</label></th>
-              <td><input type="password" defaultValue={""} /></td>
+              <td><input type="email" defaultValue={""} /></td>
             </tr>
             </tbody>
             
