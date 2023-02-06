@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const StyleWrap = styled.div`
   .container {
@@ -115,12 +115,15 @@ function ReserveInfo() {
       <div className="container">
         <h1 className="title">RESERVE INFO</h1><br />
         <div className="content">
-          {/* <div className="noReserve">
+          <div className="noReserve">
             <img className="ico-air1" src={`${process.env.PUBLIC_URL}/images/ic-air1.png`} alt="" />
             <p className="p-b">죄송합니다, 아직 항공편을 표시할 수 없습니다</p>
             <p className="p">고객님의 예약 정보를 확인하시려면, 확정 이메일 또는 <br />
             여행 제공 업체에 연락하시기 바랍니다.</p>
-          </div> */}
+          </div>
+
+          <hr />
+
           <Link to="/">
             <div className="reserve">
               <div className="reserveInfo-head">

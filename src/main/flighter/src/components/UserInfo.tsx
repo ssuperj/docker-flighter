@@ -18,6 +18,13 @@ const StyleWrap = styled.div`
     }
 
     .content {
+      border: 1px solid var(--color-l-g);
+      border-radius: 25px;
+      padding: 40px;
+
+      img {
+        margin-bottom: 30px;
+      }
 
       table {
         margin-bottom: 30px;
@@ -45,6 +52,7 @@ function UserInfo() {
       <div className="container">
         <h1 className="title">USER INFO</h1><br />
         <form className="content">
+          <img src={`${process.env.PUBLIC_URL}/images/ic-user-normal.png`} alt="" />
           <table>
             <tbody>
             <tr>

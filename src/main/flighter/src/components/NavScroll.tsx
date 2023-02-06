@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { textShaking } from "./styles/AnimationStyles";
+import { Link } from 'react-router-dom';
 
 const StyledWrap = styled.div`
   .navbar {
@@ -129,18 +130,19 @@ function NavScroll() {
     <StyledWrap>
       <Navbar expand="lg">
         <Container fluid>
-          <FontAwesomeIcon icon={faPaperPlane} size="2x" />
-          <Navbar.Brand href="#">Flighter</Navbar.Brand>
+          <Link to="/"><FontAwesomeIcon icon={faPaperPlane} size="2x" /></Link>
+          <Navbar.Brand><Link to="/">Flighter</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">Link</Nav.Link>
-              <NavDropdown title="Link" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+              <Nav.Link><Link to="/">Home</Link></Nav.Link>
+              <Nav.Link><Link to="/login">Login</Link></Nav.Link>
+              <NavDropdown title="My Page" id="navbarScrollingDropdown">
+                <NavDropdown.Item><Link to="/mypage">My passport</Link></NavDropdown.Item>
+                <NavDropdown.Item>Reserve info</NavDropdown.Item>
+                <NavDropdown.Item>User info</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+                <NavDropdown.Item>Withdrawal</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Form className="d-flex">

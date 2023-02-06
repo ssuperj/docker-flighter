@@ -49,22 +49,22 @@ function MyPageNav() {
       <StyledWrap>
         <Nav fill variant="tabs" defaultActiveKey="link-1" className="Nav">
           <Nav.Item className="navItem">
-            <Nav.Link href="#passport" onClick={nav1} className="navlink" eventKey="link-1">
-              내 정보
+            <Nav.Link onClick={nav1} className="navlink" eventKey="link-1">
+              내 여권
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="navItem">
-            <Nav.Link href="#reserveinfo" onClick={nav2} className="navlink" eventKey="link-2">
+            <Nav.Link onClick={nav2} className="navlink" eventKey="link-2">
               내 예약
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="navItem">
-            <Nav.Link href="#수정" onClick={nav3} className="navlink" eventKey="link-3">
+            <Nav.Link onClick={nav3} className="navlink" eventKey="link-3">
               회원수정
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="navItem">
-            <Nav.Link href="#탈퇴" onClick={nav4} className="navlink" eventKey="link-4">
+            <Nav.Link onClick={nav4} className="navlink" eventKey="link-4">
               회원탈퇴
             </Nav.Link>
           </Nav.Item>

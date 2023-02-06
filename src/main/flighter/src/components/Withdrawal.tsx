@@ -65,7 +65,6 @@ function Withdrawal() {
           <input className="input" type="password" id="password"/> 
           <Button
               style={{ backgroundColor: "var(--color-r-m)", border: "none", opacity: "0.8", margin: "0 0 4px 3px" }}
-              href=""
               variant="secondary"
             >
               탈퇴하기
@@ -96,7 +95,6 @@ function Withdrawal() {
           <br />
           <Button
             style={{ backgroundColor: "var(--color-r-m)", border: "none", opacity: "0.8" }}
-            href="/flighter-front"
             variant="secondary"
           >
             확인
