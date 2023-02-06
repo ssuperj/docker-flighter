@@ -1,7 +1,7 @@
 import FooterCopyRight from "./FooterCopyRight";
 import FooterSlider from "./FooterSlider";
 import styled from "styled-components";
-import { PC } from "./MediaQuery";
+import { PC } from "./MediaQueryModule";
 
 const FooterWrap = styled.div`
   position: relative;

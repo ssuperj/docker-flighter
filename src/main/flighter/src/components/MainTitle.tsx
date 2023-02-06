@@ -5,7 +5,7 @@ const TitleWrap = styled.div`
   span {
     margin: 70px 0px;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 35px;
     background: linear-gradient(to right top, var(--color-r-m), lightpink);
     color: transparent;
     -webkit-background-clip: text;
@@ -13,6 +13,12 @@ const TitleWrap = styled.div`
       color: lightpink;
       font-size: 35px;
       transform: translateX(1px);
+    }
+    @media screen and (max-width: 430px) {
+      font-size: 25px;
+      .ti-cursor {
+        font-size: 25px;
+      }
     }
   }
 `;
