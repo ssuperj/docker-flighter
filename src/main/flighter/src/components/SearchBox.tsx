@@ -8,6 +8,7 @@ import { textShaking, fadeOut } from "./styles/AnimationStyles";
 import Calendar from "./Calendar";
 import SearchGroup from "./SearchGroup";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const SearchWrap = styled.div`
   display: flex;
@@ -38,8 +39,24 @@ const SearchWrap = styled.div`
   }
   .check__container {
     display: flex;
+    align-items: center;
     .emptyBox {
       width: 5%;
+    }
+    .check__port {
+      margin: 10px 10px 10px auto;
+      .btn {
+        margin-left: 7.5px;
+      }
+      .btn-secondary {
+        background-color: white;
+        color: black;
+        border: none;
+      }
+      .btn-check:checked + .btn {
+        background-color: var(--color-r-m);
+        color: white;
+      }
     }
   }
   .destination__container {
@@ -93,6 +110,13 @@ const SearchWrap = styled.div`
         margin-left: 10%;
       }
     }
+    @media screen and (max-width: 430px) {
+      width: 27%;
+      margin-left: 0;
+      .calendar__text {
+        margin-left: 0;
+      }
+    }
   }
 
   .react-datepicker__tab-loop {
@@ -119,6 +143,7 @@ const SearchWrap = styled.div`
       width: 50%;
       .list-group {
         width: 80%;
+        min-width: 300px;
         display: flex;
         justify-content: center;
         margin: 10px 0;
@@ -179,6 +204,9 @@ const SearchWrap = styled.div`
 `;
 
 function SearchBox() {
+  const isMobile = useMediaQuery({
+    query: "(max-width:500px)",
+  });
   return (
     <SearchWrap>
       <div className="search__container">
@@ -186,7 +214,18 @@ function SearchBox() {
           <div className="emptyBox"></div>
           <CheckBox text="편도" />
           <CheckBox text="왕복" />
+          <div className="check__port">
+            <input type="radio" className="btn-check" name="options" id="option1" autoComplete="off" defaultChecked />
+            <label className="btn btn-secondary" htmlFor="option1">
+              국내선
+            </label>
+            <input type="radio" className="btn-check" name="options" id="option2" autoComplete="off" />
+            <label className="btn btn-secondary" htmlFor="option2">
+              국제선
+            </label>
+          </div>
         </div>
+
         <div className="destination__container">
           <SearchDrop
             text="출발지"
@@ -223,7 +262,11 @@ function SearchBox() {
             />
             <SearchList
               checkBtn={true}
-              item={[{ content: "이코노미 클래스" }, { content: "비즈니스 클래스" }, { content: "퍼스트 클래스" }]}
+              item={
+                isMobile
+                  ? [{ content: "이코노미" }, { content: "비즈니스" }, { content: "퍼스트" }]
+                  : [{ content: "이코노미 클래스" }, { content: "비즈니스 클래스" }, { content: "퍼스트 클래스" }]
+              }
             />
           </div>
           <div className="SearchGroup__container">

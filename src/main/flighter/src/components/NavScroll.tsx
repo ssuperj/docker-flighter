@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { textShaking } from "./styles/AnimationStyles";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const StyledWrap = styled.div`
   .navbar {
@@ -130,19 +130,29 @@ function NavScroll() {
     <StyledWrap>
       <Navbar expand="lg">
         <Container fluid>
-          <Link to="/"><FontAwesomeIcon icon={faPaperPlane} size="2x" /></Link>
-          <Navbar.Brand><Link to="/">Flighter</Link></Navbar.Brand>
+          <Link to="/">
+            <FontAwesomeIcon icon={faPaperPlane} size="2x" />
+          </Link>
+          <Navbar.Brand>
+            <Link to="/">Flighter</Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-              <Nav.Link><Link to="/">Home</Link></Nav.Link>
-              <Nav.Link><Link to="/login">Login</Link></Nav.Link>
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
               <NavDropdown title="My Page" id="navbarScrollingDropdown">
-                <NavDropdown.Item><Link to="/mypage">My passport</Link></NavDropdown.Item>
-                <NavDropdown.Item>Reserve info</NavDropdown.Item>
-                <NavDropdown.Item>User info</NavDropdown.Item>
+                <NavDropdown.Item as="span">
+                  <Link to="/mypage">My passport</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item as="span">Reserve info</NavDropdown.Item>
+                <NavDropdown.Item as="span">User info</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item>Withdrawal</NavDropdown.Item>
+                <NavDropdown.Item as="span">Withdrawal</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Form className="d-flex">
