@@ -125,18 +125,16 @@ const StyleWrap = styled.div`
     }
   }
 
-  .ad {
-    /* float: right; */
-    position: absolute;
-    left: 88%;
-    bottom: 38%;
-
-    .ad-link {
-      /* position: absolute;; */
-      img {
-        /* position: absolute; */
-      }
+  @media (max-width: 849px) {
+    .ad {
+    display: none;
     }
+  }
+
+  .ad {
+    position: absolute;
+    right: 3%;
+    bottom: 38%;
   }
 
   .other-container {
@@ -229,7 +227,7 @@ function Login() {
             </button>
           </div>
           <div className="link">
-            <Link to="" className="link-c">
+            <Link to="/join" className="link-c">
               회원가입
             </Link>
             <Link to="" className="link-c">
