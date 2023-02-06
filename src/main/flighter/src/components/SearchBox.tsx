@@ -9,6 +9,7 @@ import Calendar from "./Calendar";
 import SearchGroup from "./SearchGroup";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
 
 const SearchWrap = styled.div`
   display: flex;
@@ -95,7 +96,6 @@ const SearchWrap = styled.div`
         min-width: 100px;
         &:hover {
           background-color: #ff385c99;
-          color: white;
           cursor: pointer;
           transition: 0.2s all;
         }
@@ -150,7 +150,6 @@ const SearchWrap = styled.div`
         .list-group-item {
           &:hover {
             background-color: #ff385c99;
-            color: white;
             cursor: pointer;
             transition: 0.2s all;
           }
@@ -185,6 +184,9 @@ const SearchWrap = styled.div`
         width: 100%;
         .list-group {
           max-width: 400px;
+          .badge:last-of-type {
+            width: 30px;
+          }
         }
       }
     }
@@ -207,6 +209,17 @@ function SearchBox() {
   const isMobile = useMediaQuery({
     query: "(max-width:500px)",
   });
+
+  const [adult, setAdult] = useState(0);
+  const [youth, setYouth] = useState(0);
+  const [child, setChild] = useState(0);
+  const changeTicketHandler = (value: any) => {
+    if (value === undefined) return;
+    setAdult(value[0]);
+    setYouth(value[1]);
+    setChild(value[2]);
+  };
+
   return (
     <SearchWrap>
       <div className="search__container">
@@ -255,10 +268,11 @@ function SearchBox() {
           <div className="SearchList__container">
             <SearchList
               item={[
-                { content: "성인", image: faUser },
-                { content: "청소년", image: faChild },
-                { content: "유아", image: faBaby },
+                { content: "성인", image: faUser, count: { adult } },
+                { content: "청소년", image: faChild, count: { youth } },
+                { content: "유아", image: faBaby, count: { child } },
               ]}
+              onChangeTicket={changeTicketHandler}
             />
             <SearchList
               checkBtn={true}
@@ -270,7 +284,7 @@ function SearchBox() {
             />
           </div>
           <div className="SearchGroup__container">
-            <SearchGroup></SearchGroup>
+            <SearchGroup adult={adult} youth={youth} child={child}></SearchGroup>
           </div>
         </div>
         <div className="departure">

@@ -1,7 +1,7 @@
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 
-function SearchGroup() {
+function SearchGroup(props: any) {
   return (
     <ListGroup as="ol">
       <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
@@ -11,8 +11,8 @@ function SearchGroup() {
         <Badge bg="secondary" className="mx-1" pill>
           reset
         </Badge>
-        <Badge bg="secondary" pill>
-          0
+        <Badge bg="danger" pill>
+          {props.adult}
         </Badge>
       </ListGroup.Item>
       <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
@@ -23,7 +23,7 @@ function SearchGroup() {
           reset
         </Badge>{" "}
         <Badge bg="danger" pill>
-          0
+          {props.youth}
         </Badge>
       </ListGroup.Item>
       <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
@@ -34,7 +34,7 @@ function SearchGroup() {
           reset
         </Badge>{" "}
         <Badge bg="danger" pill>
-          0
+          {props.child}
         </Badge>
       </ListGroup.Item>
     </ListGroup>
