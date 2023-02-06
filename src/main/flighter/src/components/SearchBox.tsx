@@ -3,9 +3,11 @@ import CheckBox from "./CheckBox";
 import SearchDrop from "./SearchDrop";
 import SearchList from "./SearchList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightArrowLeft, faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightArrowLeft, faPlaneDeparture, faUser, faChild, faBaby } from "@fortawesome/free-solid-svg-icons";
 import { textShaking, fadeOut } from "./styles/AnimationStyles";
 import Calendar from "./Calendar";
+import SearchGroup from "./SearchGroup";
+import { Link } from "react-router-dom";
 
 const SearchWrap = styled.div`
   display: flex;
@@ -15,9 +17,10 @@ const SearchWrap = styled.div`
     display: flex;
     flex-direction: column;
     width: 90%;
+    max-width: 1000px;
     border-radius: 10px;
     background: #ff385c99;
-    height: 300px;
+    /* height: 420px; */
   }
   .form-check-input {
     bor &:active {
@@ -55,6 +58,15 @@ const SearchWrap = styled.div`
 
   .calendar_container {
     display: flex;
+
+    .react-datepicker-popper[data-placement^="bottom"] {
+      padding-top: 15px;
+    }
+
+    .react-datepicker-wrapper {
+      display: flex;
+      align-items: center;
+    }
     .react-datepicker__input-container {
       input {
         border: 0.5px solid grey;
@@ -62,16 +74,24 @@ const SearchWrap = styled.div`
         border-radius: 5px;
         padding: 5px 0px;
         text-align: center;
+        width: 60%;
+        min-width: 100px;
         &:hover {
-          background-color: var(--color-l-m);
-          transition: 1s all;
+          background-color: #ff385c99;
+          color: white;
+          cursor: pointer;
+          transition: 0.2s all;
         }
       }
     }
     .calendar__text {
+      color: white;
+      white-space: nowrap;
       padding: 10px;
-      width: 150px;
-      word-spacing: normal;
+      margin-left: 5%;
+      &:last-of-type {
+        margin-left: 10%;
+      }
     }
   }
 
@@ -86,17 +106,69 @@ const SearchWrap = styled.div`
       animation: 1s ${fadeOut};
     }
   }
-
-  .list-group {
+  .SearchItem__container {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    align-items: center;
+    margin-top: 30px;
+    .SearchList__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 50%;
+      .list-group {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+        .list-group-item {
+          &:hover {
+            background-color: #ff385c99;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s all;
+          }
+          .svg-inline--fa {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+    .SearchGroup__container {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      .list-group {
+        width: 80%;
+        .rounded-pill:first-of-type {
+          cursor: pointer;
+        }
+      }
+      .bg-primary {
+        background-color: pink;
+      }
+    }
+    @media screen and (max-width: 992px) {
+      display: block;
+      .SearchList__container {
+        width: 100%;
+      }
+      .SearchGroup__container {
+        width: 100%;
+        .list-group {
+          max-width: 400px;
+        }
+      }
+    }
   }
 
   .departure {
     display: flex;
     justify-content: center;
-    margin: 30px;
+    margin: 20px 0;
     .departure__btn {
       border: none;
       border-radius: 10px;
@@ -140,12 +212,31 @@ function SearchBox() {
           <span className="calendar__text">도착일</span>
           <Calendar />
         </div>
-        <SearchList />
+        <div className="SearchItem__container">
+          <div className="SearchList__container">
+            <SearchList
+              item={[
+                { content: "성인", image: faUser },
+                { content: "청소년", image: faChild },
+                { content: "유아", image: faBaby },
+              ]}
+            />
+            <SearchList
+              checkBtn={true}
+              item={[{ content: "이코노미 클래스" }, { content: "비즈니스 클래스" }, { content: "퍼스트 클래스" }]}
+            />
+          </div>
+          <div className="SearchGroup__container">
+            <SearchGroup></SearchGroup>
+          </div>
+        </div>
         <div className="departure">
-          <button className="departure__btn">
-            <FontAwesomeIcon icon={faPlaneDeparture} size="2x" />
-            <p>Departure</p>
-          </button>
+          <Link to="/search">
+            <button className="departure__btn">
+              <FontAwesomeIcon icon={faPlaneDeparture} size="2x" />
+              <p>Departure</p>
+            </button>
+          </Link>
         </div>
       </div>
     </SearchWrap>

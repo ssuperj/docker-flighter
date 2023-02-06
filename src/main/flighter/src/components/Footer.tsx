@@ -8,10 +8,16 @@ const FooterWrap = styled.div`
   transform: translateY(-100%);
   height: 250px;
   background: linear-gradient(140deg, var(--color-r-m), lightpink);
-  padding: 20px 0px;
   margin-top: 100px;
   @media screen and (max-width: 992px) {
     height: 100px;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slick-slider {
+    padding: 20px 0;
   }
 `;
 

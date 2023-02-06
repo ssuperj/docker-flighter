@@ -33,6 +33,23 @@ const Wrapper = styled.div<{ isBlock: boolean }>`
   .dropdown-item {
     color: white;
   }
+
+  .dropdown-item:hover {
+    opacity: 0.75;
+    color: var(--color-r-m);
+    background-color: white;
+    transition: 0.5s;
+  }
+
+  .dropdown-item:active {
+    opacity: 1;
+    transition: 0.25s;
+  }
+
+  .dropdown-item:focus {
+    color: var(--color-r-m);
+    background-color: white;
+  }
 `;
 
 function SearchDrop(props: any) {

@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { textShaking } from "./styles/AnimationStyles";
+import { Link } from "react-router-dom";
 
 const StyledWrap = styled.div`
   .navbar {
@@ -130,7 +131,9 @@ function NavScroll() {
       <Navbar expand="lg">
         <Container fluid>
           <FontAwesomeIcon icon={faPaperPlane} size="2x" />
-          <Navbar.Brand href="#">Flighter</Navbar.Brand>
+          <Link to="/">
+            <Navbar.Brand>Flighter</Navbar.Brand>
+          </Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>

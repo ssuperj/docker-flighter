@@ -11,13 +11,10 @@ const MainWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("flighter/images/bg-beach-main.jpg") no-repeat center center;
+    background: url("/flighter/images/bg-beach-main.jpg") no-repeat center center;
     background-size: cover;
-    width: 70%;
+    width: 100%;
     height: 800px;
-    @media screen and (max-width: 992px) {
-      width: 100%;
-    }
   }
 `;
 
