@@ -6,18 +6,22 @@ const StyledWrap = styled.div`
   .img-box {
     border-radius: 20px;
   }
+  .slick-slide {
+    margin: 0 10px;
+  }
 `;
 
 export default class FooterSlider extends Component {
   render() {
     const settings = {
+      variableWidth: true,
       dots: false,
       infinite: true,
-      slidesToShow: 5,
+      slidesToShow: 4,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 5000,
-      autoplaySpeed: 0,
+      speed: 6000,
+      autoplaySpeed: 1000,
       cssEase: "linear",
       arrows: false,
     };
@@ -75,6 +79,78 @@ export default class FooterSlider extends Component {
           <div>
             <img
               src={process.env.PUBLIC_URL + "/images/bg-street-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-street2-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-japan2-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-architecture-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-blonde-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-palace-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-santorini-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-stone-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-jeju-normal.jpg"}
+              width="200"
+              alt="street"
+              className="img-box"
+            />
+          </div>
+          <div>
+            <img
+              src={process.env.PUBLIC_URL + "/images/bg-dadaepo-normal.jpg"}
               width="200"
               alt="street"
               className="img-box"

@@ -6,6 +6,7 @@ import Login from "../components/Login";
 import NotFound from "../errors/NotFound";
 import Footer from "../components/Footer";
 import styled from "styled-components";
+import SearchPage from "./SearchPage";
 
 const BodyWrap = styled.div`
   height: auto;
@@ -23,6 +24,7 @@ const AppRouter = () => {
           <Route path="/" element={<Main />}></Route>
           <Route path="/mypage/*" element={<MyPage />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/search/*" element={<SearchPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BodyWrap>

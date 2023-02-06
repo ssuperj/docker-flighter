@@ -25,6 +25,7 @@
     "bootstrap5-toggle": "^5.0.4",
     "gh-pages": "^5.0.0",
     "graphql": "^16.6.0",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-datepicker": "^4.10.0",
@@ -42,6 +43,9 @@
     "typeit-react": "^2.6.4",
     "typescript": "^4.4.4",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -70,7 +74,5 @@
     ]
   },
   "homepage": "https://ssuperj.github.io/flighter",
-  "devDependencies": {
-    "@types/styled-components": "^5.1.26"
-  }
+  "proxy": "http://openapi.airport.co.kr/service"
 }
