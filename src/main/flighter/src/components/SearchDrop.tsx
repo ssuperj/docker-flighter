@@ -58,7 +58,7 @@ function SearchDrop(props: any) {
       <InputGroup>
         <DropdownButton variant="outline-secondary" title={props.text} id="input-group-dropdown-1">
           {props.item.map((value: any, index: string) => (
-            <Dropdown.Item href="#" key={index}>
+            <Dropdown.Item key={index}>
               {value.title}
             </Dropdown.Item>
           ))}

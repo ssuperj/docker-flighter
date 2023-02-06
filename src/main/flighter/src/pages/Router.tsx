@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
 import Main from "./Main";
 import MyPage from "./MyPage";
+import Login from "../components/Login";
 import NotFound from "../errors/NotFound";
 import Footer from "../components/Footer";
 import styled from "styled-components";
@@ -22,6 +23,7 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/mypage/*" element={<MyPage />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/search/*" element={<SearchPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
