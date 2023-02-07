@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import FileRead from "../components/FileRead";
 import Loading from "../components/Loading";
 import SearchView from "../components/SearchView";
 
@@ -10,7 +11,7 @@ const DOMESTIC_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/ser
 const INTERNATIONAL_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/IflightScheduleList/getIflightScheduleList?ServiceKey=${API_KEY}&pageNo=1`;
 
 const Search = (props: any) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const mainApi = async () => {
     await fetch(AIRPORT_API_URL, {
       headers: {
@@ -25,10 +26,21 @@ const Search = (props: any) => {
       });
   };
   useEffect(() => {
-    mainApi();
+    // mainApi();
   }, []);
 
-  return <>{loading ? <Loading /> : <SearchView />}</>;
+  return (
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {/* <SearchView /> */}
+          <FileRead />
+        </>
+      )}
+    </>
+  );
 };
 
 export default Search;
