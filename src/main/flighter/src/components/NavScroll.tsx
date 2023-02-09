@@ -10,6 +10,7 @@ import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { textShaking } from "./styles/AnimationStyles";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const StyledWrap = styled.div`
   .navbar {
@@ -126,6 +127,17 @@ const StyledWrap = styled.div`
 `;
 
 function NavScroll() {
+  const [searchData, setSearchData] = useState("1");
+
+  const keyDown = (event: any) => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+    }
+    setTimeout(() => {
+      setSearchData(event.target.value);
+    }, 1);
+  };
+
   return (
     <StyledWrap>
       <Navbar expand="lg">
@@ -156,9 +168,11 @@ function NavScroll() {
               </NavDropdown>
             </Nav>
             <Form className="d-flex">
-              <Form.Control type="search" placeholder="Search" aria-label="Search" />
+              <Form.Control type="search" placeholder="Search" aria-label="Search" onKeyDown={keyDown} />
               <Button variant="outline-light">
-                <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
+                <Link to={`http://www.google.com/search?q=${searchData}`}>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
+                </Link>
               </Button>
             </Form>
           </Navbar.Collapse>

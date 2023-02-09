@@ -14,12 +14,40 @@ const Wrapper = styled.div`
     margin-left: 5px;
   }
 `;
+const clickWayBtn = (event: any) => {
+  const endDate: any = document.querySelector("#endDate");
+  const endDateText: any = document.querySelectorAll(".calendar__text")[1];
+  if (event.currentTarget.id === "oneWay") {
+    endDate.style.visibility = "hidden";
+    endDateText.style.visibility = "hidden";
+  } else {
+    endDate.style = "";
+    endDateText.style = "";
+  }
+};
 
 function CheckBox(props: any) {
   return (
     <Wrapper>
       <div className="form-check">
-        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+        {props.checked ? (
+          <input
+            className="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id={props.id}
+            defaultChecked
+            onClick={clickWayBtn}
+          />
+        ) : (
+          <input
+            className="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id={props.id}
+            onClick={clickWayBtn}
+          />
+        )}
         <label className="form-check-label" htmlFor="flexRadioDefault1">
           {props.text}
         </label>
