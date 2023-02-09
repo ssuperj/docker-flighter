@@ -4,15 +4,12 @@ const Wrapper = styled.div`
   .box {
     margin-top: 100px;
     width: 100%;
-    /* background: linear-gradient(to bottom left, var(--color-l-m), white 300%); */
     text-align: center;
     height: 1000px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
-  /* -------------- loader4 -------------- */
 
   .loader {
     position: relative;

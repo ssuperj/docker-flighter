@@ -61,14 +61,18 @@ function SearchDrop(props: any) {
     if (event.keyCode === 13) {
       setSearchData(event.target.value);
       setSpread(true);
-      document.querySelector(".dropdown-menu")?.classList.add("show");
+      event.currentTarget.id === "departure"
+        ? document.querySelectorAll(".dropdown-menu")[0]?.classList.add("show")
+        : document.querySelectorAll(".dropdown-menu")[1]?.classList.add("show");
     }
   };
 
   const foldDropList = (event: any) => {
-    if (document.querySelector(".dropdown-menu")?.classList.contains("show")) {
-      document.querySelector(".dropdown-menu")?.classList.remove("show");
-    }
+    document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+      if (menu.classList.contains("show")) {
+        menu.classList.remove("show");
+      }
+    });
     if (event.target.classList.contains("dropdown-item")) {
       const clickText = event.target.text;
       const clickIATA = event.target.dataset.iata;
@@ -89,8 +93,13 @@ function SearchDrop(props: any) {
         >
           <CitySearch searchData={searchData} onKeyDown={KeyDownHandler} isSpread={spread} />
         </DropdownButton>
-        <Form.Control aria-label="Text input with dropdown button" onKeyDown={KeyDownHandler} id={props.inputId} />
-      </InputGroup>{" "}
+        <Form.Control
+          aria-label="Text input with dropdown button"
+          onKeyDown={KeyDownHandler}
+          id={props.inputId}
+          data-iata=""
+        />
+      </InputGroup>
     </Wrapper>
   );
 }

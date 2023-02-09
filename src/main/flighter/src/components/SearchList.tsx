@@ -3,11 +3,21 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 function SearchList(props: any) {
   const changeColorHandler = (event: any, index: number) => {
-    const arr = [...event.target.parentNode.children];
+    const arr = [...event.currentTarget.parentNode.children];
     arr.forEach((el) => {
       el.style.backgroundColor = "white";
     });
     arr[index].style.backgroundColor = "var(--color-r-m)";
+    switch (index) {
+      case 0:
+        props.checkSeatTypeHandler("economy");
+        break;
+      case 1:
+        props.checkSeatTypeHandler("business");
+        break;
+      case 2:
+        props.checkSeatTypeHandler("first");
+    }
   };
   const countUp = (event: any, index: number) => {
     let adult = props.item[0].count["adult"];
@@ -27,6 +37,7 @@ function SearchList(props: any) {
         <ListGroup.Item
           key={index}
           onClick={props.checkBtn ? (event) => changeColorHandler(event, index) : (event) => countUp(event, index)}
+          style={props.checkBtn && index === 0 ? { background: "var(--color-r-m)" } : {}}
         >
           {value.image ? <FontAwesomeIcon icon={value.image}></FontAwesomeIcon> : null}
           {value.content}

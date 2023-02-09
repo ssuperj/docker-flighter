@@ -221,6 +221,26 @@ function SearchBox() {
     setChild(value[2]);
   };
 
+  const clickResetButton = (event: any) => {
+    const userType = event.currentTarget.id;
+    switch (userType) {
+      case "adult":
+        setAdult(0);
+        break;
+      case "youth":
+        setYouth(0);
+        break;
+      case "child":
+        setChild(0);
+    }
+  };
+
+  const [seatType, setSeatType] = useState("economy");
+
+  const checkSeatTypeHandler = (type: any) => {
+    setSeatType(type);
+  };
+
   return (
     <SearchWrap>
       <div className="search__container">
@@ -229,12 +249,12 @@ function SearchBox() {
           <CheckBox text="편도" id={"oneWay"} />
           <CheckBox text="왕복" checked={true} id={"twoWay"} />
           <div className="check__port">
-            <input type="radio" className="btn-check" name="options" id="option1" autoComplete="off" defaultChecked />
-            <label className="btn btn-secondary" htmlFor="option1">
+            <input type="radio" className="btn-check" name="airType" id="domestic" autoComplete="off" defaultChecked />
+            <label className="btn btn-secondary" htmlFor="domestic">
               국내선
             </label>
-            <input type="radio" className="btn-check" name="options" id="option2" autoComplete="off" />
-            <label className="btn btn-secondary" htmlFor="option2">
+            <input type="radio" className="btn-check" name="airType" id="international" autoComplete="off" />
+            <label className="btn btn-secondary" htmlFor="international">
               국제선
             </label>
           </div>
@@ -273,10 +293,12 @@ function SearchBox() {
                   ? [{ content: "이코노미" }, { content: "비즈니스" }, { content: "퍼스트" }]
                   : [{ content: "이코노미 클래스" }, { content: "비즈니스 클래스" }, { content: "퍼스트 클래스" }]
               }
+              checkSeatTypeHandler={checkSeatTypeHandler}
             />
+            <input hidden defaultValue={seatType} id="seat-type" />
           </div>
           <div className="SearchGroup__container">
-            <SearchGroup adult={adult} youth={youth} child={child}></SearchGroup>
+            <SearchGroup adult={adult} youth={youth} child={child} clickResetButton={clickResetButton}></SearchGroup>
           </div>
         </div>
         <DepartureBtn />

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import ModalParam from "./ModalParam";
 
 const StyleWrap = styled.div`
   .container {
@@ -51,24 +50,20 @@ function Withdrawal() {
         <h1 className="title">Withdrawal</h1>
         <br />
         <div className="content">
-          <img
-            className="ico-stewardess"
-            src={`${process.env.PUBLIC_URL}/images/ic-stewardess3-normal.png`}
-            alt=""
-          />
+          <img className="ico-stewardess" src={`${process.env.PUBLIC_URL}/images/ic-stewardess3-normal.png`} alt="" />
           <p className="p-b">회원탈퇴 페이지입니다.</p>
           <p className="p">
             탈퇴를 원하시면 회원님의 비밀번호를 입력하시고, <br />
             탈퇴하기를 눌러주세요.
           </p>
           <br />
-          <input className="input" type="password" id="password"/> 
+          <input className="input" type="password" id="password" />
           <Button
-              style={{ backgroundColor: "var(--color-r-m)", border: "none", opacity: "0.8", margin: "0 0 4px 3px" }}
-              variant="secondary"
-            >
-              탈퇴하기
-            </Button>
+            style={{ backgroundColor: "var(--color-r-m)", border: "none", opacity: "0.8", margin: "0 0 4px 3px" }}
+            variant="secondary"
+          >
+            탈퇴하기
+          </Button>
           {/* <ModalParam
             render={() =>           
             <Button
@@ -82,21 +77,14 @@ function Withdrawal() {
             btnContent="탈퇴하기"
           ></ModalParam> */}
           <hr />
-          <img
-            className="ico-stewardess"
-            src={`${process.env.PUBLIC_URL}/images/ic-stewardess1-normal.png`}
-            alt=""
-          />
+          <img className="ico-stewardess" src={`${process.env.PUBLIC_URL}/images/ic-stewardess1-normal.png`} alt="" />
           <p className="p-b">회원탈퇴가 완료되었습니다.</p>
           <p className="p">
             Flighter를 이용해주시고 사랑해주셔서 감사합니다. <br />
             더욱 더 노력하는 Flighter가 되겠습니다.
           </p>
           <br />
-          <Button
-            style={{ backgroundColor: "var(--color-r-m)", border: "none", opacity: "0.8" }}
-            variant="secondary"
-          >
+          <Button style={{ backgroundColor: "var(--color-r-m)", border: "none", opacity: "0.8" }} variant="secondary">
             확인
           </Button>
         </div>

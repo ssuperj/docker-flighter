@@ -40,7 +40,6 @@ const CitySearch = (props: any) => {
     props.searchData.length !== 0 &&
       load(props.searchData).then((resp) => {
         setData(resp!);
-        console.log(resp);
       });
   }, [props.searchData]);
 
