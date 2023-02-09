@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import Weather from "./Weather";
 
 const StyledWrap = styled.div`
+  .weather_list {
+    margin-top: 60px;
+  }
+
   .container {
     display: flex;
     justify-content: center;
@@ -159,6 +164,7 @@ const StyledWrap = styled.div`
 function UserInfo() {
   return (
     <StyledWrap>
+      <Weather />
       <div className="container">
         <span>MY PASSPORT</span>
         <img

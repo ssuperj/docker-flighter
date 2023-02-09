@@ -4,6 +4,7 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import Weather from "../components/Weather";
 
 const StyleWrap = styled.div`
   .container {
@@ -189,6 +190,7 @@ const StyleWrap = styled.div`
 function Login() {
   return (
     <StyleWrap>
+      <Weather />
       <div className="container">
         <h1>
           <FontAwesomeIcon icon={faPaperPlane} size="2x" />
