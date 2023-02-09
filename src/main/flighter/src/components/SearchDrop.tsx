@@ -1,8 +1,9 @@
-import Dropdown from "react-bootstrap/Dropdown";
+import { useState } from "react";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import styled from "styled-components";
+import CitySearch from "./CitySearch";
 
 const Wrapper = styled.div<{ isBlock: boolean }>`
   width: 40%;
@@ -53,17 +54,42 @@ const Wrapper = styled.div<{ isBlock: boolean }>`
 `;
 
 function SearchDrop(props: any) {
+  const [searchData, setSearchData] = useState("");
+  const [spread, setSpread] = useState(false);
+
+  const KeyDownHandler = (event: any) => {
+    if (event.keyCode === 13) {
+      setSearchData(event.target.value);
+      setSpread(true);
+      document.querySelector(".dropdown-menu")?.classList.add("show");
+    }
+  };
+
+  const foldDropList = (event: any) => {
+    if (document.querySelector(".dropdown-menu")?.classList.contains("show")) {
+      document.querySelector(".dropdown-menu")?.classList.remove("show");
+    }
+    if (event.target.classList.contains("dropdown-item")) {
+      const clickText = event.target.text;
+      const clickIATA = event.target.dataset.iata;
+      const input = event.currentTarget.querySelector("input");
+      input.value = clickText;
+      input.setAttribute("data-iata", clickIATA);
+    }
+  };
+
   return (
     <Wrapper isBlock={props.isBlock}>
-      <InputGroup>
-        <DropdownButton variant="outline-secondary" title={props.text} id="input-group-dropdown-1">
-          {props.item.map((value: any, index: string) => (
-            <Dropdown.Item key={index}>
-              {value.title}
-            </Dropdown.Item>
-          ))}
+      <InputGroup onClick={foldDropList}>
+        <DropdownButton
+          variant="outline-secondary"
+          title={props.text}
+          id="input-group-dropdown-1"
+          style={{ background: "red" }}
+        >
+          <CitySearch searchData={searchData} onKeyDown={KeyDownHandler} isSpread={spread} />
         </DropdownButton>
-        <Form.Control aria-label="Text input with dropdown button" />
+        <Form.Control aria-label="Text input with dropdown button" onKeyDown={KeyDownHandler} id={props.inputId} />
       </InputGroup>{" "}
     </Wrapper>
   );

@@ -3,13 +3,13 @@ import CheckBox from "./CheckBox";
 import SearchDrop from "./SearchDrop";
 import SearchList from "./SearchList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightArrowLeft, faPlaneDeparture, faUser, faChild, faBaby } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightArrowLeft, faUser, faChild, faBaby } from "@fortawesome/free-solid-svg-icons";
 import { textShaking, fadeOut } from "./styles/AnimationStyles";
 import Calendar from "./Calendar";
 import SearchGroup from "./SearchGroup";
-import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
+import DepartureBtn from "./DepartureBtn";
 
 const SearchWrap = styled.div`
   display: flex;
@@ -174,6 +174,9 @@ const SearchWrap = styled.div`
       .bg-primary {
         background-color: pink;
       }
+      .badge:last-of-type {
+        width: 30px;
+      }
     }
     @media screen and (max-width: 992px) {
       display: block;
@@ -184,9 +187,6 @@ const SearchWrap = styled.div`
         width: 100%;
         .list-group {
           max-width: 400px;
-          .badge:last-of-type {
-            width: 30px;
-          }
         }
       }
     }
@@ -213,6 +213,7 @@ function SearchBox() {
   const [adult, setAdult] = useState(0);
   const [youth, setYouth] = useState(0);
   const [child, setChild] = useState(0);
+
   const changeTicketHandler = (value: any) => {
     if (value === undefined) return;
     setAdult(value[0]);
@@ -225,8 +226,8 @@ function SearchBox() {
       <div className="search__container">
         <div className="check__container">
           <div className="emptyBox"></div>
-          <CheckBox text="편도" />
-          <CheckBox text="왕복" />
+          <CheckBox text="편도" id={"oneWay"} />
+          <CheckBox text="왕복" checked={true} id={"twoWay"} />
           <div className="check__port">
             <input type="radio" className="btn-check" name="options" id="option1" autoComplete="off" defaultChecked />
             <label className="btn btn-secondary" htmlFor="option1">
@@ -240,29 +241,20 @@ function SearchBox() {
         </div>
 
         <div className="destination__container">
-          <SearchDrop
-            text="출발지"
-            isBlock="false"
-            item={[
-              { title: "서울", link: "" },
-              { title: "부산", link: "" },
-            ]}
-          />
+          <SearchDrop text="출발지" isBlock="false" item={[{ city: "서울" }, { city: "부산" }]} inputId={"departure"} />
           <FontAwesomeIcon icon={faArrowRightArrowLeft} size="2x" />
           <SearchDrop
             text="도착지"
             isBlock="false"
-            item={[
-              { title: "서울", link: "" },
-              { title: "제주", link: "" },
-            ]}
+            item={[{ city: "서울" }, { city: "제주" }]}
+            inputId={"destination"}
           />
         </div>
         <div className="calendar_container">
-          <div className="calendar__text">출발일</div>
-          <Calendar />
-          <span className="calendar__text">도착일</span>
-          <Calendar />
+          <div className="calendar__text">가는날</div>
+          <Calendar id={"startDate"} />
+          <span className="calendar__text">오는날</span>
+          <Calendar id={"endDate"} />
         </div>
         <div className="SearchItem__container">
           <div className="SearchList__container">
@@ -287,14 +279,7 @@ function SearchBox() {
             <SearchGroup adult={adult} youth={youth} child={child}></SearchGroup>
           </div>
         </div>
-        <div className="departure">
-          <Link to="/search">
-            <button className="departure__btn">
-              <FontAwesomeIcon icon={faPlaneDeparture} size="2x" />
-              <p>Departure</p>
-            </button>
-          </Link>
-        </div>
+        <DepartureBtn />
       </div>
     </SearchWrap>
   );

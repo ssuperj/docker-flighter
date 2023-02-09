@@ -14,6 +14,9 @@ const globalStyles = createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+    &:hover {
+      color: inherit;
+    }
   }
   body {
     font-family: LINESeedKR_Rg, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
