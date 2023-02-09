@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
+import Weather from "./Weather";
 
 const StyleWrap = styled.div`
+  .weather_list {
+    margin-top: 100px;
+  }
+
   .container {
 
     .title {
@@ -112,6 +117,7 @@ const StyleWrap = styled.div`
 function ReserveInfo() {
   return (
     <StyleWrap>
+      <Weather />
       <div className="container">
         <h1 className="title">RESERVE INFO</h1><br />
         <div className="content">

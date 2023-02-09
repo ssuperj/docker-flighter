@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   max-height: 200px;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const load = async (text: string) => {

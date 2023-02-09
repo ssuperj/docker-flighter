@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
+import Weather from "./Weather";
 
 const StyleWrap = styled.div`
+  .weather_list {
+    margin-top: 60px;
+  }
+
   .container {
     justify-content: center;
     text-align: center;
@@ -39,6 +44,23 @@ const StyleWrap = styled.div`
         caret-color: var(--color-r-m);
         outline-color: var(--color-r-m);
       }
+
+      input {
+        background-color: var(--color-l-g);
+        border: none;
+        width: 170px;
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 10px;
+        padding-left: 10px;
+        height: 35px;
+        outline: none;
+      }
+
+      input:hover, input:focus {
+        caret-color: var(--color-d-m);
+      }
     }
   }
 `;
@@ -46,6 +68,7 @@ const StyleWrap = styled.div`
 function Withdrawal() {
   return (
     <StyleWrap>
+      <Weather />
       <div className="container">
         <h1 className="title">Withdrawal</h1>
         <br />

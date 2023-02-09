@@ -75,11 +75,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://ssuperj.github.io/flighter",
-  "proxy": "http://openapi.airport.co.kr/service",
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
-  }
+  "homepage": "https://ya1u.github.io/flighter",
+  "proxy": "http://openapi.airport.co.kr/service"
 }
