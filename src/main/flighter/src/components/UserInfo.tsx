@@ -23,6 +23,7 @@ const StyleWrap = styled.div`
     .title {
       color: var(--color-r-m);
       font-family: var(--font-bd);
+      opacity: 0.8;
       font-size: 30px;
     }
 

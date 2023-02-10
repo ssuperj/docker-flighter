@@ -185,6 +185,44 @@ const StyleWrap = styled.div`
       }
     }
   }
+
+  @media (max-width: 425px) {
+    .container {
+      width: 330px;
+      height: 450px;
+
+      h1 {
+        margin-bottom: 55px;
+      }
+
+      input {
+        left: 40px
+      }
+
+      .ico-id {
+        left: 38px;
+        bottom: 1px;
+      }
+
+      .ico-pwd {
+        top: 56px;
+        left: 212px;
+      }
+
+      .btn-lg {
+        left: 40px;
+      }
+
+      .link {
+        margin-left: 38px;
+        top: 380px;
+      }
+    }
+
+    .other-container {
+      width: 330px;
+    }
+  }
 `;
 
 function Login() {

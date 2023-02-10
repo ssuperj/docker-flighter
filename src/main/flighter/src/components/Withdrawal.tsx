@@ -13,12 +13,13 @@ const StyleWrap = styled.div`
     width: auto;
 
     .title {
-      margin-top: 10px;
+      margin-top: 60px;
       font-size: 18px;
       color: var(--color-r-m);
       font-family: var(--font-bd);
       opacity: 0.8;
       margin-bottom: 30px;
+      font-size: 30px;
     }
 
     .content {
@@ -70,7 +71,7 @@ function Withdrawal() {
     <StyleWrap>
       <Weather />
       <div className="container">
-        <h1 className="title">Withdrawal</h1>
+        <h1 className="title">회원탈퇴</h1>
         <br />
         <div className="content">
           <img className="ico-stewardess" src={`${process.env.PUBLIC_URL}/images/ic-stewardess3-normal.png`} alt="" />
