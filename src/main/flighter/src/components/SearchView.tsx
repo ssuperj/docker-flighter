@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +6,6 @@ import NowDate from "./ResultInput";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Rellax from "rellax";
-import Decoration from "./Decoration";
 
 const SearchView = (props: any) => {
   const Wrapper = styled.div`
@@ -16,7 +15,7 @@ const SearchView = (props: any) => {
       min-width: 300px;
       box-shadow: 2px 2px 2px 2px grey;
       position: relative;
-      background-image: linear-gradient(75deg, #add8e633, #80808033);
+      background-image: linear-gradient(75deg, #add8e660, #80808060);
       font-family: var(--font-apple);
       font-weight: 700;
       &::after {
@@ -27,13 +26,13 @@ const SearchView = (props: any) => {
         top: 0px;
         right: 0px;
         bottom: 0px;
-        background-image: linear-gradient(75deg, lightblue, magenta);
-        opacity: 0;
+        background-image: linear-gradient(75deg, #f8bbc5, #d7f2fa);
+        opacity: 0.85;
         transition: all 1s ease-in-out;
         z-index: -1;
       }
       &:hover::after {
-        opacity: 0.1;
+        opacity: 0.975;
       }
       .air-card__btn {
         width: 150px;
@@ -45,19 +44,50 @@ const SearchView = (props: any) => {
     return (
       <>
         {props.searchResult.map((item: any, index: number) => (
-          <div>
-            <div></div>
-            <div key={index}>
-              <div className="">{item.children[0].innerHTML}</div>
-              <div>{item.children[1].innerHTML}</div>
-              <div>{item.children[2].innerHTML}</div>
-              <div>{item.children[3].innerHTML}</div>
-              <div>{item.children[4].innerHTML}</div>
-              <div>{item.children[5].innerHTML}</div>
-              <div>{item.children[9].innerHTML}</div>
-              <div>{item.children[11].innerHTML}</div>
-              <div>{item.children[16].innerHTML}</div>
+          <div data-aos="zoom-in" key={index} className="d-flex justify-content-center">
+            <div className="air-card row d-flex align-items-center w-50 my-5 px-4" key={index}>
+              <div className="air-card__logo col-lg-6 d-flex flex-column align-items-center text-center">
+                <img width="200px" src={process.env.PUBLIC_URL + "/images/Korean-Air-Logo-1024x640.png"} alt="logo" />
+                <div className="row my-4 w-100 fs-6">
+                  <div className="air-card__airline-en col-6">{item.children[0].innerHTML}</div>
+                  <div className="air-card__airline-kr col-6">{item.children[1].innerHTML}</div>
+                </div>
+              </div>
+
+              <div className="air-card__content col-lg-6 d-flex flex-wrap justify-content-center  text-center">
+                <div className="air-card__flight d-flex align-items-center mt-4 fs-5 w-100 justify-content-evenly">
+                  <div>항공편&nbsp;</div>
+                  <div>{item.children[11].innerHTML}</div>
+                </div>
+                <div className="d-flex flex-wrap justify-content-center align-items-center">
+                  <div className="row d-flex justify-content-center  my-4 w-100">
+                    <div className="air-card__departure col-4 text-nowrap">{item.children[2].innerHTML}</div>
+                    <FontAwesomeIcon className="col-2" icon={faArrowRight} size={"lg"} />
+                    <div className="air-card__destination col-4">{item.children[4].innerHTML}</div>
+                  </div>
+                  <div className="row w-100 my-2">
+                    <div className="col-lg-12 col-6 mt-2">DATE TIME</div>
+                    <div className="col-lg-12 col-6 mt-2">{props.date}</div>
+                  </div>
+                  <div className="row w-100">
+                    <div className="air-card__start-date col-6">
+                      <div>
+                        <div className="my-2">출발시간</div>
+                        <div>{item.children[16].innerHTML}</div>
+                      </div>
+                    </div>
+                    <div className="air-card__end-date col-6">
+                      <div className="my-2">도착시간</div>
+                      <div>미정</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="my-4">
+                  <button className="air-card__btn btn btn-danger">예매하기</button>
+                </div>
+              </div>
             </div>
+            <div className="air-price"></div>
           </div>
         ))}
       </>
@@ -79,12 +109,12 @@ const SearchView = (props: any) => {
               </div>
 
               <div className="air-card__content col-lg-6 d-flex flex-wrap justify-content-center  text-center">
-                <div className="air-card__flight d-flex align-items-center my-4 fs-5">
+                <div className="air-card__flight d-flex align-items-center mt-4 fs-5 w-100 justify-content-evenly">
                   <div>항공편&nbsp;</div>
                   <div>{item.children[8].innerHTML}</div>
                 </div>
                 <div className="d-flex flex-wrap justify-content-center">
-                  <div className="row d-flex justify-content-center my-4 w-100">
+                  <div className="row d-flex justify-content-center my-4 w-100 align-items-center">
                     <div className="air-card__departure col-4 text-nowrap">{item.children[17].innerHTML}</div>
                     <FontAwesomeIcon className="col-2" icon={faArrowRight} size={"lg"} />
                     <div className="air-card__destination col-4">{item.children[2].innerHTML}</div>
@@ -118,8 +148,6 @@ const SearchView = (props: any) => {
     );
   };
 
-  const [empty, setEmpty] = useState(true);
-
   useEffect(() => {
     AOS.init();
 
@@ -132,17 +160,28 @@ const SearchView = (props: any) => {
     });
   }, []);
 
-  useEffect(() => {
-    props.searchResult.length === 0 ? setEmpty(true) : setEmpty(false);
-    console.log(props.searchResult);
-  }, [props.searchResult]);
-
   return (
-    <>
-      <Decoration />
+    <div className="pt-5">
       <NowDate></NowDate>
-      <Wrapper className="container mt-5">{empty ? <>값이 없습니다.</> : domestic()}</Wrapper>
-    </>
+      <Wrapper className="container mt-5">{props.isDomestic ? domestic() : international()}</Wrapper>
+      <div className="row d-flex justify-content-center">
+        {props.isNextPage && (
+          <button
+            className="btn btn-danger btn-lg w-50"
+            style={{ maxWidth: "600px", minWidth: "250px" }}
+            onClick={props.clickMoreBtn}
+          >
+            {props.isLoading ? (
+              <div className="spinner-border text-white" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              <>MORE</>
+            )}
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 export default SearchView;

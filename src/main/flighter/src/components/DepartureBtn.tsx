@@ -1,14 +1,26 @@
 import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Modals from "./Modals";
 
 const DepartureBtn = (props: any) => {
+  const location = useLocation();
+  const state = location.state;
+
   const [show, setShow] = useState(false);
   const toggleModalHandler = () => setShow(!show);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (state !== null) {
+      setShow(true);
+      navigate("/", {
+        state: null,
+      });
+    }
+  }, [navigate, state]);
 
   const clickDepartureBtn = () => {
     const departure: any = document.querySelector("#departure");
@@ -28,6 +40,10 @@ const DepartureBtn = (props: any) => {
       !destination.dataset.iata ||
       (adult.innerText === "0" && adult.innerText === "0" && adult.innerText === "0")) &&
       setShow(true);
+
+    /**
+     * 오류페이지 & 조회정보 없을시
+     */
 
     /**
      * 조회하려는 정보가 정확할시 search 페이지로 넘어감

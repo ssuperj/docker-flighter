@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import BlueBg from "../components/BlueBg";
 import Loading from "../components/Loading";
 import SearchView from "../components/SearchView";
+
+/**
+ * API에서 받아올 페이지가 더 있는지 확인
+ */
+const pageTest = (itemCount: number, pageNo: number) => {
+  const result = itemCount / (pageNo * 10) >= 1;
+  return result;
+};
 
 const API_KEY =
   "B4w%2BouwgattOuQ%2BoVlzGaVpUoH6qYQmr9GjQ1zou%2Fvr2JR4h5%2BRE%2F%2FxNNeygDB2UUbswLZwhkNXAS%2BRojIqpoA%3D%3D";
@@ -13,6 +22,7 @@ const Search = (props: any) => {
   const [loading, setLoading] = useState(true);
   const [result, setResult]: any = useState([]);
   const [pageNo, setPageNo] = useState(1);
+  const [isNextPage, setIsNextPage] = useState(false);
 
   /**
    * DepartureBtn 클릭시 받아오는 state
@@ -35,28 +45,63 @@ const Search = (props: any) => {
       .then((str) => new DOMParser().parseFromString(str, "application/xml"))
       .then(async (xml) => {
         const items: any = xml.querySelector("items")?.children;
+
+        console.log(xml);
+
+        //조회하는 정보가 없으면 다시 메인 페이지로 리다이렉션
+        items.length === 0 &&
+          navigate("/", {
+            state: {
+              show: true,
+            },
+          });
+        const flightCount = Number(xml.querySelector("totalCount")?.innerHTML);
+        const pageNo = Number(xml.querySelector("pageNo")?.innerHTML);
+
+        pageTest(flightCount, pageNo) && setIsNextPage(true);
         const itemsArr = [...items];
+        console.log(result.length);
         await setResult((prev: any) => {
-          return [...itemsArr];
+          return [...prev, ...itemsArr];
         });
         setLoading(false);
       })
       .catch((error) => {
+        //에러날시 메인페이지
         navigate("/", {
-          state: "",
+          state: {
+            show: true,
+          },
         });
       });
   };
+
+  const clickMoreBtn = (event: any) => {
+    setPageNo((prev) => prev + 1);
+  };
+
   useEffect(() => {
     mainApi();
-  }, []);
+    console.log(pageNo);
+    console.log(result);
+  }, [pageNo]);
 
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-        <SearchView searchResult={result} date={state.startDate} style={{ backgroundColor: "blue" }} />
+        <>
+          <BlueBg />
+          <SearchView
+            searchResult={result}
+            date={state.startDate}
+            isDomestic={isDomestic}
+            isNextPage={isNextPage}
+            mainApi={mainApi}
+            clickMoreBtn={clickMoreBtn}
+          />
+        </>
       )}
     </>
   );

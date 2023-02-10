@@ -11,9 +11,7 @@ async function onGeoOk(position: any) {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
   await fetch(url)
     .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+    .then((data) => {});
 }
 function onGeoError() {
   alert("Can't find you. No weather for you.");

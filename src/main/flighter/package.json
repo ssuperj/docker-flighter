@@ -80,7 +80,6 @@
     ]
   },
   "homepage": "https://ssuperj.github.io/flighter",
-  "proxy": "http://openapi.airport.co.kr/service",
   "browser": {
     "fs": false,
     "os": false,

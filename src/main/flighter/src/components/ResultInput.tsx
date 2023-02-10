@@ -47,12 +47,13 @@ const NowDate = (props: any) => {
 
   return (
     <div
-      className="mt-5 p-4 rounded-5 mx-auto w-50 row text-center fs-3 fw-bold"
+      className=" p-4 rounded-5 mx-auto w-50 row text-center fs-3 fw-bold"
       style={{
-        backgroundImage: "linear-gradient(75deg, lightblue, #ffc0cb)",
+        backgroundImage: "linear-gradient(75deg, #ffc0cb99, var(--color-l-m))",
         fontFamily: "var(--font-apple)",
         boxShadow: "1px 1px 5px 1px grey",
-        textShadow: "1px 1px 15px grey",
+        textShadow: "1px 1px 15px #ddd",
+        minWidth: "300px",
       }}
     >
       <div className="date mb-3">{date}</div>
