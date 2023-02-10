@@ -35,7 +35,7 @@ const StyleWrap = styled.div`
     flex-direction: column;
     left: 1%;
     width: 180px;
-    height: 600px;
+    height: 650px;
     border-radius: 20px;
     background: linear-gradient(#0066b2, #89CFF0);
     color: white;
@@ -57,6 +57,10 @@ const StyleWrap = styled.div`
       font-family: var(--font-bd);
       font-size: 18px;
       text-shadow: 1px 1px 1px gray;
+
+      img {
+        width: 30px;
+      }
     }
 
     .weather {
@@ -143,7 +147,7 @@ function Weathers() {
       <div className="weather_list">
       {loading ? <div className="loading"><h2>Loading...</h2></div> : 
         <>
-          {<h1 className="location"><br />{loc}</h1>}
+          {<h1 className="location"><img src={`${process.env.PUBLIC_URL}/images/ic-location.png`} alt="" /><br /><br />{loc}</h1>}
           <div className="weather">
             <img src={`${process.env.PUBLIC_URL}/images/weather/${todayWeather.weather[0].icon}.png`} alt="" />
             <div className="weather_info">
