@@ -22,7 +22,6 @@ const SearchWrap = styled.div`
     max-width: 1000px;
     border-radius: 10px;
     background: #ff385c99;
-    /* height: 420px; */
   }
   .form-check-input {
     bor &:active {

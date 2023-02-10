@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import SearchView from "../components/SearchView";
 
@@ -8,9 +8,11 @@ const API_KEY =
 
 const Search = (props: any) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const state = location.state;
   const [loading, setLoading] = useState(true);
   const [result, setResult]: any = useState([]);
+  const [pageNo, setPageNo] = useState(1);
 
   /**
    * DepartureBtn 클릭시 받아오는 state
@@ -20,8 +22,8 @@ const Search = (props: any) => {
   const isDomestic = state.airType === "domestic";
   const startDate = state.startDate.replace(/\//g, "");
 
-  const DOMESTIC_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getDflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}`;
-  const INTERNATIONAL_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}`;
+  const DOMESTIC_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getDflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}&pageNo=${pageNo}`;
+  const INTERNATIONAL_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}&pageNo=${pageNo}`;
 
   const mainApi = async () => {
     await fetch(isDomestic ? DOMESTIC_API_URL : INTERNATIONAL_API_URL, {
@@ -38,17 +40,26 @@ const Search = (props: any) => {
           return [...itemsArr];
         });
         setLoading(false);
-        console.log(items);
       })
       .catch((error) => {
-        console.log(error);
+        navigate("/", {
+          state: "",
+        });
       });
   };
   useEffect(() => {
     mainApi();
   }, []);
 
-  return <>{loading ? <Loading /> : <SearchView searchResult={result} />}</>;
+  return (
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <SearchView searchResult={result} date={state.startDate} style={{ backgroundColor: "blue" }} />
+      )}
+    </>
+  );
 };
 
 export default Search;

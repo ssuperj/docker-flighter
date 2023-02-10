@@ -21,6 +21,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-responsive": "^8.0.5",
     "@types/react-slick": "^0.23.10",
+    "aos": "^2.3.4",
     "apollo-server": "^3.11.1",
     "bootstrap": "^5.2.3",
     "bootstrap5-toggle": "^5.0.4",
@@ -39,6 +40,7 @@
     "react-slick": "^0.29.0",
     "react-social-login-buttons": "^3.6.1",
     "redux": "^4.2.0",
+    "rellax": "^1.12.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
     "styled-reset": "^4.4.5",
@@ -47,6 +49,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.4",
+    "@types/rellax": "^1.7.4",
     "@types/styled-components": "^5.1.26"
   },
   "scripts": {
