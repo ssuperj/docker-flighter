@@ -14,7 +14,8 @@ const MainWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("flighter/images/${random ? bg[random] : "bg-architecture-normal.jpg"}") no-repeat center center;
+    background: url("flighter/images/${random === undefined ? "bg-architecture-normal.jpg" : bg[random]}") no-repeat
+      center center;
     background-size: cover;
     width: 100%;
     height: 800px;
