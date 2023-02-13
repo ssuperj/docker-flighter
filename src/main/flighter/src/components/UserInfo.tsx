@@ -11,7 +11,7 @@ const StyleWrap = styled.div`
     text-align: center;
     align-items: center;
     margin-top: 60px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 
     .blue {
       color: red;

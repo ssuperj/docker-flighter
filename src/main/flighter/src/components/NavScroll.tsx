@@ -161,7 +161,7 @@ function NavScroll() {
                 <NavDropdown.Item as="span">
                   <Link to="/mypage">My passport</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item as="span">Reserve info</NavDropdown.Item>
+                <NavDropdown.Item as="span"><Link to="/payment">Reserve info</Link></NavDropdown.Item>
                 <NavDropdown.Item as="span">User info</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item as="span">Withdrawal</NavDropdown.Item>
