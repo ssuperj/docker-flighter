@@ -30,7 +30,7 @@ const nextDate4 = month + "/" + (date+4) + `(${day5})`
 
 const StyleWrap = styled.div`
   .weather_list {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     left: 1%;
@@ -39,7 +39,6 @@ const StyleWrap = styled.div`
     border-radius: 20px;
     background: linear-gradient(#0066b2, #89CFF0);
     color: white;
-    /* justify-content: center; */
     text-align: center;
     
     .loading {
@@ -109,14 +108,37 @@ function Weathers() {
   const [nextDay2, setNextDay2] = useState(Object);
   const [nextDay3, setNextDay3] = useState(Object);
   const [nextDay4, setNextDay4] = useState(Object);
+  const [fixed, setFixed] = useState(false);
   const location = UseGeoLocation()
 
   if (location.coordinates) {
     lat = location.coordinates.lat;
     lng = location.coordinates.lng;
   }
+  console.log(window.pageYOffset)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (3400 < window.pageYOffset && window.pageYOffset < 3538.5) {
+        setFixed(true);
+      } else if (7205 < window.pageYOffset && window.pageYOffset < 7343.5) {
+        setFixed(true);
+      } else if (11010 < window.pageYOffset && window.pageYOffset < 11148.5) {
+        setFixed(true);
+      } else if (14815 < window.pageYOffset && window.pageYOffset < 14953.5) {
+        setFixed(true);
+      } else if (18620 < window.pageYOffset && window.pageYOffset < 18758.5) {
+        setFixed(true);
+      } else {
+        setFixed(false);
+      }
+    };
 
+    window.addEventListener('scroll', handleScroll);
 
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [window.pageYOffset]);
 
   useEffect( () => {
     const API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric&lang=kr`; // &lang=kr
@@ -144,7 +166,7 @@ function Weathers() {
   } 
   return (
     <StyleWrap>
-      <div className="weather_list">
+      <div className="weather_list" style={{ top: fixed ? '20px' : '160px'}}>
       {loading ? <div className="loading"><h2>Loading...</h2></div> : 
         <>
           {<h1 className="location"><img src={`${process.env.PUBLIC_URL}/images/ic-location.png`} alt="" /><br /><br />{loc}</h1>}

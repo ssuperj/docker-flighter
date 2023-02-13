@@ -48,6 +48,7 @@ const CitySearch = (props: any) => {
       <Dropdown.Item data-iata={"ICN"}>인천 국제공항</Dropdown.Item>
       <Dropdown.Item data-iata={"GMP"}>김포 국제공항</Dropdown.Item>
       <Dropdown.Item data-iata={"CJU"}>제주 국제공항</Dropdown.Item>
+      <Dropdown.Item>해외 공항은 검색 해주세요</Dropdown.Item>
     </>
   );
 

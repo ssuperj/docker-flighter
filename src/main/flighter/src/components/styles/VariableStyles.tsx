@@ -6,6 +6,8 @@ const variableStyles = css`
     --font-rg: LINESeedKR_Rg;
     --font-bd: LINESeedKR_Bd;
     --font-th: LINESeedKR_Th;
+    --font-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
 
     //color
     --color-d-m: #e31c5f;

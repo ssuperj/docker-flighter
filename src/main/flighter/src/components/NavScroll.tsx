@@ -127,7 +127,7 @@ const StyledWrap = styled.div`
 `;
 
 function NavScroll() {
-  const [searchData, setSearchData] = useState("1");
+  const [searchData, setSearchData] = useState("");
 
   const keyDown = (event: any) => {
     if (event.keyCode === 13) {
