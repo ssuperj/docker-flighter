@@ -5,9 +5,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import NowDate from "./ResultInput";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Rellax from "rellax";
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Flickr from "./Flickr";
 
 const SearchView = (props: any) => {
   const location = useLocation();
@@ -19,7 +18,8 @@ const SearchView = (props: any) => {
       min-width: 300px;
       box-shadow: 2px 2px 2px 2px grey;
       position: relative;
-      background-image: linear-gradient(75deg, #add8e660, #80808060);
+      background-image: linear-gradient(75deg, #add8e660, #eee);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.315);
       font-family: var(--font-apple);
       font-weight: 700;
       &::after {
@@ -31,12 +31,12 @@ const SearchView = (props: any) => {
         right: 0px;
         bottom: 0px;
         background-image: linear-gradient(75deg, #f8bbc5, #d7f2fa);
-        opacity: 0.85;
-        transition: all 1s ease-in-out;
+        opacity: 0.9;
+        transition: all 0.5s ease-in-out;
         z-index: -1;
       }
       &:hover::after {
-        opacity: 0.975;
+        opacity: 0.99;
       }
       .air-card__btn {
         width: 150px;
@@ -51,7 +51,7 @@ const SearchView = (props: any) => {
           <div data-aos="zoom-in" key={index} className="d-flex justify-content-center">
             <div className="air-card row d-flex align-items-center w-50 my-5 px-4" key={index}>
               <div className="air-card__logo col-lg-6 d-flex flex-column align-items-center text-center">
-                <img width="200px" src={process.env.PUBLIC_URL + "/images/Korean-Air-Logo-1024x640.png"} alt="logo" />
+                <Flickr query={`${item.children[0].innerHTML} airline`} />
                 <div className="row my-4 w-100 fs-6">
                   <div className="air-card__airline-en col-6" id={"airline"}>{item.children[0].innerHTML}</div>
                   <div className="air-card__airline-kr col-6">{item.children[1].innerHTML}</div>
@@ -105,7 +105,7 @@ const SearchView = (props: any) => {
           <div data-aos="zoom-in" key={index} className="d-flex justify-content-center">
             <div className="air-card row d-flex align-items-center w-50 my-5 px-4" key={index}>
               <div className="air-card__logo col-lg-6 d-flex flex-column align-items-center text-center">
-                <img width="200px" src={process.env.PUBLIC_URL + "/images/Korean-Air-Logo-1024x640.png"} alt="logo" />
+                <Flickr query={`${item.children[0].innerHTML} airline`} />
                 <div className="row my-4 w-100 fs-6">
                   <div className="air-card__airline-en col-6" id={"airline"}>{item.children[0].innerHTML}</div>
                   <div className="air-card__airline-kr col-6">{item.children[1].innerHTML}</div>
@@ -154,14 +154,6 @@ const SearchView = (props: any) => {
 
   useEffect(() => {
     AOS.init();
-
-    new Rellax(".rellax", {
-      speed: -10,
-      center: false,
-      round: true,
-      vertical: true,
-      horizontal: false,
-    });
   }, []);
 
   const navigate = useNavigate();

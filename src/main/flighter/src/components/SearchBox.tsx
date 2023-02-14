@@ -271,9 +271,9 @@ function SearchBox() {
         </div>
         <div className="calendar_container">
           <div className="calendar__text">가는날</div>
-          <Calendar id={"startDate"} />
+          <Calendar id={"startDate"} date={0} />
           <span className="calendar__text">오는날</span>
-          <Calendar id={"endDate"} />
+          <Calendar id={"endDate"} date={1} />
         </div>
         <div className="SearchItem__container">
           <div className="SearchList__container">
