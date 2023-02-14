@@ -166,20 +166,22 @@ const SearchView = (props: any) => {
 
   const navigate = useNavigate();
 
-  const clickTicketingBtn = () => {
-    const airline: any = document.querySelector("#airline");
-    const airCode: any = document.querySelector("#airCode");
-    const departure: any = document.querySelector("#departure");
-    const destination: any = document.querySelector("#destination");
-    const dateTime: any = document.querySelector("#dateTime");
-    const startDate: any = document.querySelector("#startDate")
-    const endDate: any = document.querySelector("#endDate");
+  const clickTicketingBtn = (event: any) => {
+    const airline: any = event.currentTarget.parentNode.parentNode.parentNode.querySelector("#airline");
+    const airCode: any = event.currentTarget.parentNode.parentNode.querySelector("#airCode");
+    const distance: any = location.state.distance;
+    const departure: any = event.currentTarget.parentNode.parentNode.querySelector("#departure");
+    const destination: any = event.currentTarget.parentNode.parentNode.querySelector("#destination");
+    const dateTime: any = event.currentTarget.parentNode.parentNode.querySelector("#dateTime");
+    const startDate: any = event.currentTarget.parentNode.parentNode.querySelector("#startDate");
+    const endDate: any = event.currentTarget.parentNode.parentNode.querySelector("#endDate");
     const passengers: any = location.state.passengers;
 
     navigate("/payment", {
       state: {
         airline: airline.innerText,
         airCode: airCode.innerText,
+        distance: distance,
         departure: departure.innerText,
         destination: destination.innerText,
         dateTime: dateTime.innerText,
