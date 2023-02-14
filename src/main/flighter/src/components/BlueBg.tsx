@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { cloud, cloud_a, cloud_b, cloud_c, cloud_d, plainfly, plainfly2 } from "./styles/AnimationStyles";
+import { cloud, cloud_a, cloud_b, cloud_c, cloud_d, plainfly } from "./styles/AnimationStyles";
 
 const Wrapper = styled.div`
   height: 100%;
   .container__bg {
+    background: #4ba6de;
     z-index: -1;
-    background: #64b1ee;
     width: 100%;
     height: 100%;
     position: absolute;

@@ -170,7 +170,7 @@ function NavScroll() {
             <Form className="d-flex">
               <Form.Control type="search" placeholder="Search" aria-label="Search" onKeyDown={keyDown} />
               <Button variant="outline-light">
-                <Link to={`http://www.google.com/search?q=${searchData}`}>
+                <Link to={`https://www.google.co.kr/maps/search/${searchData}/?hl=ko`}>
                   <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
                 </Link>
               </Button>

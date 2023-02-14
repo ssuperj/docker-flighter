@@ -49,9 +49,9 @@ const NowDate = (props: any) => {
     <div
       className=" p-4 rounded-5 mx-auto w-50 row text-center fs-3 fw-bold"
       style={{
-        backgroundImage: "linear-gradient(75deg, #ffc0cb99, var(--color-l-m))",
+        backgroundColor: "#e4f2fdcc",
         fontFamily: "var(--font-apple)",
-        boxShadow: "1px 1px 5px 1px grey",
+        boxShadow: "0 0 50px rgba(0, 0, 0, 0.315)",
         textShadow: "1px 1px 15px #ddd",
         minWidth: "300px",
       }}

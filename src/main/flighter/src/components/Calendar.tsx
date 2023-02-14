@@ -7,7 +7,9 @@ import ko from "date-fns/locale/ko";
 registerLocale("ko", ko);
 
 const Calendar = (props: any) => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  let today = new Date();
+
+  const [startDate, setStartDate] = useState<Date | null>(new Date(today.setDate(today.getDate() + props.date)));
   return (
     <DatePicker
       dateFormat="yyyy/MM/dd"

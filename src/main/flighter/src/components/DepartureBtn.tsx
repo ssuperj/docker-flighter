@@ -56,21 +56,30 @@ const DepartureBtn = (props: any) => {
     const airType = domesticBtn.checked ? "domestic" : "international";
     const wayType = wayRadioBtn.checked ? "oneWay" : "twoWay";
 
+    const now = new Date().getTime();
+    const compareTime = new Date(startDate.value).getTime();
+    const diffDay = (now - compareTime) / (1000 * 60 * 60 * 24);
+
     (!destination.dataset.iata ||
       !destination.dataset.iata ||
-      (adult.innerText === "0" && adult.innerText === "0" && adult.innerText === "0")) &&
+      (adult.innerText === "0" && adult.innerText === "0" && adult.innerText === "0") ||
+      (wayType === "twoWay" && startDate.value >= endDate.value) ||
+      diffDay > 1) &&
       setShow(true);
 
     /**
      * 조회하려는 정보가 정확할시 search 페이지로 넘어감
      */
+
     let departurePosition: any = "";
     let destinationPosition: any = "";
     let distance: number = 0;
     if (
       destination.dataset.iata.length === 3 &&
       destination.dataset.iata.length === 3 &&
-      (adult.innerText !== "0" || youth.innerText !== "0" || child.innerText !== "0")
+      (adult.innerText !== "0" || youth.innerText !== "0" || child.innerText !== "0") &&
+      startDate.value < endDate.value &&
+      diffDay <= 1
     ) {
       load(departure.dataset.iata, "airportdetail.csv", 6, 7, 4)
         .then((resp: any) => {
