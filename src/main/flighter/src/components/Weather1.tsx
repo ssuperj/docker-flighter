@@ -7,26 +7,62 @@ let lat = 0;
 let lng = 0;
 
 let today = new Date();
-let month = today.getMonth() + 1;  // 월
-let date = today.getDate();  // 날짜
+let month = today.getMonth() + 1; // 월
+let date = today.getDate(); // 날짜
 let day1;
 let day2;
 let day3;
-let day4; 
+let day4;
 let day5;
-  if (today.getDay() === 0) {day1 = "일"; day2 = "월"; day3 = "화"; day4 = "수"; day5 = "목";} 
-  else if (today.getDay() === 1) {day1 = "월"; day2 = "화"; day3 = "수"; day4 = "목"; day5 = "금";}
-  else if (today.getDay() === 2) {day1 = "화"; day2 = "수"; day3 = "목"; day4 = "금"; day5 = "토";}
-  else if (today.getDay() === 3) {day1 = "수"; day2 = "목"; day3 = "금"; day4 = "토"; day5 = "일";}
-  else if (today.getDay() === 4) {day1 = "목"; day2 = "금"; day3 = "토"; day4 = "일"; day5 = "월";}
-  else if (today.getDay() === 5) {day1 = "금"; day2 = "토"; day3 = "일"; day4 = "월"; day5 = "화";}
-  else if (today.getDay() === 6) {day1 = "토"; day2 = "일"; day3 = "월"; day4 = "화"; day5 = "수";};
+if (today.getDay() === 0) {
+  day1 = "일";
+  day2 = "월";
+  day3 = "화";
+  day4 = "수";
+  day5 = "목";
+} else if (today.getDay() === 1) {
+  day1 = "월";
+  day2 = "화";
+  day3 = "수";
+  day4 = "목";
+  day5 = "금";
+} else if (today.getDay() === 2) {
+  day1 = "화";
+  day2 = "수";
+  day3 = "목";
+  day4 = "금";
+  day5 = "토";
+} else if (today.getDay() === 3) {
+  day1 = "수";
+  day2 = "목";
+  day3 = "금";
+  day4 = "토";
+  day5 = "일";
+} else if (today.getDay() === 4) {
+  day1 = "목";
+  day2 = "금";
+  day3 = "토";
+  day4 = "일";
+  day5 = "월";
+} else if (today.getDay() === 5) {
+  day1 = "금";
+  day2 = "토";
+  day3 = "일";
+  day4 = "월";
+  day5 = "화";
+} else if (today.getDay() === 6) {
+  day1 = "토";
+  day2 = "일";
+  day3 = "월";
+  day4 = "화";
+  day5 = "수";
+}
 
-const todayDate = month + "/" + date + `(${day1})`
-const nextDate1 = month + "/" + (date+1) + `(${day2})`
-const nextDate2 = month + "/" + (date+2) + `(${day3})`
-const nextDate3 = month + "/" + (date+3) + `(${day4})`
-const nextDate4 = month + "/" + (date+4) + `(${day5})`
+const todayDate = month + "/" + date + `(${day1})`;
+const nextDate1 = month + "/" + (date + 1) + `(${day2})`;
+const nextDate2 = month + "/" + (date + 2) + `(${day3})`;
+const nextDate3 = month + "/" + (date + 3) + `(${day4})`;
+const nextDate4 = month + "/" + (date + 4) + `(${day5})`;
 
 const StyleWrap = styled.div`
   .weather_list {
@@ -37,10 +73,11 @@ const StyleWrap = styled.div`
     width: 180px;
     height: 650px;
     border-radius: 20px;
-    background: linear-gradient(#0066b2, #89CFF0);
+    background: linear-gradient(#0066b2, #89cff0);
     color: white;
     text-align: center;
-    
+    top: 120px;
+
     .loading {
       justify-content: center;
       h2 {
@@ -94,9 +131,7 @@ const StyleWrap = styled.div`
     }
   }
   @media (max-width: 849px) {
-    .weather_list {
-      display: none;
-    }
+    display: none;
   }
 `;
 
@@ -109,117 +144,125 @@ function Weathers() {
   const [nextDay3, setNextDay3] = useState(Object);
   const [nextDay4, setNextDay4] = useState(Object);
   const [fixed, setFixed] = useState(false);
-  const location = UseGeoLocation()
+  const location = UseGeoLocation();
 
   if (location.coordinates) {
     lat = location.coordinates.lat;
     lng = location.coordinates.lng;
   }
-  
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (3400 < window.pageYOffset && window.pageYOffset < 3538.5) {
-        setFixed(true);
-      } else if (7205 < window.pageYOffset && window.pageYOffset < 7343.5) {
-        setFixed(true);
-      } else if (11010 < window.pageYOffset && window.pageYOffset < 11148.5) {
-        setFixed(true);
-      } else if (14815 < window.pageYOffset && window.pageYOffset < 14953.5) {
-        setFixed(true);
-      } else if (18620 < window.pageYOffset && window.pageYOffset < 18758.5) {
-        setFixed(true);
+    const element: any = document.querySelector(".weather_list");
+
+    const handleScroll = (event: any) => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (window.scrollY + 200 >= scrollableHeight) {
+        element.style.display = "none";
       } else {
-        setFixed(false);
+        element.style.display = "block";
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [window.pageYOffset]);
 
-  useEffect( () => {
+  useEffect(() => {
     const API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric&lang=kr`; // &lang=kr
     fetch(API_URL)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((json) => {
-        setLoc(json.city.name)
-        setTodayWeather(json.list[2])
-        setNextDay1(json.list[10])
-        setNextDay2(json.list[18])
-        setNextDay3(json.list[26])
-        setNextDay4(json.list[34])
+        setLoc(json.city.name);
+        setTodayWeather(json.list[2]);
+        setNextDay1(json.list[10]);
+        setNextDay2(json.list[18]);
+        setNextDay3(json.list[26]);
+        setNextDay4(json.list[34]);
         setLoading(false);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lat, lng]);
   if (loc === "Globe") {
     return (
       <StyleWrap>
         <div className="weather_list">
-        <div className="loading"><h2>Loading...</h2></div>
+          <div className="loading">
+            <h2>Loading...</h2>
+          </div>
         </div>
       </StyleWrap>
-    )
-  } 
+    );
+  }
   return (
     <StyleWrap>
-      <div className="weather_list" style={{ top: fixed ? '20px' : '160px'}}>
-      {loading ? <div className="loading"><h2>Loading...</h2></div> : 
-        <>
-          {<h1 className="location"><img src={`${process.env.PUBLIC_URL}/images/ic-location.png`} alt="" /><br /><br />{loc}</h1>}
-          <div className="weather">
-            <img src={`${process.env.PUBLIC_URL}/images/weather/${todayWeather.weather[0].icon}.png`} alt="" />
-            <div className="weather_info">
-              {<h1>{Math.round(todayWeather.main.temp)}°C</h1>}
-              {<h1>{todayWeather.weather[0].main}</h1>}
-              {todayDate}
-            </div>
+      <div className="weather_list">
+        {loading ? (
+          <div className="loading">
+            <h2>Loading...</h2>
           </div>
+        ) : (
+          <>
+            {
+              <h1 className="location">
+                <img src={`${process.env.PUBLIC_URL}/images/ic-location.png`} alt="" />
+                <br />
+                <br />
+                {loc}
+              </h1>
+            }
+            <div className="weather">
+              <img src={`${process.env.PUBLIC_URL}/images/weather/${todayWeather.weather[0].icon}.png`} alt="" />
+              <div className="weather_info">
+                {<h1>{Math.round(todayWeather.main.temp)}°C</h1>}
+                {<h1>{todayWeather.weather[0].main}</h1>}
+                {todayDate}
+              </div>
+            </div>
 
-          <div className="weather">
-            <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay1.weather[0].icon}.png`} alt="" />
-            <div className="weather_info">
-              {<h1>{Math.round(nextDay1.main.temp)}°C</h1>}
-              {<h1>{nextDay1.weather[0].main}</h1>}
-              {nextDate1}
+            <div className="weather">
+              <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay1.weather[0].icon}.png`} alt="" />
+              <div className="weather_info">
+                {<h1>{Math.round(nextDay1.main.temp)}°C</h1>}
+                {<h1>{nextDay1.weather[0].main}</h1>}
+                {nextDate1}
+              </div>
             </div>
-          </div>
 
-          <div className="weather">
-            <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay2.weather[0].icon}.png`} alt="" />
-            <div className="weather_info">
-              {<h1>{Math.round(nextDay2.main.temp)}°C</h1>}
-              {<h1>{nextDay2.weather[0].main}</h1>}
-              {nextDate2}
+            <div className="weather">
+              <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay2.weather[0].icon}.png`} alt="" />
+              <div className="weather_info">
+                {<h1>{Math.round(nextDay2.main.temp)}°C</h1>}
+                {<h1>{nextDay2.weather[0].main}</h1>}
+                {nextDate2}
+              </div>
             </div>
-          </div>
 
-          <div className="weather">
-            <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay3.weather[0].icon}.png`} alt="" />
-            <div className="weather_info">
-              {<h1>{Math.round(nextDay3.main.temp)}°C</h1>}
-              {<h1>{nextDay3.weather[0].main}</h1>}
-              {nextDate3}
+            <div className="weather">
+              <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay3.weather[0].icon}.png`} alt="" />
+              <div className="weather_info">
+                {<h1>{Math.round(nextDay3.main.temp)}°C</h1>}
+                {<h1>{nextDay3.weather[0].main}</h1>}
+                {nextDate3}
+              </div>
             </div>
-          </div>
 
-          <div className="weather">
-            <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay4.weather[0].icon}.png`} alt="" />
-            <div className="weather_info">
-              {<h1>{Math.round(nextDay4.main.temp)}°C</h1>}
-              {<h1>{nextDay4.weather[0].main}</h1>}
-              {nextDate4}
+            <div className="weather">
+              <img src={`${process.env.PUBLIC_URL}/images/weather/${nextDay4.weather[0].icon}.png`} alt="" />
+              <div className="weather_info">
+                {<h1>{Math.round(nextDay4.main.temp)}°C</h1>}
+                {<h1>{nextDay4.weather[0].main}</h1>}
+                {nextDate4}
+              </div>
             </div>
-          </div>
-        </>
-      }
+          </>
+        )}
       </div>
     </StyleWrap>
   );
-};
+}
 export default Weathers;
 
 // navigator.geolocation.getCurrentPosition(Weathers, onGeoError);
