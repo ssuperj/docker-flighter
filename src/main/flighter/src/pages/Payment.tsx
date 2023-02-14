@@ -1,11 +1,11 @@
 import Button from "react-bootstrap/esm/Button";
 import styled from "styled-components";
 import Weather from "../components/Weather";
-import Coupang from '../components/Coupang';
+import Coupang from "../components/Coupang";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState } from "react";
+import { useEffect } from "react";
 
 const StyleWrap = styled.div`
   .container {
@@ -19,11 +19,13 @@ const StyleWrap = styled.div`
       flex-direction: column;
 
       .title {
-          font-size: 24px;
-          margin-bottom: 15px;
-        }
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
 
-      .info-1, .info-2, .info-3 {
+      .info-1,
+      .info-2,
+      .info-3 {
         width: 600px;
         height: 300px;
         padding-top: 25px;
@@ -49,31 +51,32 @@ const StyleWrap = styled.div`
           }
         }
         .bot {
-            display: flex;
+          display: flex;
 
-            span {
-              margin-top: 10px;
-              height: 50px;
-              width: 200px;
-              text-align: center;
-              p {
-                font-size: 18px;
-                margin-top: 5px;
-              }
-              p:first-child {
-                color: var(--color-d-g);
-              }
+          span {
+            margin-top: 10px;
+            height: 50px;
+            width: 200px;
+            text-align: center;
+            p {
+              font-size: 18px;
+              margin-top: 5px;
             }
-
-            span:nth-child(1), span:nth-child(2) {
-              border-right: 1px solid black;
+            p:first-child {
+              color: var(--color-d-g);
             }
           }
+
+          span:nth-child(1),
+          span:nth-child(2) {
+            border-right: 1px solid black;
+          }
+        }
 
         .title {
           line-height: 70px;
           padding-left: 20px;
-          padding-right: 20px
+          padding-right: 20px;
         }
 
         .img-qr {
@@ -90,7 +93,7 @@ const StyleWrap = styled.div`
           .info {
             display: flex;
             margin-top: 10px;
-            
+
             div:nth-child(2) {
               /* margin-top: 20px; */
               margin-left: 10px;
@@ -117,7 +120,7 @@ const StyleWrap = styled.div`
 
       .info-2 {
         padding-left: 20px;
-        
+
         p {
           margin-top: 10px;
           color: var(--color-d-g);
@@ -130,8 +133,10 @@ const StyleWrap = styled.div`
       display: flex;
       flex-direction: column;
 
-      .info-1, .info-2, .info-3 {
-        width: 300px;;
+      .info-1,
+      .info-2,
+      .info-3 {
+        width: 300px;
         margin-left: 50px;
         border-radius: 10px;
         padding-top: 20px;
@@ -182,10 +187,10 @@ const StyleWrap = styled.div`
           }
 
           span:nth-child(2) {
-          text-align: right;
-          float: right;
-          font-size: 18px;
-        }
+            text-align: right;
+            float: right;
+            font-size: 18px;
+          }
         }
       }
 
@@ -196,7 +201,7 @@ const StyleWrap = styled.div`
         border-right: 1px solid var(--color-r-g);
         border-bottom: 1px solid var(--color-r-g);
 
-        .title {          
+        .title {
           font-size: 18px;
           margin-bottom: 15px;
         }
@@ -208,7 +213,7 @@ const StyleWrap = styled.div`
       }
 
       .btn {
-        background-Color: black;
+        background-color: black;
         border: none;
         opacity: 0.7;
         width: 300px;
@@ -256,13 +261,16 @@ const StyleWrap = styled.div`
       flex-direction: column;
       margin: auto;
 
-      .payment-info1, .payment-info2 {
+      .payment-info1,
+      .payment-info2 {
         margin: auto;
       }
       .payment-info2 {
         margin-top: 30px;
 
-        .info-1, .info-2, .info-3 {
+        .info-1,
+        .info-2,
+        .info-3 {
           margin: auto;
         }
         .btn {
@@ -275,7 +283,6 @@ const StyleWrap = styled.div`
 
   @media (max-width: 767px) {
     .container {
-      
       .payment-info1 {
         .info-1 {
           width: 500px;
@@ -283,16 +290,16 @@ const StyleWrap = styled.div`
           .intainer {
             .info {
               div {
-              p:first-child {
-                margin-left: 0px;
-                padding-top: 20px;
-                font-size: 20px;
+                p:first-child {
+                  margin-left: 0px;
+                  padding-top: 20px;
+                  font-size: 20px;
+                }
+                p:nth-child(2) {
+                  margin-left: 0px;
+                  font-size: 18px;
+                }
               }
-              p:nth-child(2) {
-                margin-left: 0px;
-                font-size: 18px;
-              }
-            }
             }
           }
         }
@@ -373,12 +380,11 @@ const StyleWrap = styled.div`
 `;
 
 function priceToString(price: any) {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function Payment(props: any) {
-  const location =  useLocation();
-  console.log(location);
+  const location = useLocation();
   const [airline, setAirline] = useState("");
   const [airCode, setAirCode] = useState("");
   const [distance, setDistance] = useState(Number);
@@ -389,30 +395,30 @@ function Payment(props: any) {
   const [endDate, setEndDate] = useState("");
   const [passengers, setPassengers] = useState(Object);
 
-  useEffect(()=>{
+  useEffect(() => {
     setAirline(location.state.airline);
     setAirCode(location.state.airCode);
-    setDistance(Math.ceil((location.state.distance) * 0.001 / 800))
+    setDistance(Math.ceil((location.state.distance * 0.001) / 800));
     setDeparture(location.state.departure);
     setDestination(location.state.destination);
     // setDateTime(location.state.dateTime);
     setStartDate(location.state.startDate);
     setEndDate(location.state.endDate);
     setPassengers(location.state.passengers);
-  }, [])
+  }, []);
 
-  let endHour = (parseInt(startDate[0]+startDate[1])+distance).toString();
+  let endHour = (parseInt(startDate[0] + startDate[1]) + distance).toString();
 
   if (parseInt(endHour) >= 24) {
     endHour = (parseInt(endHour) % 24).toString();
     if (endHour.toString().length === 2) {
-      endHour = (parseInt(endHour[0]+endHour[1])).toString();
+      endHour = parseInt(endHour[0] + endHour[1]).toString();
     } else if (endHour.toString().length === 1) {
       endHour = "0" + endHour.toString();
     }
   }
 
-  return(
+  return (
     <StyleWrap>
       <Weather />
       <Coupang />
@@ -426,16 +432,24 @@ function Payment(props: any) {
               <div className="info">
                 <div>
                   <p>{departure}</p>
-                  <p>출발 {startDate[0] + startDate[1]}:{startDate[2] + startDate[3]}</p>
+                  <p>
+                    출발 {startDate[0] + startDate[1]}:{startDate[2] + startDate[3]}
+                  </p>
                 </div>
                 <div>
                   <img src={`${process.env.PUBLIC_URL}/images/ic-travel.png`} alt="" />
                 </div>
                 <div>
                   <p>{destination}</p>
-                  {endDate === "미정" ? 
-                  <p>도착 {endHour}:{startDate[2] + startDate[3]}</p> :
-                  <p>도착 {endDate[0] + endDate[1]}:{endDate[2] + endDate[3]}</p> }
+                  {endDate === "미정" ? (
+                    <p>
+                      도착 {endHour}:{startDate[2] + startDate[3]}
+                    </p>
+                  ) : (
+                    <p>
+                      도착 {endDate[0] + endDate[1]}:{endDate[2] + endDate[3]}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -475,10 +489,12 @@ function Payment(props: any) {
           <div className="info-1">
             <span>총 금액</span>
             <span>
-              ₩ {priceToString(
-                (distance * 130000 * passengers.adult)
-                + (distance * 80000 * passengers.youth) 
-                + (distance * 50000 * passengers.child))}
+              ₩{" "}
+              {priceToString(
+                distance * 130000 * passengers.adult +
+                  distance * 80000 * passengers.youth +
+                  distance * 50000 * passengers.child
+              )}
               원
             </span>
             <p>부가세와 서비스 요금이 포함됩니다.</p>
@@ -502,20 +518,29 @@ function Payment(props: any) {
             <h1 className="title">서비스</h1>
             <p>선택된 추가 서비스 없음</p>
           </div>
-          <Link to="/paycomplete"><Button type="submit" variant="secondary">결제하기</Button></Link>
+          <Link to="/paycomplete">
+            <Button type="submit" variant="secondary">
+              결제하기
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="event">
         <h1 className="title">플라이터 앱에서 즐기는 더 많은 혜택</h1>
         <div>
-          <p>앱에서 예약 시 수천 개 호텔을 평균 15% 할인받으실 수 있으며 모든 예약에 대해 포인트를 두 배로 적립해 드려요.</p>
-          <p>앱 전용 특가 상품으로 저렴하게 예약해 부담 없이 더 많은 여행을 즐기고, 이동 중에도 여행의 모든 것을 관리하실 수 있어요.</p>
+          <p>
+            앱에서 예약 시 수천 개 호텔을 평균 15% 할인받으실 수 있으며 모든 예약에 대해 포인트를 두 배로 적립해 드려요.
+          </p>
+          <p>
+            앱 전용 특가 상품으로 저렴하게 예약해 부담 없이 더 많은 여행을 즐기고, 이동 중에도 여행의 모든 것을 관리하실
+            수 있어요.
+          </p>
           <p>기기의 카메라로 QR 코드를 스캔하여 앱을 다운로드해 보세요.</p>
         </div>
         <img src={`${process.env.PUBLIC_URL}/images/QRcode.png`} alt="" />
       </div>
     </StyleWrap>
-  )
+  );
 }
 
 export default Payment;

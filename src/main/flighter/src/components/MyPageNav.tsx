@@ -6,7 +6,7 @@ import ReserveInfo from "./ReserveInfo";
 import UserInfo from "./UserInfo";
 import Withdrawal from "./Withdrawal";
 import Coupang from "./Coupang";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const StyledWrap = styled.div`
   display: flex;
@@ -23,10 +23,18 @@ const StyledWrap = styled.div`
     color: var(--color-r-m);
   }
 
+<<<<<<< HEAD
   .navlink:hover {
     background-color: var(--color-r-m) !important;
     opacity: 0.8 !important;
     color: var(--color-l-g) !important;
+=======
+  .navlink:hover,
+  .navlink.active {
+    background-color: var(--color-r-m);
+    opacity: 0.8;
+    color: var(--color-l-g);
+>>>>>>> upstream/develop
   }
 
   .ad {
@@ -58,11 +66,9 @@ function MyPageNav(props: any) {
   const nav4 = () => setNav(4);
   const location = useLocation();
 
-  console.log(location);
-
-  useEffect(()=>{
+  useEffect(() => {
     setNav(location.state.nav);
-  }, [location.state.nav])
+  }, [location.state.nav]);
 
   return (
     <div>

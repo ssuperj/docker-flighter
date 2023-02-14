@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 import Weather from "./Weather";
 
 const StyleWrap = styled.div`
@@ -33,7 +32,6 @@ const StyleWrap = styled.div`
     }
 
     .content {
-
       table {
         margin: auto;
         margin-top: 30px;
@@ -64,7 +62,8 @@ const StyleWrap = styled.div`
           padding: 7px;
         }
 
-        input:hover, input:focus {
+        input:hover,
+        input:focus {
           caret-color: var(--color-d-m);
         }
       }
@@ -107,7 +106,13 @@ function UserInfo() {
                   <label>아이디</label>
                 </th>
                 <td>
-                  <input className="input_small input_id" type="text" placeholder="아이디를 입력해주세요." defaultValue={"qwe123"} disabled />
+                  <input
+                    className="input_small input_id"
+                    type="text"
+                    placeholder="아이디를 입력해주세요."
+                    defaultValue={"qwe123"}
+                    disabled
+                  />
                 </td>
               </tr>
               <tr>
@@ -162,7 +167,7 @@ function UserInfo() {
         </form>
       </div>
     </StyleWrap>
-  )
+  );
 }
 
 export default UserInfo;

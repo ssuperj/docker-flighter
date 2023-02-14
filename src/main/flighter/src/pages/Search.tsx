@@ -4,13 +4,6 @@ import BlueBg from "../components/BlueBg";
 import Loading from "../components/Loading";
 import SearchView from "../components/SearchView";
 import Weathers1 from "../components/Weather1";
-// import styled from "styled-components";
-
-// const StyleWrap = styled.div`
-//   .weather_list {
-//     position: fixed;
-//   }
-// `;
 
 /**
  * API에서 받아올 페이지가 더 있는지 확인
@@ -44,7 +37,6 @@ const Search = (props: any) => {
   const INTERNATIONAL_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}&pageNo=${pageNo}`;
 
   const mainApi = async () => {
-    console.log(state);
     await fetch(isDomestic ? DOMESTIC_API_URL : INTERNATIONAL_API_URL, {
       headers: {
         "x-cors-api-key": "temp_f725bd4bd754e5de9c60ee709a5ede89",
@@ -66,7 +58,6 @@ const Search = (props: any) => {
 
         pageTest(flightCount, pageNo) && setIsNextPage(true);
         const itemsArr = [...items];
-        console.log(result.length);
         await setResult((prev: any) => {
           return [...prev, ...itemsArr];
         });
@@ -88,8 +79,6 @@ const Search = (props: any) => {
 
   useEffect(() => {
     mainApi();
-    console.log(pageNo);
-    console.log(result);
   }, [pageNo]);
 
   return (
