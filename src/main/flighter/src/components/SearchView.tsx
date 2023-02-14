@@ -5,9 +5,12 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import NowDate from "./ResultInput";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useNavigate, useLocation } from 'react-router-dom';
 import Flickr from "./Flickr";
 
 const SearchView = (props: any) => {
+  const location = useLocation();
+  
   const Wrapper = styled.div`
     .air-card {
       border: 0.25px solid grey;
@@ -50,7 +53,7 @@ const SearchView = (props: any) => {
               <div className="air-card__logo col-lg-6 d-flex flex-column align-items-center text-center">
                 <Flickr query={`${item.children[0].innerHTML} airline`} />
                 <div className="row my-4 w-100 fs-6">
-                  <div className="air-card__airline-en col-6">{item.children[0].innerHTML}</div>
+                  <div className="air-card__airline-en col-6" id={"airline"}>{item.children[0].innerHTML}</div>
                   <div className="air-card__airline-kr col-6">{item.children[1].innerHTML}</div>
                 </div>
               </div>
@@ -58,33 +61,33 @@ const SearchView = (props: any) => {
               <div className="air-card__content col-lg-6 d-flex flex-wrap justify-content-center  text-center">
                 <div className="air-card__flight d-flex align-items-center mt-4 fs-5 w-100 justify-content-evenly">
                   <div>항공편&nbsp;</div>
-                  <div>{item.children[11].innerHTML}</div>
+                  <div id={"airCode"}>{item.children[11].innerHTML}</div>
                 </div>
                 <div className="d-flex flex-wrap justify-content-center align-items-center">
                   <div className="row d-flex justify-content-center  my-4 w-100">
-                    <div className="air-card__departure col-4 text-nowrap">{item.children[2].innerHTML}</div>
+                    <div className="air-card__departure col-4 text-nowrap" id={"departure"}>{item.children[2].innerHTML}</div>
                     <FontAwesomeIcon className="col-2" icon={faArrowRight} size={"lg"} />
-                    <div className="air-card__destination col-4">{item.children[4].innerHTML}</div>
+                    <div className="air-card__destination col-4" id={"destination"}>{item.children[4].innerHTML}</div>
                   </div>
                   <div className="row w-100 my-2">
                     <div className="col-lg-12 col-6 mt-2">DATE TIME</div>
-                    <div className="col-lg-12 col-6 mt-2">{props.date}</div>
+                    <div className="col-lg-12 col-6 mt-2" id={"dateTime"}>{props.date}</div>
                   </div>
                   <div className="row w-100">
                     <div className="air-card__start-date col-6">
                       <div>
                         <div className="my-2">출발시간</div>
-                        <div>{item.children[16].innerHTML}</div>
+                        <div id={"startDate"}>{item.children[16].innerHTML}</div>
                       </div>
                     </div>
                     <div className="air-card__end-date col-6">
                       <div className="my-2">도착시간</div>
-                      <div>미정</div>
+                      <div id={"endDate"}>미정</div>
                     </div>
                   </div>
                 </div>
                 <div className="my-4">
-                  <button className="air-card__btn btn btn-danger">예매하기</button>
+                  <button className="air-card__btn btn btn-danger" onClick={clickTicketingBtn}>예매하기</button>
                 </div>
               </div>
             </div>
@@ -104,7 +107,7 @@ const SearchView = (props: any) => {
               <div className="air-card__logo col-lg-6 d-flex flex-column align-items-center text-center">
                 <Flickr query={`${item.children[0].innerHTML} airline`} />
                 <div className="row my-4 w-100 fs-6">
-                  <div className="air-card__airline-en col-6">{item.children[0].innerHTML}</div>
+                  <div className="air-card__airline-en col-6" id={"airline"}>{item.children[0].innerHTML}</div>
                   <div className="air-card__airline-kr col-6">{item.children[1].innerHTML}</div>
                 </div>
               </div>
@@ -112,33 +115,33 @@ const SearchView = (props: any) => {
               <div className="air-card__content col-lg-6 d-flex flex-wrap justify-content-center  text-center">
                 <div className="air-card__flight d-flex align-items-center mt-4 fs-5 w-100 justify-content-evenly">
                   <div>항공편&nbsp;</div>
-                  <div>{item.children[8].innerHTML}</div>
+                  <div id={"airCode"}>{item.children[8].innerHTML}</div>
                 </div>
                 <div className="d-flex flex-wrap justify-content-center">
                   <div className="row d-flex justify-content-center my-4 w-100 align-items-center">
-                    <div className="air-card__departure col-4 text-nowrap">{item.children[17].innerHTML}</div>
+                    <div className="air-card__departure col-4 text-nowrap" id={"departure"}>{item.children[17].innerHTML}</div>
                     <FontAwesomeIcon className="col-2" icon={faArrowRight} size={"lg"} />
-                    <div className="air-card__destination col-4">{item.children[2].innerHTML}</div>
+                    <div className="air-card__destination col-4 text-nowrap" id={"destination"}>{item.children[2].innerHTML}</div>
                   </div>
                   <div className="row w-100 my-2">
                     <div className="col-lg-12 col-6">DATE TIME</div>
-                    <div className="col-lg-12 col-6">{props.date}</div>
+                    <div className="col-lg-12 col-6" id={"dateTime"}>{props.date}</div>
                   </div>
                   <div className="row w-100">
                     <div className="air-card__start-date col-6">
                       <div>
                         <div className="my-2">출발시간</div>
-                        <div>{item.children[10].innerHTML}</div>
+                        <div id={"startDate"}>{item.children[10].innerHTML}</div>
                       </div>
                     </div>
                     <div className="air-card__end-date col-6">
                       <div className="my-2">도착시간</div>
-                      <div>{item.children[4].innerHTML}</div>
+                      <div id={"endDate"}>{item.children[4].innerHTML}</div>
                     </div>
                   </div>
                 </div>
                 <div className="my-4">
-                  <button className="air-card__btn btn btn-danger">예매하기</button>
+                  <button className="air-card__btn btn btn-danger" onClick={clickTicketingBtn}>예매하기</button>
                 </div>
               </div>
             </div>
@@ -152,6 +155,38 @@ const SearchView = (props: any) => {
   useEffect(() => {
     AOS.init();
   }, []);
+
+  const navigate = useNavigate();
+
+  const clickTicketingBtn = (event: any) => {
+    const airline: any = event.currentTarget.parentNode.parentNode.parentNode.querySelector("#airline");
+    const airCode: any = event.currentTarget.parentNode.parentNode.querySelector("#airCode");
+    const distance: any = location.state.distance;
+    const departure: any = event.currentTarget.parentNode.parentNode.querySelector("#departure");
+    const destination: any = event.currentTarget.parentNode.parentNode.querySelector("#destination");
+    const dateTime: any = event.currentTarget.parentNode.parentNode.querySelector("#dateTime");
+    const startDate: any = event.currentTarget.parentNode.parentNode.querySelector("#startDate");
+    const endDate: any = event.currentTarget.parentNode.parentNode.querySelector("#endDate");
+    const passengers: any = location.state.passengers;
+
+    navigate("/payment", {
+      state: {
+        airline: airline.innerText,
+        airCode: airCode.innerText,
+        distance: distance,
+        departure: departure.innerText,
+        destination: destination.innerText,
+        dateTime: dateTime.innerText,
+        startDate: startDate.innerText,
+        endDate: endDate.innerText,
+        passengers: {
+          adult: passengers.adult,
+          youth: passengers.youth,
+          child: passengers.child,
+        },
+      },
+    });
+  };
 
   return (
     <div className="pt-5">

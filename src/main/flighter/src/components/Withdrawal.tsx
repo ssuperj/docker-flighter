@@ -1,19 +1,25 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
+import Weather from "./Weather";
 
 const StyleWrap = styled.div`
+  .weather_list {
+    margin-top: 60px;
+  }
+
   .container {
     justify-content: center;
     text-align: center;
     width: auto;
 
     .title {
-      margin-top: 10px;
+      margin-top: 60px;
       font-size: 18px;
       color: var(--color-r-m);
       font-family: var(--font-bd);
       opacity: 0.8;
       margin-bottom: 30px;
+      font-size: 30px;
     }
 
     .content {
@@ -39,6 +45,23 @@ const StyleWrap = styled.div`
         caret-color: var(--color-r-m);
         outline-color: var(--color-r-m);
       }
+
+      input {
+        background-color: var(--color-l-g);
+        border: none;
+        width: 170px;
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 10px;
+        padding-left: 10px;
+        height: 35px;
+        outline: none;
+      }
+
+      input:hover, input:focus {
+        caret-color: var(--color-d-m);
+      }
     }
   }
 `;
@@ -46,8 +69,9 @@ const StyleWrap = styled.div`
 function Withdrawal() {
   return (
     <StyleWrap>
+      <Weather />
       <div className="container">
-        <h1 className="title">Withdrawal</h1>
+        <h1 className="title">회원탈퇴</h1>
         <br />
         <div className="content">
           <img className="ico-stewardess" src={`${process.env.PUBLIC_URL}/images/ic-stewardess3-normal.png`} alt="" />
