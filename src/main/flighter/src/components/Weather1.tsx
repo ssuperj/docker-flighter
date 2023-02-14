@@ -115,7 +115,7 @@ function Weathers() {
     lat = location.coordinates.lat;
     lng = location.coordinates.lng;
   }
-  console.log(window.pageYOffset)
+  
   useEffect(() => {
     const handleScroll = () => {
       if (3400 < window.pageYOffset && window.pageYOffset < 3538.5) {

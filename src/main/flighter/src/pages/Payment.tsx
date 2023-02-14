@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Weather from "../components/Weather";
 import Coupang from '../components/Coupang';
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const StyleWrap = styled.div`
 
@@ -47,17 +50,7 @@ const StyleWrap = styled.div`
           }
         }
         .bot {
-            /* span:first-child {
-              color: white;
-            }
-            span:nth-child(2) {
-              color: red;
-            }
-            span:last-child {
-              color: green;
-            } */
             display: flex;
-            /* justify-content: space-between; */
 
             span {
               margin-top: 10px;
@@ -107,13 +100,16 @@ const StyleWrap = styled.div`
             div {
               p:first-child {
                 margin-left: 25px;
-                padding-top: 15px;
-                font-size: 26px;
+                padding-top: 24px;
+                font-size: 22px;
+                text-align: center;
               }
               p:nth-child(2) {
+                margin-top: 2px;
                 margin-left: 25px;
-                font-size: 24px;
+                font-size: 14px;
                 text-align: center;
+                /* font-style: oblique; */
               }
             }
           }
@@ -378,6 +374,28 @@ const StyleWrap = styled.div`
 `;
 
 function Payment(props: any) {
+  const location =  useLocation();
+  console.log(location);
+  const [airline, setAirline] = useState("");
+  const [airCode, setAirCode] = useState("");
+  const [departure, setDeparture] = useState("");
+  const [destination, setDestination] = useState("");
+  const [dateTime, setDateTime] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [passengers, setPassengers] = useState(Object);
+
+  useEffect(()=>{
+    setAirline(location.state.airline);
+    setAirCode(location.state.airCode);
+    setDeparture(location.state.departure);
+    setDestination(location.state.destination);
+    setDateTime(location.state.dateTime);
+    setStartDate(location.state.startDate);
+    setEndDate(location.state.endDate);
+    setPassengers(location.state.passengers);
+  }, [])
+
   return(
     <StyleWrap>
       <Weather />
@@ -388,25 +406,26 @@ function Payment(props: any) {
             <span className="title">BOARDING PASS</span>
             <img className="img-qr" src={`${process.env.PUBLIC_URL}/images/QRcode.png`} alt="" />
             <div className="intainer">
-              <span>AIR SEOUL</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span>RS933</span>
+              <span>{airline}</span>&nbsp;&nbsp;/&nbsp;&nbsp;<span>{airCode}</span>
               <div className="info">
                 <div>
-                  <p>서울/김포</p>
-                  <p>GMP</p>
+                  <p>{departure}</p>
+                  <p>출발:{startDate[0] + startDate[1]}:{startDate[2] + startDate[3]}</p>
                 </div>
                 <div>
                   <img src={`${process.env.PUBLIC_URL}/images/ic-travel.png`} alt="" />
                 </div>
                 <div>
-                  <p>제주</p>
-                  <p>CJU</p>
+                  <p>{destination}</p>
+                  {endDate === "미정" ? <p>도착:미정</p> :
+                  <p>도착:{endDate[0] + endDate[1]}:{endDate[2] + endDate[3]}</p> }
                 </div>
               </div>
             </div>
             <div className="bot">
               <span>
                 <p>FIGHT</p>
-                <p>RS933</p>
+                <p>{airCode}</p>
               </span>
               <span>
                 <p>GATE</p>
@@ -445,15 +464,15 @@ function Payment(props: any) {
             <h1 className="title">승객</h1>
             <div>
               <span>성인</span>
-              <span>0 명</span>
+              <span>{passengers.adult} 명</span>
             </div>
             <div>
               <span>청소년</span>
-              <span>0 명</span>
+              <span>{passengers.youth} 명</span>
             </div>
             <div>
               <span>유아</span>
-              <span>0 명</span>
+              <span>{passengers.child} 명</span>
             </div>
           </div>
           <div className="info-3">
