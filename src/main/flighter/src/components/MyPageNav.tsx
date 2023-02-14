@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nav from "react-bootstrap/Nav";
 import Passport from "./Passport";
@@ -6,6 +6,7 @@ import ReserveInfo from "./ReserveInfo";
 import UserInfo from "./UserInfo";
 import Withdrawal from "./Withdrawal";
 import Coupang from "./Coupang";
+import { useLocation } from 'react-router-dom';
 
 const StyledWrap = styled.div`
   display: flex;
@@ -50,12 +51,20 @@ const MyPageWrap = styled.div`
   justify-content: center;
 `;
 
-function MyPageNav() {
+function MyPageNav(props: any) {
   const [nav, setNav] = useState(1);
   const nav1 = () => setNav(1);
   const nav2 = () => setNav(2);
   const nav3 = () => setNav(3);
   const nav4 = () => setNav(4);
+  const location = useLocation();
+
+  console.log(location);
+
+  useEffect(()=>{
+    setNav(location.state.nav);
+  }, [location.state.nav])
+
   return (
     <div>
       <StyledWrap>

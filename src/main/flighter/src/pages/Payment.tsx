@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const StyleWrap = styled.div`
-
   .container {
     display: flex;
     justify-content: center;
@@ -373,14 +372,19 @@ const StyleWrap = styled.div`
   }
 `;
 
+function priceToString(price: any) {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 function Payment(props: any) {
   const location =  useLocation();
   console.log(location);
   const [airline, setAirline] = useState("");
   const [airCode, setAirCode] = useState("");
+  const [distance, setDistance] = useState(Number);
   const [departure, setDeparture] = useState("");
   const [destination, setDestination] = useState("");
-  const [dateTime, setDateTime] = useState("");
+  // const [dateTime, setDateTime] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [passengers, setPassengers] = useState(Object);
@@ -388,13 +392,25 @@ function Payment(props: any) {
   useEffect(()=>{
     setAirline(location.state.airline);
     setAirCode(location.state.airCode);
+    setDistance(Math.ceil((location.state.distance) * 0.001 / 800))
     setDeparture(location.state.departure);
     setDestination(location.state.destination);
-    setDateTime(location.state.dateTime);
+    // setDateTime(location.state.dateTime);
     setStartDate(location.state.startDate);
     setEndDate(location.state.endDate);
     setPassengers(location.state.passengers);
   }, [])
+
+  let endHour = (parseInt(startDate[0]+startDate[1])+distance).toString();
+
+  if (parseInt(endHour) >= 24) {
+    endHour = (parseInt(endHour) % 24).toString();
+    if (endHour.toString().length === 2) {
+      endHour = (parseInt(endHour[0]+endHour[1])).toString();
+    } else if (endHour.toString().length === 1) {
+      endHour = "0" + endHour.toString();
+    }
+  }
 
   return(
     <StyleWrap>
@@ -410,15 +426,16 @@ function Payment(props: any) {
               <div className="info">
                 <div>
                   <p>{departure}</p>
-                  <p>출발:{startDate[0] + startDate[1]}:{startDate[2] + startDate[3]}</p>
+                  <p>출발 {startDate[0] + startDate[1]}:{startDate[2] + startDate[3]}</p>
                 </div>
                 <div>
                   <img src={`${process.env.PUBLIC_URL}/images/ic-travel.png`} alt="" />
                 </div>
                 <div>
                   <p>{destination}</p>
-                  {endDate === "미정" ? <p>도착:미정</p> :
-                  <p>도착:{endDate[0] + endDate[1]}:{endDate[2] + endDate[3]}</p> }
+                  {endDate === "미정" ? 
+                  <p>도착 {endHour}:{startDate[2] + startDate[3]}</p> :
+                  <p>도착 {endDate[0] + endDate[1]}:{endDate[2] + endDate[3]}</p> }
                 </div>
               </div>
             </div>
@@ -457,7 +474,13 @@ function Payment(props: any) {
         <div className="payment-info2">
           <div className="info-1">
             <span>총 금액</span>
-            <span>₩ 250,000</span>
+            <span>
+              ₩ {priceToString(
+                (distance * 130000 * passengers.adult)
+                + (distance * 80000 * passengers.youth) 
+                + (distance * 50000 * passengers.child))}
+              원
+            </span>
             <p>부가세와 서비스 요금이 포함됩니다.</p>
           </div>
           <div className="info-2">

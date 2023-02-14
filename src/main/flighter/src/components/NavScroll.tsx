@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { textShaking } from "./styles/AnimationStyles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const StyledWrap = styled.div`
@@ -138,6 +138,17 @@ function NavScroll() {
     }, 1);
   };
 
+  const navigate = useNavigate();
+
+  const clickNav1 = () => {const nav = 1;
+    navigate("/mypage", {state: { nav: nav }})};
+  const clickNav2 = () => {const nav = 2;
+    navigate("/mypage", {state: { nav: nav }})};
+  const clickNav3 = () => {const nav = 3;
+    navigate("/mypage", {state: { nav: nav }})};
+  const clickNav4 = () => {const nav = 4;
+    navigate("/mypage", {state: { nav: nav }})};
+
   return (
     <StyledWrap>
       <Navbar expand="lg">
@@ -158,13 +169,11 @@ function NavScroll() {
                 Login
               </Link>
               <NavDropdown title="My Page" id="navbarScrollingDropdown">
-                <NavDropdown.Item as="span">
-                  <Link to="/mypage">My passport</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item as="span"><Link to="/payment">Reserve info</Link></NavDropdown.Item>
-                <NavDropdown.Item as="span">User info</NavDropdown.Item>
+                <NavDropdown.Item as="span" onClick={clickNav1}>My passport</NavDropdown.Item>
+                <NavDropdown.Item as="span" onClick={clickNav2}>Reserve info</NavDropdown.Item>
+                <NavDropdown.Item as="span" onClick={clickNav3}>User info</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item as="span">Withdrawal</NavDropdown.Item>
+                <NavDropdown.Item as="span" onClick={clickNav4}>Withdrawal</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Form className="d-flex">
