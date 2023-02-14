@@ -23,6 +23,7 @@
     "@types/react-slick": "^0.23.10",
     "aos": "^2.3.4",
     "apollo-server": "^3.11.1",
+    "axios": "^1.3.2",
     "bootstrap": "^5.2.3",
     "bootstrap5-toggle": "^5.0.4",
     "gh-pages": "^5.0.0",
@@ -79,10 +80,11 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://ssuperj.github.io/flighter",
+  "homepage": "https://ya1u.github.io/flighter",
   "browser": {
     "fs": false,
     "os": false,
     "path": false
-  }
+  },
+  "proxy": "http://openapi.airport.co.kr/service"
 }

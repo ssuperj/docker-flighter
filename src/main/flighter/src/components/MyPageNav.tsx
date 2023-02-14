@@ -5,6 +5,7 @@ import Passport from "./Passport";
 import ReserveInfo from "./ReserveInfo";
 import UserInfo from "./UserInfo";
 import Withdrawal from "./Withdrawal";
+import Coupang from "./Coupang";
 
 const StyledWrap = styled.div`
   display: flex;
@@ -27,9 +28,20 @@ const StyledWrap = styled.div`
     opacity: 0.8;
     color: var(--color-l-g);
   }
+
+  .ad {
+    top: 18%;
+  }
+
   hr {
     margin-top: 0 auto;
     width: 80%;
+  }
+
+  @media (max-width: 450px) {
+    .navlink {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -75,6 +87,9 @@ function MyPageNav() {
         {nav === 2 && <ReserveInfo />}
         {nav === 3 && <UserInfo />}
         {nav === 4 && <Withdrawal />}
+        <StyledWrap>
+          <Coupang />
+        </StyledWrap>
       </MyPageWrap>
       <StyledWrap>
         <hr />

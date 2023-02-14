@@ -4,6 +4,7 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import Weather from "../components/Weather";
 
 const StyleWrap = styled.div`
   .container {
@@ -125,18 +126,16 @@ const StyleWrap = styled.div`
     }
   }
 
-  .ad {
-    /* float: right; */
-    position: absolute;
-    left: 88%;
-    bottom: 38%;
-
-    .ad-link {
-      /* position: absolute;; */
-      img {
-        /* position: absolute; */
-      }
+  @media (max-width: 849px) {
+    .ad {
+    display: none;
     }
+  }
+
+  .ad {
+    position: absolute;
+    right: 3%;
+    bottom: 38%;
   }
 
   .other-container {
@@ -186,11 +185,50 @@ const StyleWrap = styled.div`
       }
     }
   }
+
+  @media (max-width: 425px) {
+    .container {
+      width: 330px;
+      height: 450px;
+
+      h1 {
+        margin-bottom: 55px;
+      }
+
+      input {
+        left: 40px
+      }
+
+      .ico-id {
+        left: 38px;
+        bottom: 1px;
+      }
+
+      .ico-pwd {
+        top: 56px;
+        left: 212px;
+      }
+
+      .btn-lg {
+        left: 40px;
+      }
+
+      .link {
+        margin-left: 38px;
+        top: 380px;
+      }
+    }
+
+    .other-container {
+      width: 330px;
+    }
+  }
 `;
 
 function Login() {
   return (
     <StyleWrap>
+      <Weather />
       <div className="container">
         <h1>
           <FontAwesomeIcon icon={faPaperPlane} size="2x" />
@@ -229,7 +267,7 @@ function Login() {
             </button>
           </div>
           <div className="link">
-            <Link to="" className="link-c">
+            <Link to="/join" className="link-c">
               회원가입
             </Link>
             <Link to="" className="link-c">

@@ -3,6 +3,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BlueBg from "../components/BlueBg";
 import Loading from "../components/Loading";
 import SearchView from "../components/SearchView";
+import Weathers1 from "../components/Weather1";
+// import styled from "styled-components";
+
+// const StyleWrap = styled.div`
+//   .weather_list {
+//     position: fixed;
+//   }
+// `;
 
 /**
  * API에서 받아올 페이지가 더 있는지 확인
@@ -91,6 +99,7 @@ const Search = (props: any) => {
       ) : (
         <>
           <BlueBg />
+          <Weathers1 />
           <SearchView
             searchResult={result}
             date={state.startDate}
