@@ -36,6 +36,7 @@ const Search = (props: any) => {
   const INTERNATIONAL_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}&pageNo=${pageNo}`;
 
   const mainApi = async () => {
+    console.log(state);
     await fetch(isDomestic ? DOMESTIC_API_URL : INTERNATIONAL_API_URL, {
       headers: {
         "x-cors-api-key": "temp_f725bd4bd754e5de9c60ee709a5ede89",
@@ -45,9 +46,6 @@ const Search = (props: any) => {
       .then((str) => new DOMParser().parseFromString(str, "application/xml"))
       .then(async (xml) => {
         const items: any = xml.querySelector("items")?.children;
-
-        console.log(xml);
-
         //조회하는 정보가 없으면 다시 메인 페이지로 리다이렉션
         items.length === 0 &&
           navigate("/", {

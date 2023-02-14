@@ -2,7 +2,27 @@ import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { load } from "./CitySearch";
 import Modals from "./Modals";
+
+function getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
+  if (lat1 == lat2 && lon1 == lon2) return 0;
+
+  var radLat1 = (Math.PI * lat1) / 180;
+  var radLat2 = (Math.PI * lat2) / 180;
+  var theta = lon1 - lon2;
+  var radTheta = (Math.PI * theta) / 180;
+  var dist = Math.sin(radLat1) * Math.sin(radLat2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.cos(radTheta);
+  if (dist > 1) dist = 1;
+
+  dist = Math.acos(dist);
+  dist = (dist * 180) / Math.PI;
+  dist = dist * 60 * 1.1515 * 1.609344 * 1000;
+  if (dist < 100) dist = Math.round(dist / 10) * 10;
+  else dist = Math.round(dist / 100) * 100;
+
+  return dist;
+}
 
 const DepartureBtn = (props: any) => {
   const location = useLocation();
@@ -42,36 +62,57 @@ const DepartureBtn = (props: any) => {
       setShow(true);
 
     /**
-     * 오류페이지 & 조회정보 없을시
-     */
-
-    /**
      * 조회하려는 정보가 정확할시 search 페이지로 넘어감
      */
-    destination.dataset.iata.length === 3 &&
+    let departurePosition: any = "";
+    let destinationPosition: any = "";
+    let distance: number = 0;
+    if (
       destination.dataset.iata.length === 3 &&
-      (adult.innerText !== "0" || youth.innerText !== "0" || child.innerText !== "0") &&
-      navigate("/search", {
-        state: {
-          departure: departure.dataset.iata,
-          destination: destination.dataset.iata,
-          startDate: startDate.value,
-          endDate: endDate.value,
-          airType: airType,
-          wayType: wayType,
-          passengers: {
-            adult: adult.innerText,
-            youth: youth.innerText,
-            child: child.innerText,
-          },
-        },
-      });
+      destination.dataset.iata.length === 3 &&
+      (adult.innerText !== "0" || youth.innerText !== "0" || child.innerText !== "0")
+    ) {
+      load(departure.dataset.iata, "airportdetail.csv", 6, 7, 4)
+        .then((resp: any) => {
+          departurePosition = resp[0];
+        })
+        .then(() => {
+          load(destination.dataset.iata, "airportdetail.csv", 6, 7, 4)
+            .then((resp: any) => {
+              destinationPosition = resp[0];
+              distance = getDistance(
+                departurePosition["data1"],
+                departurePosition["data2"],
+                destinationPosition["data1"],
+                destinationPosition["data2"]
+              );
+            })
+            .then(() => {
+              navigate("/search", {
+                state: {
+                  departure: departure.dataset.iata,
+                  destination: destination.dataset.iata,
+                  distance: distance,
+                  startDate: startDate.value,
+                  endDate: endDate.value,
+                  airType: airType,
+                  wayType: wayType,
+                  passengers: {
+                    adult: adult.innerText,
+                    youth: youth.innerText,
+                    child: child.innerText,
+                  },
+                },
+              });
+            });
+        });
+    }
   };
 
   return (
     <>
-      <div className="departure" onClick={clickDepartureBtn}>
-        <button className="departure__btn">
+      <div className="departure">
+        <button className="departure__btn" onClick={clickDepartureBtn}>
           <FontAwesomeIcon icon={faPlaneDeparture} size="2x" />
           <p>Departure</p>
         </button>

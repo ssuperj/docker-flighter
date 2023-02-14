@@ -7,40 +7,41 @@ const Wrapper = styled.div`
   overflow: scroll;
 `;
 
-const load = async (text: string) => {
+export const load = async (text: string, file: string, idx_1: number, idx_2: number, target: number) => {
   let result;
-  await fetch(`${process.env.PUBLIC_URL}/airportcode.csv`)
+  await fetch(`${process.env.PUBLIC_URL}/${file}`)
     .then((response) => response.arrayBuffer())
     .then((responseText) => {
       const decoder = new TextDecoder("EUC-KR");
       const csv = decoder.decode(responseText);
-      result = parsing(csv, text);
+      result = parsing(csv, text, idx_1, idx_2, target);
     });
   return result;
 };
-const parsing = (csv: string, text: string) => {
+export const parsing = (csv: string, text: string, idx_1: number, idx_2: number, target: number) => {
   let obj: any = [];
   const rows = csv.split("\r\n");
   for (let row of rows) {
     const data = row.split(",");
-    const koreanData = data[1];
-    const IATA = data[2];
+    const koreanData = data[idx_1];
+    const IATA = data[idx_2];
     const regex = new RegExp(`^${text}`);
-    if (regex.test(koreanData)) {
-      obj = [...obj, { content: koreanData, IATA: IATA }];
+    if (regex.test(data[target])) {
+      obj = [...obj, { data1: koreanData, data2: IATA }];
     }
   }
   return obj;
 };
 
 const CitySearch = (props: any) => {
-  const [data, setData] = useState([]);
+  const [data, setData]: any = useState([]);
 
   useEffect(() => {
-    props.searchData.length !== 0 &&
-      load(props.searchData).then((resp) => {
+    if (props.searchData.length !== 0) {
+      load(props.searchData, "airportcode.csv", 1, 2, 1).then((resp) => {
         setData(resp!);
       });
+    }
   }, [props.searchData]);
 
   const defaultValue = (
@@ -54,9 +55,9 @@ const CitySearch = (props: any) => {
 
   const searchValue = (
     <>
-      {data.map((result: any, index) => (
-        <Dropdown.Item key={index} data-iata={result.IATA}>
-          {result.content}
+      {data.map((result: any, index: any) => (
+        <Dropdown.Item key={index} data-iata={result.data2}>
+          {result.data1}
         </Dropdown.Item>
       ))}
     </>
