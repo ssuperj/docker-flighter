@@ -23,18 +23,10 @@ const StyledWrap = styled.div`
     color: var(--color-r-m);
   }
 
-<<<<<<< HEAD
   .navlink:hover {
     background-color: var(--color-r-m) !important;
     opacity: 0.8 !important;
     color: var(--color-l-g) !important;
-=======
-  .navlink:hover,
-  .navlink.active {
-    background-color: var(--color-r-m);
-    opacity: 0.8;
-    color: var(--color-l-g);
->>>>>>> upstream/develop
   }
 
   .ad {
