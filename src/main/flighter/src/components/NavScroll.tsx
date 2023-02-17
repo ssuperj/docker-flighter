@@ -140,14 +140,22 @@ function NavScroll() {
 
   const navigate = useNavigate();
 
-  const clickNav1 = () => {const nav = 1;
-    navigate("/mypage", {state: { nav: nav }})};
-  const clickNav2 = () => {const nav = 2;
-    navigate("/mypage", {state: { nav: nav }})};
-  const clickNav3 = () => {const nav = 3;
-    navigate("/mypage", {state: { nav: nav }})};
-  const clickNav4 = () => {const nav = 4;
-    navigate("/mypage", {state: { nav: nav }})};
+  const clickNav1 = () => {
+    const nav = 1;
+    navigate("/mypage", { state: { nav: nav } });
+  };
+  const clickNav2 = () => {
+    const nav = 2;
+    navigate("/mypage", { state: { nav: nav } });
+  };
+  const clickNav3 = () => {
+    const nav = 3;
+    navigate("/mypage", { state: { nav: nav } });
+  };
+  const clickNav4 = () => {
+    const nav = 4;
+    navigate("/mypage", { state: { nav: nav } });
+  };
 
   return (
     <StyledWrap>
@@ -168,12 +176,29 @@ function NavScroll() {
               <Link to="/login" className="nav-link">
                 Login
               </Link>
-              <NavDropdown title="My Page" id="navbarScrollingDropdown">
-                <NavDropdown.Item as="span" onClick={clickNav1}>My passport</NavDropdown.Item>
-                <NavDropdown.Item as="span" onClick={clickNav2}>Reserve info</NavDropdown.Item>
-                <NavDropdown.Item as="span" onClick={clickNav3}>User info</NavDropdown.Item>
+              <NavDropdown
+                title="My Page"
+                id="navbarScrollingDropdown"
+                onClick={(event) => {
+                  const parent: any = event.currentTarget.parentNode;
+                  setTimeout(() => {
+                    parent.scrollTop = 65;
+                  }, 100);
+                }}
+              >
+                <NavDropdown.Item as="span" onClick={clickNav1}>
+                  My passport
+                </NavDropdown.Item>
+                <NavDropdown.Item as="span" onClick={clickNav2}>
+                  Reserve info
+                </NavDropdown.Item>
+                <NavDropdown.Item as="span" onClick={clickNav3}>
+                  User info
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item as="span" onClick={clickNav4}>Withdrawal</NavDropdown.Item>
+                <NavDropdown.Item as="span" onClick={clickNav4}>
+                  Withdrawal
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Form className="d-flex">

@@ -6,6 +6,7 @@ import Agreement1 from "../components/Agreement1";
 import Agreement2 from "../components/Agreement2";
 import Weather from "../components/Weather";
 import { useCallback, useEffect, useState } from "react";
+import MailModal from "../components/join/MailModal";
 
 const StyleWrap = styled.div`
   .weather_list {
@@ -79,10 +80,13 @@ const StyleWrap = styled.div`
           margin-right: 5px;
         }
 
-        .input_id {
-          width: 181px;
+        .input_birth1 {
+          width: 153px;
         }
 
+        .input_birth2 {
+          width: 30px;
+        }
         .input_mail {
           width: 207px;
         }
@@ -237,97 +241,99 @@ const Join = (props: any) => {
   const [nameMessage, setNameMessage] = useState<string>("");
   const [emailMessage, setEmailMessage] = useState<string>("");
   const [passwordMessage, setPasswordMessage] = useState<string>("");
-  const [passwordConfirmMessage, setPasswordConfirmMessage] =
-    useState<string>("");
+  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState<string>("");
 
   // 유효성 검사
   const [isName, setIsName] = useState<boolean>(false);
   const [isEmail, setIsEmail] = useState<boolean>(false);
   const [isPassword, setIsPassword] = useState<boolean>(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState<boolean>(false);
-  
-  // const onSubmit = useCallback(
-  //   async (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault()
-  //     try {
-  //       await axios
-  //         .post(REGISTER_USERS_URL, {
-  //           username: name,
-  //           password: password,
-  //           email: email,
-  //         })
-  //         .then((res) => {
-  //           console.log('response:', res)
-  //           if (res.status === 200) {
-  //             router.push('/sign_up/profile_start')
-  //           }
-  //         })
-  //     } catch (err) {
-  //       console.error(err)
-  //     }
-  //   },
-  //   [email, name, password, router]
-  // )
 
   // 이름
   const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value)
+    setName(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 5) {
-      setNameMessage('2글자 이상 5글자 미만으로 입력해주세요.')
-      setIsName(false)
+      setNameMessage("2글자 이상 5글자 미만으로 입력해주세요.");
+      setIsName(false);
     } else {
-      setNameMessage('올바른 이름 형식입니다')
-      setIsName(true)
+      setNameMessage("올바른 이름 형식입니다");
+      setIsName(true);
     }
-  }, [])
+  }, []);
 
   // 이메일
   const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const emailRegex =
-      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
-    const emailCurrent = e.target.value
-    setEmail(emailCurrent)
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const emailCurrent = e.target.value;
+    setEmail(emailCurrent);
 
     if (!emailRegex.test(emailCurrent)) {
-      setEmailMessage('이메일 형식이 틀렸습니다')
-      setIsEmail(false)
+      setEmailMessage("이메일 형식이 틀렸습니다");
+      setIsEmail(false);
     } else {
-      setEmailMessage('올바른 이메일 형식입니다')
-      setIsEmail(true)
+      setEmailMessage("올바른 이메일 형식입니다");
+      setIsEmail(true);
     }
-  }, [])
+  }, []);
 
   // 비밀번호
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
-    const passwordCurrent = e.target.value
-    setPassword(passwordCurrent)
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const passwordCurrent = e.target.value;
+    setPassword(passwordCurrent);
 
     if (!passwordRegex.test(passwordCurrent)) {
-      setPasswordMessage('숫자+영문자+특수문자 8자리 이상')
-      setIsPassword(false)
+      setPasswordMessage("숫자+영문자+특수문자 8자리 이상");
+      setIsPassword(false);
     } else {
-      setPasswordMessage('안전한 비밀번호를 입력하셨습니다')
-      setIsPassword(true)
+      setPasswordMessage("안전한 비밀번호를 입력하셨습니다");
+      setIsPassword(true);
     }
-  }, [])
+  }, []);
 
   // 비밀번호 확인
   const onChangePasswordConfirm = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const passwordConfirmCurrent = e.target.value
-      setPasswordConfirm(passwordConfirmCurrent)
+      const passwordConfirmCurrent = e.target.value;
+      setPasswordConfirm(passwordConfirmCurrent);
 
       if (password === passwordConfirmCurrent) {
-        setPasswordConfirmMessage('비밀번호를 똑같이 입력하셨습니다')
-        setIsPasswordConfirm(true)
+        setPasswordConfirmMessage("비밀번호를 똑같이 입력하셨습니다");
+        setIsPasswordConfirm(true);
       } else {
-        setPasswordConfirmMessage('비밀번호가 틀려요. 다시 확인해주세요')
-        setIsPasswordConfirm(false)
+        setPasswordConfirmMessage("비밀번호가 틀려요. 다시 확인해주세요");
+        setIsPasswordConfirm(false);
       }
     },
     [password]
-  )
+  );
+
+  // 폼 유효성 체크
+  const [show, setShow] = useState(false);
+  const validateForm = (event: any) => {
+    event.preventDefault();
+    const name = document.querySelector("#name");
+    const email = document.querySelector("#email");
+    const password = document.querySelector("#password");
+    const password2 = document.querySelector("#password2");
+    const birthFront = document.querySelector("#birth-front");
+    const birthBack = document.querySelector("#birth-back");
+    console.log(name, email, password, password2, birthFront, birthBack);
+  };
+
+  const MailValidate = async (email: string) => {
+    await fetch("/join/validate", {
+      method: "post",
+      body: email,
+    })
+      .then((res) => {
+        res.status === 200 ? setShow(true) : setEmailMessage("이메일이 중복입니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <StyleWrap>
@@ -335,9 +341,7 @@ const Join = (props: any) => {
       <div className="container">
         <h1 className="title">FLIGHTER SIGNUP</h1>
         <br />
-        <h1 className="title-1">
-          플라이터의 항공권 예매와 특별한 혜택을 받으실 수 있습니다.
-        </h1>
+        <h1 className="title-1">플라이터의 항공권 예매와 특별한 혜택을 받으실 수 있습니다.</h1>
         <Coupang />
         <form className="content">
           {/* <img src={`${process.env.PUBLIC_URL}/images/ic-user-normal.png`} alt="" /> */}
@@ -348,55 +352,8 @@ const Join = (props: any) => {
                   <label>이 &nbsp; 름</label>
                 </th>
                 <td>
-                  <input type="text" placeholder="이름을 입력해주세요."  onChange={onChangeName} id="name"  />
-                  {name.length > 0 && (
-                    <span className={`message ${isName ? "success" : "error"}`}>
-                      {nameMessage}
-                    </span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <label>아이디</label>
-                </th>
-                <td>
-                  <div>
-                    <input className="input_small input_id" type="text" placeholder="아이디를 입력해주세요."/>
-                    <Link className="input_btn" to="">
-                      중복확인
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <label>비밀번호</label>
-                </th>
-                <td className="position-relative">
-                  <input 
-                    type="password"
-                    placeholder="숫자+영어+특수문자 8자리 이상"
-                    onChange={onChangePassword}
-                  />
-                  {password.length > 0 && (
-                    <span className={`${isPassword ? 'success' : 'error'}`}>{passwordMessage}</span>
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <label>비밀번호 확인</label>
-                </th>
-                <td>
-                  <input
-                    type="password"
-                    placeholder="비밀번호를 한번 더 입력해주세요."
-                    onChange={onChangePasswordConfirm}
-                  />
-                  {passwordConfirm.length > 0 && (
-                    <span className={`message ${isPasswordConfirm ? 'success' : 'error'}`}>{passwordConfirmMessage}</span>
-                  )}
+                  <input type="text" placeholder="이름을 입력해주세요." onChange={onChangeName} id="name" />
+                  {name.length > 0 && <span className={`message ${isName ? "success" : "error"}`}>{nameMessage}</span>}
                 </td>
               </tr>
               <tr>
@@ -409,13 +366,80 @@ const Join = (props: any) => {
                       className="input_small input_mail"
                       type="email"
                       placeholder="이메일 입력해주세요"
-                      onChange={onChangeEmail} 
+                      onChange={onChangeEmail}
+                      id="email"
                     />
-                    <Link className="input_btn" to="">
+                    <button
+                      className="input_btn"
+                      type="button"
+                      onClick={
+                        isEmail
+                          ? () => {
+                              MailValidate(email);
+                            }
+                          : () => false
+                      }
+                    >
                       인증
-                    </Link>
+                    </button>
                   </div>
-                  {email.length > 0 && <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</span>}
+                  {email.length > 0 && (
+                    <span className={`message ${isEmail ? "success" : "error"}`}>{emailMessage}</span>
+                  )}
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  <label>비밀번호</label>
+                </th>
+                <td className="position-relative">
+                  <input
+                    type="password"
+                    placeholder="숫자+영어+특수문자 8자리 이상"
+                    onChange={onChangePassword}
+                    id="password"
+                  />
+                  {password.length > 0 && (
+                    <span className={`${isPassword ? "success" : "error"}`}>{passwordMessage}</span>
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label>비밀번호 확인</label>
+                </th>
+                <td>
+                  <input
+                    type="password"
+                    placeholder="비밀번호를 한번 더 입력해주세요."
+                    onChange={onChangePasswordConfirm}
+                    id="password2"
+                  />
+                  {passwordConfirm.length > 0 && (
+                    <span className={`message ${isPasswordConfirm ? "success" : "error"}`}>
+                      {passwordConfirmMessage}
+                    </span>
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label>생년월일</label>
+                </th>
+                <td>
+                  <div>
+                    <input
+                      className="input_small input_birth1"
+                      type="text"
+                      placeholder="주민번호 앞 6자리"
+                      maxLength={6}
+                      id="birth-front"
+                    />
+                    <span className="p-1">-</span>
+                    <input className="input_small input_birth2 mx-1" type="password" maxLength={1} id="birth-back" />
+                    <span className="input_birth3 p-0">******</span>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -427,52 +451,29 @@ const Join = (props: any) => {
               <div className="form_agreement_item">
                 <Agreement1 />
                 <br />
-                <input
-                  type="checkbox"
-                  id="check1"
-                  checked={ageCheck}
-                  onChange={ageBtnEvent}
-                />
+                <input type="checkbox" id="check1" checked={ageCheck} onChange={ageBtnEvent} />
                 <label htmlFor="check1">
-                  &nbsp;위의 이용약관에 동의합니다.{" "}
-                  <span className="blue">(필수)</span>
+                  &nbsp;위의 이용약관에 동의합니다. <span className="blue">(필수)</span>
                 </label>
               </div>
               <div className="form_agreement_item">
                 <Agreement2 />
                 <br />
-                <input
-                  type="checkbox"
-                  id="check2"
-                  checked={useCheck}
-                  onChange={useBtnEvent}
-                />
+                <input type="checkbox" id="check2" checked={useCheck} onChange={useBtnEvent} />
                 <label htmlFor="check2">
-                  &nbsp;위의 개인정보 수집 및 이용에 대한 안내에 동의합니다.{" "}
-                  <span className="blue">(필수)</span>
+                  &nbsp;위의 개인정보 수집 및 이용에 대한 안내에 동의합니다. <span className="blue">(필수)</span>
                 </label>
               </div>
               <div className="form_agreement_item">
-                <input
-                  type="checkbox"
-                  id="check3"
-                  checked={marketingCheck}
-                  onChange={marketingBtnEvent}
-                />
+                <input type="checkbox" id="check3" checked={marketingCheck} onChange={marketingBtnEvent} />
                 <label htmlFor="check3">
                   &nbsp;마케팅 동의 <span className="gray">(선택)</span>
                 </label>
               </div>
               <div className="form_agreement_all">
-                <input
-                  type="checkbox"
-                  id="all-check"
-                  checked={allCheck}
-                  onChange={allBtnEvent}
-                />
+                <input type="checkbox" id="all-check" checked={allCheck} onChange={allBtnEvent} />
                 <label htmlFor="all-check">
-                  &nbsp;위의 이용약관 및 개인정보 수집 및 이용에 대한 안내에
-                  동의합니다.
+                  &nbsp;위의 이용약관 및 개인정보 수집 및 이용에 대한 안내에 동의합니다.
                 </label>
               </div>
             </div>
@@ -486,7 +487,7 @@ const Join = (props: any) => {
               opacity: "0.8",
             }}
             variant="secondary"
-            // disabled={!(isName && isEmail && isPassword && isPasswordConfirm)}
+            onClick={validateForm}
           >
             회원가입
           </Button>
@@ -495,6 +496,7 @@ const Join = (props: any) => {
           </Button>
         </form>
       </div>
+      <MailModal email={email} show={show} setShow={setShow} title="메일 인증" text="인증번호를 입력 해주세요" />
     </StyleWrap>
   );
 };
