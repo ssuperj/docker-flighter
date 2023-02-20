@@ -4,10 +4,12 @@ import Modal from "react-bootstrap/esm/Modal";
 import sgMail from "@sendgrid/mail";
 
 const MailModal = (props: any) => {
-  //const
+  //variable
 
   //state
   const [isSended, setIsSended] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [serverStr, setServerStr] = useState("");
 
   // function
   const clickSendMail = async (email: string) => {
@@ -21,9 +23,17 @@ const MailModal = (props: any) => {
       .then((res) => res.text())
       .then((text) => {
         setIsSended(true);
-        console.log(text);
+        setServerStr(text);
       })
       .catch((error) => console.error(error));
+  };
+
+  const compareAuthStr = () => {
+    setTimeout(() => {
+      const userStrElement = document.querySelector("#user-str") as HTMLInputElement;
+      const userStr = userStrElement.value;
+      setIsAuth(userStr === serverStr);
+    }, 100);
   };
 
   //useEffect
@@ -42,6 +52,8 @@ const MailModal = (props: any) => {
           aria-label="Auth"
           aria-describedby="basic-addon1"
           maxLength={7}
+          id="user-str"
+          onKeyDown={compareAuthStr}
         />
       </div>
     </>
@@ -68,7 +80,15 @@ const MailModal = (props: any) => {
         </Modal.Header>
         <Modal.Body>{sendBox}</Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={props.toggleModalHandler}>
+          <Button
+            variant="danger"
+            disabled={!isAuth}
+            onClick={() => {
+              props.setShow(false);
+              props.setEmailMessage("이메일 인증 확인했습니다.");
+              props.setIsAuthEmail(true);
+            }}
+          >
             인증확인
           </Button>
           <Button

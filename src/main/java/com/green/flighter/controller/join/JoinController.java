@@ -1,5 +1,6 @@
 package com.green.flighter.controller.join;
 
+import com.green.flighter.model.Users;
 import com.green.flighter.service.join.JoinService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -71,5 +72,12 @@ public class JoinController {
         }
 
         return new ResponseEntity<>(RANDOM_STR, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> joinUser(@RequestBody Users user) {
+        log.warn(user.toString());
+//        joinService.joinUser(user);
+        return new ResponseEntity<>("good", HttpStatus.OK);
     }
 }

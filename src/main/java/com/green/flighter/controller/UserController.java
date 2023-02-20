@@ -18,9 +18,6 @@ public class UserController {
 
     @GetMapping("/user/{name}")
     public String test(@PathVariable String name) {
-        Users user1 = Users.builder().email(name + "@naver.com").password("123123").name(name).birth(LocalDate.now())
-                .sexType(SexType.MALE).image("~~~").build();
-        testService.회원가입(user1);
         return "hello";
     }
 }

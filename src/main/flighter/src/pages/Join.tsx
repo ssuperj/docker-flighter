@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Coupang from "../components/Coupang";
 import Agreement1 from "../components/Agreement1";
 import Agreement2 from "../components/Agreement2";
 import Weather from "../components/Weather";
-import { useCallback, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import MailModal from "../components/join/MailModal";
 
 const StyleWrap = styled.div`
@@ -88,7 +88,7 @@ const StyleWrap = styled.div`
           width: 30px;
         }
         .input_mail {
-          width: 207px;
+          width: 190px;
         }
 
         .input_btn {
@@ -182,6 +182,7 @@ const Join = (props: any) => {
   const [ageCheck, setAgeCheck] = useState(false);
   const [useCheck, setUseCheck] = useState(false);
   const [marketingCheck, setMarketingCheck] = useState(false);
+  const navigate = useNavigate();
 
   const allBtnEvent = () => {
     if (allCheck === false) {
@@ -246,8 +247,14 @@ const Join = (props: any) => {
   // 유효성 검사
   const [isName, setIsName] = useState<boolean>(false);
   const [isEmail, setIsEmail] = useState<boolean>(false);
+  const [isAuthEmail, setIsAuthEmail] = useState<boolean>(false);
   const [isPassword, setIsPassword] = useState<boolean>(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState<boolean>(false);
+  const [isBirth, setIsBirth] = useState<boolean>(false);
+  const [isSex, setIsSex] = useState<boolean>(false);
+
+  // EMAIL 모달 플레그
+  const [show, setShow] = useState(false);
 
   // 이름
   const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -309,17 +316,67 @@ const Join = (props: any) => {
     [password]
   );
 
+  // 생년월일 유효성 확인
+  const onChangeBirthInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const birthRegex = /[0-9]{6}/;
+    const birthInputValue: string = event.target.value;
+    birthRegex.test(birthInputValue) ? setIsBirth(true) : setIsBirth(false);
+  };
+
+  // 성별 유효성 확인
+  const onChangeSexInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const sexRegex = /[1-4]/;
+    const SexInputValue: string = event.target.value;
+    sexRegex.test(SexInputValue) ? setIsSex(true) : setIsSex(false);
+  };
+
   // 폼 유효성 체크
-  const [show, setShow] = useState(false);
-  const validateForm = (event: any) => {
+  const validateForm = () =>
+    isName && isEmail && isPassword && isPasswordConfirm && isAuthEmail && isBirth && isSex && ageCheck && useCheck;
+  const makeJoinData = () => {
+    const name = document.querySelector("#name") as HTMLInputElement;
+    const email = document.querySelector("#email") as HTMLInputElement;
+    const password = document.querySelector("#password") as HTMLInputElement;
+    const birth = document.querySelector("#birth-front") as HTMLInputElement;
+    const sexType = document.querySelector("#birth-back") as HTMLInputElement;
+
+    const birthStr = `${birth.value.slice(0, 2)}/${birth.value.slice(2, 4)}/${birth.value.slice(4, 6)}`;
+    const birthValue = sexType.value === "1" || sexType.value === "2" ? `19${birthStr}` : `20${birthStr}`;
+
+    const sexTypeValue = sexType.value === "1" || sexType.value === "3" ? "MALE" : "FEMALE";
+
+    const data = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      birth: new Date(birthValue),
+      sexType: sexTypeValue,
+    };
+    console.log(data);
+    return data;
+  };
+
+  /**
+   * 유효성 체크가 모두 끝나고 서버로 json 데이터 전송
+   */
+  const sendData = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const name = document.querySelector("#name");
-    const email = document.querySelector("#email");
-    const password = document.querySelector("#password");
-    const password2 = document.querySelector("#password2");
-    const birthFront = document.querySelector("#birth-front");
-    const birthBack = document.querySelector("#birth-back");
-    console.log(name, email, password, password2, birthFront, birthBack);
+    if (!validateForm()) {
+      const data = makeJoinData();
+
+      fetch("/join", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.text())
+        .then((text) => {
+          console.log(text);
+          navigate("/");
+        });
+    }
   };
 
   const MailValidate = async (email: string) => {
@@ -343,7 +400,7 @@ const Join = (props: any) => {
         <br />
         <h1 className="title-1">플라이터의 항공권 예매와 특별한 혜택을 받으실 수 있습니다.</h1>
         <Coupang />
-        <form className="content">
+        <form className="content" onSubmit={sendData}>
           {/* <img src={`${process.env.PUBLIC_URL}/images/ic-user-normal.png`} alt="" /> */}
           <table>
             <tbody>
@@ -368,6 +425,7 @@ const Join = (props: any) => {
                       placeholder="이메일 입력해주세요"
                       onChange={onChangeEmail}
                       id="email"
+                      disabled={isAuthEmail}
                     />
                     <button
                       className="input_btn"
@@ -435,9 +493,16 @@ const Join = (props: any) => {
                       placeholder="주민번호 앞 6자리"
                       maxLength={6}
                       id="birth-front"
+                      onChange={onChangeBirthInput}
                     />
                     <span className="p-1">-</span>
-                    <input className="input_small input_birth2 mx-1" type="password" maxLength={1} id="birth-back" />
+                    <input
+                      className="input_small input_birth2 mx-1"
+                      type="password"
+                      maxLength={1}
+                      id="birth-back"
+                      onChange={onChangeSexInput}
+                    />
                     <span className="input_birth3 p-0">******</span>
                   </div>
                 </td>
@@ -487,7 +552,6 @@ const Join = (props: any) => {
               opacity: "0.8",
             }}
             variant="secondary"
-            onClick={validateForm}
           >
             회원가입
           </Button>
@@ -496,7 +560,15 @@ const Join = (props: any) => {
           </Button>
         </form>
       </div>
-      <MailModal email={email} show={show} setShow={setShow} title="메일 인증" text="인증번호를 입력 해주세요" />
+      <MailModal
+        email={email}
+        setEmailMessage={setEmailMessage}
+        setIsAuthEmail={setIsAuthEmail}
+        show={show}
+        setShow={setShow}
+        title="메일 인증"
+        text="인증번호를 입력 해주세요"
+      />
     </StyleWrap>
   );
 };
