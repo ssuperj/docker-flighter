@@ -1,4 +1,4 @@
-package com.green.flighter.config.jwt.auth;
+package com.green.flighter.config.auth;
 
 import com.green.flighter.model.Users;
 import org.springframework.security.core.GrantedAuthority;

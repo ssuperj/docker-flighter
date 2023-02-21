@@ -15,12 +15,6 @@ public class HelloController {
         return "hello";
     }
 
-//    @PostMapping
-//    public String helloPost(@RequestBody HashMap<String, Object> param) {
-//        log.warn("haha");
-//        return param.toString();
-//    }
-
     @PostMapping
     public String helloPost2(@RequestBody String text) {
         log.warn(text);

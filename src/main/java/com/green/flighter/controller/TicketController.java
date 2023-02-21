@@ -26,7 +26,7 @@ public class TicketController {
 
     @GetMapping("/ticket/{name}")
     public String test(@PathVariable String name) {
-        Users user1 = userRepository.findById(1).get();
+        Users user1 = userRepository.findById(1L).get();
 
         List<Seat> seats = new ArrayList<>();
 

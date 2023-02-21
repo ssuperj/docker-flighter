@@ -1,4 +1,4 @@
-package com.green.flighter.controller;
+package com.green.flighter.controller.graphqls;
 
 import com.green.flighter.model.Member;
 import com.green.flighter.repository.MemberRepository;

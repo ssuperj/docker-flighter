@@ -3,15 +3,11 @@ package com.green.flighter.model;
 import com.green.flighter.enums.PassengerType;
 import com.green.flighter.enums.SeatType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "seat")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(name = "SEQ_GENERATOR3", sequenceName = "SEQ3", allocationSize = 1)

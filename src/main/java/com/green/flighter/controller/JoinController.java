@@ -1,7 +1,7 @@
-package com.green.flighter.controller.join;
+package com.green.flighter.controller;
 
 import com.green.flighter.model.Users;
-import com.green.flighter.service.join.JoinService;
+import com.green.flighter.service.JoinService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
