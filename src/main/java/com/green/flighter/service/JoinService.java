@@ -1,5 +1,6 @@
 package com.green.flighter.service.join;
 
+import com.green.flighter.enums.RoleType;
 import com.green.flighter.model.Users;
 import com.green.flighter.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

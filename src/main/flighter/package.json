@@ -53,13 +53,12 @@
   "devDependencies": {
     "@types/aos": "^3.0.4",
     "@types/rellax": "^1.7.4",
-    "@types/styled-components": "^5.1.26",
-    "react-app-rewired": "^2.2.1"
+    "@types/styled-components": "^5.1.26"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -81,12 +80,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://ya1u.github.io/flighter",
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
   },
   "proxy": "http://localhost:8080"
 }

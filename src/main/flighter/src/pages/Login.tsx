@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import Weather from "../components/Weather";
+import Coupang from "../components/Coupang";
+import axios from "axios";
+import { FormEvent, useRef } from "react";
 
 const StyleWrap = styled.div`
   .container {
@@ -128,7 +131,7 @@ const StyleWrap = styled.div`
 
   @media (max-width: 849px) {
     .ad {
-    display: none;
+      display: none;
     }
   }
 
@@ -196,7 +199,7 @@ const StyleWrap = styled.div`
       }
 
       input {
-        left: 40px
+        left: 40px;
       }
 
       .ico-id {
@@ -226,38 +229,57 @@ const StyleWrap = styled.div`
 `;
 
 function Login() {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const handleLoginFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const emailValue = emailRef.current?.value;
+    const passwordValue = passwordRef.current?.value;
+
+    authenticateToServer(emailValue, passwordValue);
+  };
+
+  const authenticateToServer = (emailValue?: string, passwordValue?: string) => {
+    axios({
+      url: "/login",
+      method: "post",
+      data: {
+        email: emailValue,
+        password: passwordValue,
+      },
+    })
+      .then((response) => response.data)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <StyleWrap>
       <Weather />
+      <Coupang />
       <div className="container">
         <h1>
           <FontAwesomeIcon icon={faPaperPlane} size="2x" />
           &nbsp; Flighter &nbsp;
         </h1>
-        <form action="">
+        <form action="" onSubmit={handleLoginFormSubmit}>
           <div className="input-box">
             <label htmlFor="">
-              <img
-                className="ico-id"
-                src={`${process.env.PUBLIC_URL}/images/ic-user-48.png`}
-                alt=""
-              />
+              <img className="ico-id" src={`${process.env.PUBLIC_URL}/images/ic-user-48.png`} alt="" />
             </label>
-            <input className="input-id" type="text" placeholder="Username" />
+            <input ref={emailRef} className="input-id" type="text" placeholder="Email" id="input-email" />
             <br />
           </div>
           <div className="input-box">
-            <input
-              className="input-pwd"
-              type="password"
-              placeholder="Password"
-            />
+            <input ref={passwordRef} className="input-pwd" type="password" placeholder="Password" id="input-pwd" />
             <label htmlFor="">
-              <img
-                className="ico-pwd"
-                src={`${process.env.PUBLIC_URL}/images/ic-lock-48.png`}
-                alt=""
-              />
+              <img className="ico-pwd" src={`${process.env.PUBLIC_URL}/images/ic-lock-48.png`} alt="" />
             </label>
             <br />
           </div>
@@ -278,19 +300,6 @@ function Login() {
             </Link>
           </div>
         </form>
-      </div>
-
-      <div className="ad">
-        <Link
-          to="https://link.coupang.com/a/N9Q3Y"
-          target="_blank"
-          referrerPolicy="unsafe-url"
-        >
-          <img
-            src="https://ads-partners.coupang.com/banners/636975?subId=&traceId=V0-301-879dd1202e5c73b2-I636975&w=160&h=600"
-            alt=""
-          />
-        </Link>
       </div>
 
       <div className="other-container">
