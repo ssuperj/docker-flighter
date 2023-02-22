@@ -1,9 +1,14 @@
 package com.green.flighter.service;
 
+import com.green.flighter.dto.FlightDataDto;
+import com.green.flighter.dto.SeatDataDto;
 import com.green.flighter.dto.TicketDataDto;
+import com.green.flighter.enums.SeatType;
+import com.green.flighter.model.Flight;
 import com.green.flighter.model.Seat;
 import com.green.flighter.model.Ticket;
 import com.green.flighter.model.Users;
+import com.green.flighter.repository.FlightRepository;
 import com.green.flighter.repository.SeatRepository;
 import com.green.flighter.repository.TicketRepository;
 import com.green.flighter.repository.UserRepository;
@@ -17,30 +22,41 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TicketService {
 
-    private final UserRepository userRepository;
     private final TicketRepository ticketRepository;
-
     private final SeatRepository seatRepository;
+    private final FlightRepository flightRepository;
 
     @Transactional
-    public void 예매하기(Users user, TicketDataDto ticketDataDto) {
+    public void reserve(Users user, TicketDataDto ticketDataDto, SeatDataDto seatDataDto, FlightDataDto flightDataDto) {
+        Flight flight = Flight.builder()
+                .flight(flightDataDto.getFlight())
+                .departure(flightDataDto.getDeparture())
+                .depCode(flightDataDto.getDepCode())
+                .destination(flightDataDto.getDestination())
+                .desCode(flightDataDto.getDesCode())
+                .departureDate(flightDataDto.getDepartureDate())
+                .startTime(flightDataDto.getStartTime())
+                .endTime(flightDataDto.getEndTime())
+                .build();
         Ticket ticket = Ticket.builder()
                 .airLine(ticketDataDto.getAirLine())
-                .flight(ticketDataDto.getFlight())
-                .departure(ticketDataDto.getDeparture())
-                .depCode(ticketDataDto.getDepCode())
-                .destination(ticketDataDto.getDestination())
-                .desCode(ticketDataDto.getDesCode())
-                .departureDate(ticketDataDto.getDepartureDate())
-                .startTime(ticketDataDto.getStartTime())
-                .endTime(ticketDataDto.getEndTime())
                 .price(ticketDataDto.getPrice())
-                .passengers(ticketDataDto.getPassengers())
                 .adult(ticketDataDto.getAdult())
                 .youth(ticketDataDto.getYouth())
                 .child(ticketDataDto.getChild())
                 .users(user)
+                .flight(flight)
                 .build();
+        Seat seat = Seat.builder()
+                .seatNo(seatDataDto.getSeatNo())
+                .seatType(SeatType.valueOf(seatDataDto.getSeatType()))
+                .ticket(ticket)
+                .flight(flight)
+                .build();
+
+
         ticketRepository.save(ticket);
+        seatRepository.save(seat);
+        flightRepository.save(flight);
     }
 }

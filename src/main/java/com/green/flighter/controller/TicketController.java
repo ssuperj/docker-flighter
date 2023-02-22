@@ -1,9 +1,6 @@
 package com.green.flighter.controller;
 
-import com.green.flighter.dto.TicketDataDto;
-import com.green.flighter.enums.PassengerType;
-import com.green.flighter.enums.SeatType;
-import com.green.flighter.model.Seat;
+import com.green.flighter.dto.ReserveData;
 import com.green.flighter.model.Ticket;
 import com.green.flighter.model.Users;
 import com.green.flighter.repository.TicketRepository;
@@ -14,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,9 +23,9 @@ public class TicketController {
     private final TicketRepository ticketRepository;
 
     @PostMapping("/api/payment/complete")
-    public String ticketing(@RequestBody TicketDataDto ticketDataDto) {
+    public String ticketing(@RequestBody ReserveData reserveData) {
         Users user1 = userRepository.findById(1L).get();
-        ticketService.예매하기(user1, ticketDataDto);
+        ticketService.reserve(user1, reserveData.getTicketDataDto(), reserveData.getSeatDataDto(), reserveData.getFlightDataDto());
 
         return "";
     }

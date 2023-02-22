@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GithubLoginButton from "../login/GithubLoginButton";
 import GoogleLoginButton from "../login/GoogleLoginButton";
+import Counter from "./Counter";
 
 const Login = () => {
   const [hello, setHello] = useState("");
@@ -39,6 +40,7 @@ const Login = () => {
 
   return (
     <>
+      <Counter />
       <GithubLoginButton />
       <GoogleLoginButton />
     </>

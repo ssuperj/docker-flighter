@@ -23,6 +23,8 @@ type PaymentProps = {
         adult: number,
         youth: number,
         child: number,
+        seatType: string,
+        seatNo: string,
     }
 }
 
