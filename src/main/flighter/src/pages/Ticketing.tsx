@@ -1,11 +1,9 @@
-import Button from "react-bootstrap/esm/Button";
 import styled from "styled-components";
 import Weather from "../components/Weather";
 import Coupang from "../components/Coupang";
-import { Link } from "react-router-dom";
+import Payment from "../components/Payment";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const StyleWrap = styled.div`
   .container {
@@ -212,13 +210,17 @@ const StyleWrap = styled.div`
         }
       }
 
-      .btn {
+      button {
         background-color: black;
+        color: white;
         border: none;
         opacity: 0.7;
         width: 300px;
+        height: 36px;
         margin-top: 2px;
         margin-left: 50px;
+        font-size: 15px;
+        border-radius: 0.375rem;
       }
     }
   }
@@ -273,7 +275,7 @@ const StyleWrap = styled.div`
         .info-3 {
           margin: auto;
         }
-        .btn {
+        button {
           margin-top: 5px;
           margin-left: 0;
         }
@@ -379,18 +381,22 @@ const StyleWrap = styled.div`
   }
 `;
 
+
+
 function priceToString(price: any) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function Payment(props: any) {
+function Ticketing() {
   const location = useLocation();
   const [airline, setAirline] = useState("");
   const [airCode, setAirCode] = useState("");
   const [distance, setDistance] = useState(Number);
   const [departure, setDeparture] = useState("");
+  const [depCode, setDepCode] = useState("");
   const [destination, setDestination] = useState("");
-  // const [dateTime, setDateTime] = useState("");
+  const [desCode, setDesCode] = useState("");
+  const [dateTime, setDateTime] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [passengers, setPassengers] = useState(Object);
@@ -400,23 +406,45 @@ function Payment(props: any) {
     setAirCode(location.state.airCode);
     setDistance(Math.ceil((location.state.distance * 0.001) / 800));
     setDeparture(location.state.departure);
+    setDepCode(location.state.depCode);
     setDestination(location.state.destination);
-    // setDateTime(location.state.dateTime);
+    setDesCode(location.state.desCode);
+    setDateTime(location.state.dateTime);
     setStartDate(location.state.startDate);
     setEndDate(location.state.endDate);
     setPassengers(location.state.passengers);
   }, []);
 
-  let endHour = (parseInt(startDate[0] + startDate[1]) + distance).toString();
+  let endHour = (parseInt(startDate[0] + startDate[1]) + distance).toString().padStart(2,"0");
 
   if (parseInt(endHour) >= 24) {
-    endHour = (parseInt(endHour) % 24).toString();
-    if (endHour.toString().length === 2) {
-      endHour = parseInt(endHour[0] + endHour[1]).toString();
-    } else if (endHour.toString().length === 1) {
-      endHour = "0" + endHour.toString();
-    }
+    endHour = String(parseInt(endHour) % 24).padStart(2,"0");
   }
+
+  const end = endDate !== "미정" ? endDate : endHour + startDate[2] + startDate[3];
+
+  const paymentData = {
+    pg: 'kakaopay',
+    pay_method: 'card',
+    merchant_uid: `FLIGHTER${new Date().getTime()}`,
+    name: destination + ' 티켓',
+    amount: String(distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child),
+    price: (distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child),
+    buyer_name: 'park',
+    airLine: airline,
+    flight: airCode,
+    departure: departure,
+    depCode: depCode,
+    destination: destination,
+    desCode: desCode,
+    departureDate: dateTime,
+    startTime: startDate,
+    endTime: end,
+    passengers: parseInt(passengers.adult) + parseInt(passengers.youth) + parseInt(passengers.child),
+    adult: passengers.adult,
+    youth: passengers.youth,
+    child: passengers.child,
+  };
 
   return (
     <StyleWrap>
@@ -518,11 +546,7 @@ function Payment(props: any) {
             <h1 className="title">서비스</h1>
             <p>선택된 추가 서비스 없음</p>
           </div>
-          <Link to="/paycomplete">
-            <Button type="submit" variant="secondary">
-              결제하기
-            </Button>
-          </Link>
+          <Payment paymentData={paymentData} />
         </div>
       </div>
       <div className="event">
@@ -543,4 +567,4 @@ function Payment(props: any) {
   );
 }
 
-export default Payment;
+export default Ticketing;
