@@ -8,6 +8,8 @@ import axios from "axios";
 import { FormEvent, useRef } from "react";
 import GoogleLoginButton from "../components/login/GoogleLoginButton";
 import GithubLoginButton from "../components/login/GithubLoginButton";
+import store from "../redux/store";
+import { saveToken } from "../redux/actions";
 
 const StyleWrap = styled.div`
   .container {
@@ -252,7 +254,10 @@ function Login() {
     })
       .then((response) => response.data)
       .then((data) => {
-        console.log(data);
+        const token = data;
+        store.dispatch(saveToken(token));
+        const currentState = store.getState();
+        console.log(currentState.token);
       })
       .catch((error) => {
         console.log(error);

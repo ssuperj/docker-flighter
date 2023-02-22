@@ -381,8 +381,6 @@ const StyleWrap = styled.div`
   }
 `;
 
-
-
 function priceToString(price: any) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -400,6 +398,7 @@ function Ticketing() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [passengers, setPassengers] = useState(Object);
+  const [seatType, setSeatType] = useState("");
 
   useEffect(() => {
     setAirline(location.state.airline);
@@ -413,24 +412,28 @@ function Ticketing() {
     setStartDate(location.state.startDate);
     setEndDate(location.state.endDate);
     setPassengers(location.state.passengers);
+    setSeatType(location.state.seatType);
   }, []);
 
-  let endHour = (parseInt(startDate[0] + startDate[1]) + distance).toString().padStart(2,"0");
+  let endHour = (parseInt(startDate[0] + startDate[1]) + distance).toString().padStart(2, "0");
 
   if (parseInt(endHour) >= 24) {
-    endHour = String(parseInt(endHour) % 24).padStart(2,"0");
+    endHour = String(parseInt(endHour) % 24).padStart(2, "0");
   }
 
   const end = endDate !== "미정" ? endDate : endHour + startDate[2] + startDate[3];
 
   const paymentData = {
-    pg: 'kakaopay',
-    pay_method: 'card',
+    pg: "kakaopay",
+    pay_method: "card",
     merchant_uid: `FLIGHTER${new Date().getTime()}`,
-    name: destination + ' 티켓',
-    amount: String(distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child),
-    price: (distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child),
-    buyer_name: 'park',
+    name: destination + " 티켓",
+    amount: String(
+      distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child
+    ),
+    price:
+      distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child,
+    buyer_name: "park",
     airLine: airline,
     flight: airCode,
     departure: departure,
@@ -444,8 +447,8 @@ function Ticketing() {
     adult: passengers.adult,
     youth: passengers.youth,
     child: passengers.child,
-    seatType: "빠스트",
-    seatNo: "A12" 
+    seatNo: "A12",
+    seatType: seatType,
   };
 
   return (
