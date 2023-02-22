@@ -1,4 +1,5 @@
 package com.green.flighter.model;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.green.flighter.enums.SeatType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,10 +32,16 @@ public class Ticket {
     private String departure;
 
     @Column(nullable = false)
+    private String depCode;
+
+    @Column(nullable = false)
     private String destination;
 
     @Column(nullable = false)
-    private LocalDate departureDate;
+    private String desCode;
+
+    @Column(nullable = false)
+    private String departureDate;
 
     @Column(nullable = false)
     private String startTime;
@@ -45,11 +52,17 @@ public class Ticket {
     @Column(nullable = false)
     private Integer price;
 
+    private Integer passengers;
+    private Integer adult;
+    private Integer youth;
+    private Integer child;
+
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "ticket")
     private List<Seat> seats;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
     private Users users;
 
     @CreationTimestamp

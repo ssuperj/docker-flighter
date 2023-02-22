@@ -45,6 +45,7 @@ const StyledWrap = styled.div`
   .navbar-nav .nav-link.active,
   #navbarScrollingDropdown {
     color: white;
+    width: 95%;
   }
 
   .navbar-nav .nav-link:hover,

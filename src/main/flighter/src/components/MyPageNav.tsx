@@ -23,11 +23,10 @@ const StyledWrap = styled.div`
     color: var(--color-r-m);
   }
 
-  .navlink:hover,
-  .navlink.active {
-    background-color: var(--color-r-m);
-    opacity: 0.8;
-    color: var(--color-l-g);
+  .navlink:hover {
+    background-color: var(--color-r-m) !important;
+    opacity: 0.8 !important;
+    color: var(--color-l-g) !important;
   }
 
   .ad {
@@ -68,22 +67,22 @@ function MyPageNav(props: any) {
       <StyledWrap>
         <Nav fill variant="tabs" defaultActiveKey="link-1" className="Nav">
           <Nav.Item className="navItem">
-            <Nav.Link onClick={nav1} className="navlink" eventKey="link-1">
+            <Nav.Link onClick={nav1} className="navlink" eventKey="link-1" style={nav === 1  ? {backgroundColor: 'var(--color-r-m)', opacity: '0.8', color: 'var(--color-l-g)'} : {fontSize: '17px', color: 'var(--color-r-m)', border: '1px solid transparent'}}>
               내 여권
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="navItem">
-            <Nav.Link onClick={nav2} className="navlink" eventKey="link-2">
+            <Nav.Link onClick={nav2} className="navlink" eventKey="link-2" style={nav === 2  ? {backgroundColor: 'var(--color-r-m)', opacity: '0.8', color: 'var(--color-l-g)'} : {fontSize: '17px', color: 'var(--color-r-m)', border: '1px solid transparent'}}>
               내 예약
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="navItem">
-            <Nav.Link onClick={nav3} className="navlink" eventKey="link-3">
+            <Nav.Link onClick={nav3} className="navlink" eventKey="link-3" style={nav === 3  ? {backgroundColor: 'var(--color-r-m)', opacity: '0.8', color: 'var(--color-l-g)'} : {fontSize: '17px', color: 'var(--color-r-m)', border: '1px solid transparent'}}>
               회원수정
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="navItem">
-            <Nav.Link onClick={nav4} className="navlink" eventKey="link-4">
+            <Nav.Link onClick={nav4} className="navlink" eventKey="link-4" style={nav === 4  ? {backgroundColor: 'var(--color-r-m)', opacity: '0.8', color: 'var(--color-l-g)'} : {fontSize: '17px', color: 'var(--color-r-m)', border: '1px solid transparent'}}>
               회원탈퇴
             </Nav.Link>
           </Nav.Item>

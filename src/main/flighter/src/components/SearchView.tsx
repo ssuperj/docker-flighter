@@ -163,7 +163,9 @@ const SearchView = (props: any) => {
     const airCode: any = event.currentTarget.parentNode.parentNode.querySelector("#airCode");
     const distance: any = location.state.distance;
     const departure: any = event.currentTarget.parentNode.parentNode.querySelector("#departure");
+    const depCode: any = location.state.departure;
     const destination: any = event.currentTarget.parentNode.parentNode.querySelector("#destination");
+    const desCode: any = location.state.destination;
     const dateTime: any = event.currentTarget.parentNode.parentNode.querySelector("#dateTime");
     const startDate: any = event.currentTarget.parentNode.parentNode.querySelector("#startDate");
     const endDate: any = event.currentTarget.parentNode.parentNode.querySelector("#endDate");
@@ -175,7 +177,9 @@ const SearchView = (props: any) => {
         airCode: airCode.innerText,
         distance: distance,
         departure: departure.innerText,
+        depCode: depCode,
         destination: destination.innerText,
+        desCode: desCode,
         dateTime: dateTime.innerText,
         startDate: startDate.innerText,
         endDate: endDate.innerText,
@@ -183,7 +187,7 @@ const SearchView = (props: any) => {
           adult: passengers.adult,
           youth: passengers.youth,
           child: passengers.child,
-        },
+          },
       },
     });
   };

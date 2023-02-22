@@ -5,14 +5,14 @@ import com.green.flighter.enums.SeatType;
 import com.green.flighter.model.Seat;
 import com.green.flighter.model.Ticket;
 import com.green.flighter.model.Users;
+import com.green.flighter.repository.TicketRepository;
 import com.green.flighter.repository.UserRepository;
 import com.green.flighter.service.TicketService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,27 +23,27 @@ public class TicketController {
     private final TicketService ticketService;
 
     private final UserRepository userRepository;
+    private final TicketRepository ticketRepository;
 
-    @GetMapping("/ticket/{name}")
-    public String test(@PathVariable String name) {
+    @PostMapping("/api/payment/complete")
+    public String ticketing(@RequestBody Ticket ticket, @RequestBody Seat seat) {
         Users user1 = userRepository.findById(1L).get();
 
-        List<Seat> seats = new ArrayList<>();
+        ticket.setUsers(user1);
+//        ticket.setSeats(seats);
 
+        System.out.println(ticket);
+        System.out.println(seat);
+        ticketService.예매하기(ticket, seat);
 
-        Ticket ticket = Ticket.builder()
-                        .airLine("korean air").flight("ABC123").
-                departure("인천공항").destination("김포공항").departureDate(LocalDate.now())
-                .startTime("0203")
-                .endTime("0903")
-                .users(user1)
-                .seats(seats)
-                .build();
+        return "";
+    }
 
-        seats.add(new Seat(1, PassengerType.ADULT, SeatType.BUSINESS, "A12", ticket));
+    @GetMapping(value = "/mypage/{userId}")
+    public Object findTicket(@PathVariable("userId") int id) {
+        List<Ticket> tickets = ticketRepository.findByTicket(id);
 
-        ticket.setSeats(seats);
-        ticketService.예매하기(ticket);
-        return "ticket";
+            return new ResponseEntity<>(tickets, HttpStatus.OK);
+
     }
 }

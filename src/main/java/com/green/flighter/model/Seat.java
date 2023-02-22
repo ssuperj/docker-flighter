@@ -26,7 +26,7 @@ public class Seat {
     @Column(nullable = false)
     private String SeatNo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ticketId")
     private Ticket ticket;
 }
