@@ -27,8 +27,7 @@ public class TicketController {
 
     @PostMapping("/api/payment/complete")
     public String ticketing(@RequestBody Ticket ticket, @RequestBody Seat seat) {
-        Users user1 = userRepository.findById(1).get();
-
+        Users user1 = userRepository.findById(1L).get();
 
         ticket.setUsers(user1);
 //        ticket.setSeats(seats);

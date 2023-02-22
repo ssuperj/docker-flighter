@@ -76,7 +76,7 @@ const StyleWrap = styled.div`
     background: linear-gradient(#0066b2, #89cff0);
     color: white;
     text-align: center;
-    top: 120px;
+    top: 20%;
 
     .loading {
       justify-content: center;

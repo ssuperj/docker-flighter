@@ -1,19 +1,24 @@
 package com.green.flighter.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+
 @Slf4j
+@RestController
+@RequestMapping("/hello")
 public class HelloController {
 
-    @ResponseBody
-    @GetMapping("/hello/{message}")
-    public String hello(@PathVariable String message) {
-        log.error(message);
-        return "hhhhhhh" + message;
+    @GetMapping
+    public String helloGet() {
+        return "hello";
+    }
+
+    @PostMapping
+    public String helloPost2(@RequestBody String text) {
+        log.warn(text);
+        return "haha";
     }
 }

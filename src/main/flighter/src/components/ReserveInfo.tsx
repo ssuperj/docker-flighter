@@ -1,4 +1,8 @@
 import styled from "styled-components";
+<<<<<<< HEAD
+=======
+import { Link } from "react-router-dom";
+>>>>>>> upstream/develop
 import Weather from "./Weather";
 import TicketDetail from "./TicketDetail";
 import { useEffect, useState } from "react";
@@ -155,6 +159,7 @@ const ReserveInfo = () => {
     <StyleWrap>
       <Weather />
       <div className="container">
+<<<<<<< HEAD
         <h1 className="title">예약내역</h1>
         <br />
         <div className="content">
@@ -172,6 +177,39 @@ const ReserveInfo = () => {
                 고객님의 예약 정보를 확인하시려면, 확정 이메일 또는 <br />
                 여행 제공 업체에 연락하시기 바랍니다.
               </p>
+=======
+        <h1 className="title">RESERVE INFO</h1>
+        <br />
+        <div className="content">
+          <div className="noReserve">
+            <img className="ico-air1" src={`${process.env.PUBLIC_URL}/images/ic-air1.png`} alt="" />
+            <p className="p-b">죄송합니다, 아직 항공편을 표시할 수 없습니다</p>
+            <p className="p">
+              고객님의 예약 정보를 확인하시려면, 확정 이메일 또는 <br />
+              여행 제공 업체에 연락하시기 바랍니다.
+            </p>
+          </div>
+
+          <hr />
+
+          <Link to="/">
+            <div className="reserve">
+              <div className="reserveInfo-head">
+                <div className="reserveInfo-1">예약번호 : FLY-32415</div>
+                <div className="reserveInfo-2">2023-04-29(금)</div>
+              </div>
+              <div className="reserveInfo-body">
+                <div className="reserveInfo-3">
+                  <p className="p-h">김포</p>
+                  <p className="p-b">GMP</p>
+                </div>
+                <img src={`${process.env.PUBLIC_URL}/images/ic-airplane-take-off-black.png`} alt="" />
+                <div className="reserveInfo-4">
+                  <p className="p-h">제주</p>
+                  <p className="p-b">CJU</p>
+                </div>
+              </div>
+>>>>>>> upstream/develop
             </div>
           ) : (
             <>
@@ -229,6 +267,10 @@ const ReserveInfo = () => {
       </div>
     </StyleWrap>
   );
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> upstream/develop
 
 export default ReserveInfo;

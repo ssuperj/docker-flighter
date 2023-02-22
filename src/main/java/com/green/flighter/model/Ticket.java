@@ -11,12 +11,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "ticket")
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Builder
 @SequenceGenerator(name = "SEQ_GENERATOR2", sequenceName = "SEQ2", allocationSize = 1)
 public class Ticket {
 

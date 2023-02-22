@@ -10,6 +10,7 @@ import NotFound from "../errors/NotFound";
 import Footer from "../components/Footer";
 import styled from "styled-components";
 import Search from "./Search";
+import Hello from "../components/test/Hello";
 
 const BodyWrap = styled.div`
   height: auto;
@@ -31,6 +32,7 @@ const AppRouter = () => {
           <Route path="/search/*" element={<Search />}></Route>
           <Route path="/payment" element={<Ticketing />}></Route>
           <Route path="/paycomplete" element={<Paycomplete />}></Route>
+          <Route path="/hello" element={<Hello />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BodyWrap>
