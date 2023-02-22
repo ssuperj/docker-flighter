@@ -1,7 +1,5 @@
 package com.green.flighter.controller;
 
-import com.green.flighter.enums.PassengerType;
-import com.green.flighter.enums.SeatType;
 import com.green.flighter.model.Seat;
 import com.green.flighter.model.Ticket;
 import com.green.flighter.model.Users;
@@ -13,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

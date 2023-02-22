@@ -1,12 +1,14 @@
 package com.green.flighter.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.green.flighter.enums.SeatType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -25,34 +27,13 @@ public class Ticket {
     @Column(nullable = false)
     private String airLine;
 
-    @Column(nullable = false)
-    private String flight;
-
-    @Column(nullable = false)
-    private String departure;
-
-    @Column(nullable = false)
-    private String depCode;
-
-    @Column(nullable = false)
-    private String destination;
-
-    @Column(nullable = false)
-    private String desCode;
-
-    @Column(nullable = false)
-    private String departureDate;
-
-    @Column(nullable = false)
-    private String startTime;
-
-    @Column(nullable = false)
-    private String endTime;
+    @ManyToOne
+    @JoinColumn(name = "flightId")
+    private Flight flight;
 
     @Column(nullable = false)
     private Integer price;
 
-    private Integer passengers;
     private Integer adult;
     private Integer youth;
     private Integer child;
