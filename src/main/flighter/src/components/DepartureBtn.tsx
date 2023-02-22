@@ -52,9 +52,11 @@ const DepartureBtn = (props: any) => {
     const child: any = document.querySelector("#child-value");
     const domesticBtn: any = document.querySelector("#domestic");
     const wayRadioBtn: any = document.querySelector("#oneWay");
+    const seatType: any = document.querySelector("#seatType");
 
     const airType = domesticBtn.checked ? "domestic" : "international";
     const wayType = wayRadioBtn.checked ? "oneWay" : "twoWay";
+    // const seatType =
 
     const now = new Date().getTime();
     const compareTime = new Date(startDate.value).getTime();
@@ -111,6 +113,7 @@ const DepartureBtn = (props: any) => {
                     youth: youth.innerText,
                     child: child.innerText,
                   },
+                  seatType: seatType.dataset.seat,
                 },
               });
             });

@@ -5,12 +5,12 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import NowDate from "./ResultInput";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import Flickr from "./Flickr";
 
 const SearchView = (props: any) => {
   const location = useLocation();
-  
+
   const Wrapper = styled.div`
     .air-card {
       border: 0.25px solid grey;
@@ -53,7 +53,9 @@ const SearchView = (props: any) => {
               <div className="air-card__logo col-lg-6 d-flex flex-column align-items-center text-center">
                 <Flickr query={`${item.children[0].innerHTML} airline`} />
                 <div className="row my-4 w-100 fs-6">
-                  <div className="air-card__airline-en col-6" id={"airline"}>{item.children[0].innerHTML}</div>
+                  <div className="air-card__airline-en col-6" id={"airline"}>
+                    {item.children[0].innerHTML}
+                  </div>
                   <div className="air-card__airline-kr col-6">{item.children[1].innerHTML}</div>
                 </div>
               </div>
@@ -65,13 +67,19 @@ const SearchView = (props: any) => {
                 </div>
                 <div className="d-flex flex-wrap justify-content-center align-items-center">
                   <div className="row d-flex justify-content-center  my-4 w-100">
-                    <div className="air-card__departure col-4 text-nowrap" id={"departure"}>{item.children[2].innerHTML}</div>
+                    <div className="air-card__departure col-4 text-nowrap" id={"departure"}>
+                      {item.children[2].innerHTML}
+                    </div>
                     <FontAwesomeIcon className="col-2" icon={faArrowRight} size={"lg"} />
-                    <div className="air-card__destination col-4" id={"destination"}>{item.children[4].innerHTML}</div>
+                    <div className="air-card__destination col-4" id={"destination"}>
+                      {item.children[4].innerHTML}
+                    </div>
                   </div>
                   <div className="row w-100 my-2">
                     <div className="col-lg-12 col-6 mt-2">DATE TIME</div>
-                    <div className="col-lg-12 col-6 mt-2" id={"dateTime"}>{props.date}</div>
+                    <div className="col-lg-12 col-6 mt-2" id={"dateTime"}>
+                      {props.date}
+                    </div>
                   </div>
                   <div className="row w-100">
                     <div className="air-card__start-date col-6">
@@ -87,7 +95,9 @@ const SearchView = (props: any) => {
                   </div>
                 </div>
                 <div className="my-4">
-                  <button className="air-card__btn btn btn-danger" onClick={clickTicketingBtn}>예매하기</button>
+                  <button className="air-card__btn btn btn-danger" onClick={clickTicketingBtn}>
+                    예매하기
+                  </button>
                 </div>
               </div>
             </div>
@@ -107,7 +117,9 @@ const SearchView = (props: any) => {
               <div className="air-card__logo col-lg-6 d-flex flex-column align-items-center text-center">
                 <Flickr query={`${item.children[0].innerHTML} airline`} />
                 <div className="row my-4 w-100 fs-6">
-                  <div className="air-card__airline-en col-6" id={"airline"}>{item.children[0].innerHTML}</div>
+                  <div className="air-card__airline-en col-6" id={"airline"}>
+                    {item.children[0].innerHTML}
+                  </div>
                   <div className="air-card__airline-kr col-6">{item.children[1].innerHTML}</div>
                 </div>
               </div>
@@ -119,13 +131,19 @@ const SearchView = (props: any) => {
                 </div>
                 <div className="d-flex flex-wrap justify-content-center">
                   <div className="row d-flex justify-content-center my-4 w-100 align-items-center">
-                    <div className="air-card__departure col-4 text-nowrap" id={"departure"}>{item.children[17].innerHTML}</div>
+                    <div className="air-card__departure col-4 text-nowrap" id={"departure"}>
+                      {item.children[17].innerHTML}
+                    </div>
                     <FontAwesomeIcon className="col-2" icon={faArrowRight} size={"lg"} />
-                    <div className="air-card__destination col-4 text-nowrap" id={"destination"}>{item.children[2].innerHTML}</div>
+                    <div className="air-card__destination col-4 text-nowrap" id={"destination"}>
+                      {item.children[2].innerHTML}
+                    </div>
                   </div>
                   <div className="row w-100 my-2">
                     <div className="col-lg-12 col-6">DATE TIME</div>
-                    <div className="col-lg-12 col-6" id={"dateTime"}>{props.date}</div>
+                    <div className="col-lg-12 col-6" id={"dateTime"}>
+                      {props.date}
+                    </div>
                   </div>
                   <div className="row w-100">
                     <div className="air-card__start-date col-6">
@@ -141,7 +159,9 @@ const SearchView = (props: any) => {
                   </div>
                 </div>
                 <div className="my-4">
-                  <button className="air-card__btn btn btn-danger" onClick={clickTicketingBtn}>예매하기</button>
+                  <button className="air-card__btn btn btn-danger" onClick={clickTicketingBtn}>
+                    예매하기
+                  </button>
                 </div>
               </div>
             </div>
@@ -170,6 +190,7 @@ const SearchView = (props: any) => {
     const startDate: any = event.currentTarget.parentNode.parentNode.querySelector("#startDate");
     const endDate: any = event.currentTarget.parentNode.parentNode.querySelector("#endDate");
     const passengers: any = location.state.passengers;
+    const seatType: any = location.state.seatType;
 
     navigate("/payment", {
       state: {
@@ -187,7 +208,8 @@ const SearchView = (props: any) => {
           adult: passengers.adult,
           youth: passengers.youth,
           child: passengers.child,
-          },
+        },
+        seatType: seatType,
       },
     });
   };

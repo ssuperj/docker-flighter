@@ -79,7 +79,7 @@ const Search = (props: any) => {
 
   useEffect(() => {
     mainApi();
-  }, [pageNo]);
+  }, []);
 
   return (
     <>

@@ -1,7 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 
 function SearchList(props: any) {
+  const [seatType, setSeatType] = useState("ECONOMY");
+
   const changeColorHandler = (event: any, index: number) => {
     const arr = [...event.currentTarget.parentNode.children];
     arr.forEach((el) => {
@@ -11,12 +14,15 @@ function SearchList(props: any) {
     switch (index) {
       case 0:
         props.checkSeatTypeHandler("economy");
+        setSeatType("ECONOMY");
         break;
       case 1:
         props.checkSeatTypeHandler("business");
+        setSeatType("BUSINESS");
         break;
       case 2:
         props.checkSeatTypeHandler("first");
+        setSeatType("FIRST");
     }
   };
   const countUp = (event: any, index: number) => {
@@ -32,7 +38,7 @@ function SearchList(props: any) {
     }
   };
   return (
-    <ListGroup horizontal>
+    <ListGroup horizontal id={props.checkBtn && "seatType"} data-seat={seatType}>
       {props.item.map((value: any, index: number) => (
         <ListGroup.Item
           key={index}
