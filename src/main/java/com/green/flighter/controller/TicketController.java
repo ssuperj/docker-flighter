@@ -1,5 +1,6 @@
 package com.green.flighter.controller;
 
+import com.green.flighter.dto.TicketDataDto;
 import com.green.flighter.enums.PassengerType;
 import com.green.flighter.enums.SeatType;
 import com.green.flighter.model.Seat;
@@ -26,15 +27,9 @@ public class TicketController {
     private final TicketRepository ticketRepository;
 
     @PostMapping("/api/payment/complete")
-    public String ticketing(@RequestBody Ticket ticket, @RequestBody Seat seat) {
+    public String ticketing(@RequestBody TicketDataDto ticketDataDto) {
         Users user1 = userRepository.findById(1L).get();
-
-        ticket.setUsers(user1);
-//        ticket.setSeats(seats);
-
-        System.out.println(ticket);
-        System.out.println(seat);
-        ticketService.예매하기(ticket, seat);
+        ticketService.예매하기(user1, ticketDataDto);
 
         return "";
     }

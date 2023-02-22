@@ -444,7 +444,11 @@ function Ticketing() {
     adult: passengers.adult,
     youth: passengers.youth,
     child: passengers.child,
+
+    seatNo: "A12" 
   };
+  console.log(paymentData);
+
 
   return (
     <StyleWrap>
