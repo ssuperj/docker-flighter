@@ -2,7 +2,6 @@ package com.green.flighter.config;
 
 import com.green.flighter.enums.SexType;
 import com.green.flighter.model.Users;
-import com.green.flighter.repository.UserRepository;
 import com.green.flighter.service.JoinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
@@ -10,7 +9,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @RequiredArgsConstructor
 @Component

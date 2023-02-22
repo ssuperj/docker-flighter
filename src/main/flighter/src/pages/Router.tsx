@@ -10,7 +10,7 @@ import NotFound from "../errors/NotFound";
 import Footer from "../components/Footer";
 import styled from "styled-components";
 import Search from "./Search";
-import Hello from "../components/login/Login";
+import Hello from "../components/test/Hello";
 
 const BodyWrap = styled.div`
   height: auto;

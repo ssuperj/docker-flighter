@@ -1,5 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import GithubLoginButton from "../login/GithubLoginButton";
+import GoogleLoginButton from "../login/GoogleLoginButton";
 
 const Login = () => {
   const [hello, setHello] = useState("");
@@ -36,6 +37,11 @@ const Login = () => {
       });
   }, []);
 
-  return <h1>123</h1>;
+  return (
+    <>
+      <GithubLoginButton />
+      <GoogleLoginButton />
+    </>
+  );
 };
 export default Login;

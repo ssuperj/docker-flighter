@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { GithubLoginButton } from "react-social-login-buttons";
-import { GoogleLoginButton } from "react-social-login-buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
@@ -8,10 +6,12 @@ import Weather from "../components/Weather";
 import Coupang from "../components/Coupang";
 import axios from "axios";
 import { FormEvent, useRef } from "react";
+import GoogleLoginButton from "../components/login/GoogleLoginButton";
+import GithubLoginButton from "../components/login/GithubLoginButton";
 
 const StyleWrap = styled.div`
   .container {
-    margin-top: 100px;
+    margin-top: 200px;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -262,7 +262,6 @@ function Login() {
   return (
     <StyleWrap>
       <Weather />
-      <Coupang />
       <div className="container">
         <h1>
           <FontAwesomeIcon icon={faPaperPlane} size="2x" />
@@ -305,10 +304,9 @@ function Login() {
       <div className="other-container">
         <div className="line">OR</div>
         <div className="social">
-          <div className="btn-social">
-            <GithubLoginButton onClick={() => alert("")} />
-            <GoogleLoginButton onClick={() => alert("")} />
-          </div>
+          <GoogleLoginButton />
+          <div className="btn-social m-3"></div>
+          <GithubLoginButton />
         </div>
       </div>
     </StyleWrap>

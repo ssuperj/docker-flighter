@@ -15,3 +15,4 @@ declare module "*.woff2";
 declare module "*.png";
 declare module "*.jpg";
 declare module "*.jpeg";
+declare module "react-github-login";
