@@ -127,6 +127,8 @@ const StyleWrap = styled.div`
 
 const ReserveInfo = () => {
   const [tickets, setTickets]: any = useState([]);
+  // const [seats, setSeats]: any = useState([]);
+  // const [flights, setFlights]: any = useState([]);
   const [userId, setUserId] = useState(1);
 
   // useEffect(() => {
@@ -176,6 +178,10 @@ const ReserveInfo = () => {
             </div>
           ) : (
             <>
+              {/* {flights.map((flight: any) => (
+            <div>
+              {seats.map((seat: any) => (
+                <div> */}
               {tickets.map((ticket: any) => (
                 <div key={ticket.id}>
                   <TicketDetail
@@ -217,6 +223,10 @@ const ReserveInfo = () => {
                   ></TicketDetail>
                 </div>
               ))}
+              {/* </div>
+              ))}
+              </div>
+              ))} */}
             </>
           )}
         </div>

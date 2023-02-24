@@ -1,5 +1,6 @@
 package com.green.flighter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,7 +39,7 @@ public class Ticket {
     private Integer youth;
     private Integer child;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "ticket")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "ticket")
     private List<Seat> seats;
 
     @ManyToOne(fetch = FetchType.EAGER)
