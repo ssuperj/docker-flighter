@@ -8,30 +8,35 @@ type PaymentProps = {
         merchant_uid: string,
         name: string,
         amount: string,
-        price: number,
         buyer_name: string,
-        airLine: string,
-        flight: string,
-        departure: string,
-        depCode: string,
-        destination: string,
-        desCode: string,
-        departureDate: string,
-        startTime: string,
-        endTime: string,
         passengers: number,
-        adult: number,
-        youth: number,
-        child: number,
-        seatType: string,
-        seatNo: string,
+        ticketDataDto: {
+            airLine: string,
+            price: number,
+            adult: number,
+            youth: number,
+            child: number,
+        },
+        seatDataDto: {
+            seatNo: string,
+            seatType: string,
+        },
+        flightDataDto: {
+            flight: string,
+            departure: string,
+            depCode: string,
+            destination: string,
+            desCode: string,
+            departureDate: string,
+            startTime: string,
+            endTime: string,
+        }
     }
 }
 
 const Payment = ({ paymentData }: PaymentProps) => {
     const paymentDataJson = JSON.stringify(paymentData);
     const history = useHistory();
-    console.log(paymentDataJson);
 
     useEffect(() => {
         const jquery = document.createElement("script");
@@ -47,9 +52,17 @@ const Payment = ({ paymentData }: PaymentProps) => {
     }, []);
 
     const onClickPayment = () => {
-        const { IMP }: any = window;
-        IMP.init("imp55188063");
-        IMP.request_pay(paymentData, callback);
+        // const { IMP }: any = window;
+        // IMP.init("imp55188063");
+        // IMP.request_pay(paymentData, callback);
+        fetch('/api/payment/complete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: paymentDataJson
+        })
+        history.push('/flighter/paycomplete');
     }
 
     const callback = (response: any) => {

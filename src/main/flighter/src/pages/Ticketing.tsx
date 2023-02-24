@@ -431,24 +431,29 @@ function Ticketing() {
     amount: String(
       distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child
     ),
-    price:
-      distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child,
     buyer_name: "park",
-    airLine: airline,
-    flight: airCode,
-    departure: departure,
-    depCode: depCode,
-    destination: destination,
-    desCode: desCode,
-    departureDate: dateTime,
-    startTime: startDate,
-    endTime: end,
     passengers: parseInt(passengers.adult) + parseInt(passengers.youth) + parseInt(passengers.child),
-    adult: passengers.adult,
-    youth: passengers.youth,
-    child: passengers.child,
-    seatNo: "A12",
-    seatType: seatType,
+    ticketDataDto: {
+      airLine: airline,
+      price: distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child,
+      adult: passengers.adult,
+      youth: passengers.youth,
+      child: passengers.child,
+    },
+    seatDataDto: {
+      seatNo: "A12",
+      seatType: seatType,
+    },
+    flightDataDto: {
+      flight: airCode,
+      departure: departure,
+      depCode: depCode,
+      destination: destination,
+      desCode: desCode,
+      departureDate: dateTime,
+      startTime: startDate,
+      endTime: end,
+    }
   };
 
   return (

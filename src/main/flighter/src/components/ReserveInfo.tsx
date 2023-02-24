@@ -126,6 +126,8 @@ const StyleWrap = styled.div`
 
 const ReserveInfo = () => {
   const [tickets, setTickets]: any = useState([]);
+  // const [seats, setSeats]: any = useState([]);
+  // const [flights, setFlights]: any = useState([]);
   const [userId, setUserId] = useState(1);
 
   // useEffect(() => {
@@ -148,7 +150,7 @@ const ReserveInfo = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(tickets)
+    console.log(tickets);
   }, [tickets]);
 
   return (
@@ -160,8 +162,14 @@ const ReserveInfo = () => {
         <div className="content">
           {tickets.length === 0 ? (
             <div className="noReserve">
-              <img className="ico-air1" src={`${process.env.PUBLIC_URL}/images/ic-air1.png`} alt="" />
-              <p className="p-b">죄송합니다, 아직 항공편을 표시할 수 없습니다</p>
+              <img
+                className="ico-air1"
+                src={`${process.env.PUBLIC_URL}/images/ic-air1.png`}
+                alt=""
+              />
+              <p className="p-b">
+                죄송합니다, 아직 항공편을 표시할 수 없습니다
+              </p>
               <p className="p">
                 고객님의 예약 정보를 확인하시려면, 확정 이메일 또는 <br />
                 여행 제공 업체에 연락하시기 바랍니다.
@@ -169,47 +177,62 @@ const ReserveInfo = () => {
             </div>
           ) : (
             <>
-              {tickets.map((ticket: any) => (
-                <div key={ticket.id}>
-                  <TicketDetail
-                    render={() => (
-                      <div className="reserve">
-                        <div className="reserveInfo-head">
-                          <div className="reserveInfo-1">항공편 : {ticket.flight}</div>
-                          <div className="reserveInfo-2">{ticket.departureDate}</div>
-                        </div>
-                        <div className="reserveInfo-body">
-                          <div className="reserveInfo-3">
-                            <p className="p-h">{ticket.departure}</p>
-                            {/* <p className="p-b">{ticket.startTime}</p> */}
-                            <p className="p-b">{ticket.depCode}</p>
+            {/* {flights.map((flight: any) => (
+            <div>
+              {seats.map((seat: any) => (
+                <div> */}
+                  {tickets.map((ticket: any) => (
+                    <div key={ticket.id}>
+                      <TicketDetail
+                        render={() => (
+                          <div className="reserve">
+                            <div className="reserveInfo-head">
+                              <div className="reserveInfo-1">
+                                항공편 : {ticket.flight}
+                              </div>
+                              <div className="reserveInfo-2">
+                                {ticket.departureDate}
+                              </div>
+                            </div>
+                            <div className="reserveInfo-body">
+                              <div className="reserveInfo-3">
+                                <p className="p-h">{ticket.departure}</p>
+                                {/* <p className="p-b">{ticket.startTime}</p> */}
+                                <p className="p-b">{ticket.depCode}</p>
+                              </div>
+                              <img
+                                src={`${process.env.PUBLIC_URL}/images/ic-airplane-take-off-black.png`}
+                                alt=""
+                              />
+                              <div className="reserveInfo-4">
+                                <p className="p-h">{ticket.destination}</p>
+                                {/* <p className="p-b">{ticket.endTime}</p> */}
+                                <p className="p-b">{ticket.desCode}</p>
+                              </div>
+                            </div>
                           </div>
-                          <img src={`${process.env.PUBLIC_URL}/images/ic-airplane-take-off-black.png`} alt="" />
-                          <div className="reserveInfo-4">
-                            <p className="p-h">{ticket.destination}</p>
-                            {/* <p className="p-b">{ticket.endTime}</p> */}
-                            <p className="p-b">{ticket.desCode}</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    airLine={ticket.airLine}
-                    flight={ticket.flight}
-                    departure={ticket.departure}
-                    depCode={ticket.depCode}
-                    destination={ticket.destination}
-                    desCode={ticket.desCode}
-                    departureDate={ticket.departureDate}
-                    startTime={ticket.startTime}
-                    endTime={ticket.endTime}
-                    price={ticket.price}
-                    adult={ticket.adult}
-                    youth={ticket.youth}
-                    child={ticket.child}
-                    seats={ticket.seats}
-                  ></TicketDetail>
-                </div>
+                        )}
+                        airLine={ticket.airLine}
+                        flight={ticket.flight}
+                        departure={ticket.departure}
+                        depCode={ticket.depCode}
+                        destination={ticket.destination}
+                        desCode={ticket.desCode}
+                        departureDate={ticket.departureDate}
+                        startTime={ticket.startTime}
+                        endTime={ticket.endTime}
+                        price={ticket.price}
+                        adult={ticket.adult}
+                        youth={ticket.youth}
+                        child={ticket.child}
+                        seats={ticket.seats}
+                      ></TicketDetail>
+                    </div>
+                  ))}
+                {/* </div>
               ))}
+              </div>
+              ))} */}
             </>
           )}
         </div>

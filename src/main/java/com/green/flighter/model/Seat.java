@@ -2,10 +2,7 @@ package com.green.flighter.model;
 
 import com.green.flighter.enums.SeatType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "seat")
@@ -27,11 +24,11 @@ public class Seat {
     @Column(nullable = false)
     private String seatNo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticketId")
     private Ticket ticket;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flightId")
     private Flight flight;
 }

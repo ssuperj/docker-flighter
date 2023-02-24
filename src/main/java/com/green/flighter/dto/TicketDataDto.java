@@ -1,6 +1,9 @@
 package com.green.flighter.dto;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
 
 @Data
 public class TicketDataDto {

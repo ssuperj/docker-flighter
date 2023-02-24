@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class SeatDataDto {
     private String seatNo;
-
     private String seatType;
 }
