@@ -1,14 +1,42 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-use-history";
-import { useAuth } from "../hooks/useAuth";
-import { PaymentProps } from "../types/types";
+
+type PaymentProps = {
+  paymentData: {
+    pg: string;
+    pay_method: string;
+    merchant_uid: string;
+    name: string;
+    amount: string;
+    buyer_name: string;
+    passengers: number;
+    ticketDataDto: {
+      airLine: string;
+      price: number;
+      adult: number;
+      youth: number;
+      child: number;
+    };
+    seatDataDto: {
+      seatNo: string;
+      seatType: string;
+    };
+    flightDataDto: {
+      flight: string;
+      departure: string;
+      depCode: string;
+      destination: string;
+      desCode: string;
+      departureDate: string;
+      startTime: string;
+      endTime: string;
+    };
+  };
+};
 
 const Payment = ({ paymentData }: PaymentProps) => {
   const paymentDataJson = JSON.stringify(paymentData);
   const history = useHistory();
-  const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const jquery = document.createElement("script");
@@ -24,9 +52,17 @@ const Payment = ({ paymentData }: PaymentProps) => {
   }, []);
 
   const onClickPayment = () => {
-    const { IMP }: any = window;
-    IMP.init("imp55188063");
-    IMP.request_pay(paymentData, callback);
+    // const { IMP }: any = window;
+    // IMP.init("imp55188063");
+    // IMP.request_pay(paymentData, callback);
+    fetch("/api/payment/complete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: paymentDataJson,
+    });
+    history.push("/flighter/paycomplete");
   };
 
   const callback = (response: any) => {
@@ -49,17 +85,7 @@ const Payment = ({ paymentData }: PaymentProps) => {
 
   return (
     <>
-      <button
-        onClick={
-          isAuthenticated
-            ? onClickPayment
-            : () => {
-                navigate("/login");
-              }
-        }
-      >
-        결제하기
-      </button>
+      <button onClick={onClickPayment}>결제하기</button>
     </>
   );
 };
