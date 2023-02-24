@@ -182,7 +182,7 @@ function UserInfo() {
 
   useEffect(() => {
     instance
-      .get("/user")
+      .get("/api/user")
       .then((response) => response.data)
       .then((data) => {
         const resUser = data;
@@ -197,26 +197,21 @@ function UserInfo() {
         <span>MY PASSPORT</span>
         <img className="img" src={`${process.env.PUBLIC_URL}/images/mypage-passport2-normal.png`} alt="passport" />
         <div className="stampBox">
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
-          <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
+          {[...new Array(Math.min(user?.totalTicket || 0, 12))].map(() => (
+            <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
+          ))}
         </div>
         <div className="info">
-          <img className="profile" src={`${process.env.PUBLIC_URL}/images/mypage-profile-default.webp`} alt="profile" />
+          <img
+            className="profile"
+            src={`${process.env.PUBLIC_URL}/images/${user?.image ?? `mypage-profile-default.webp`}`}
+            alt="profile"
+          />
           <p className="name">{user?.name}</p>
           <p className="birth">{user?.birth}</p>
           <p className="sex">{user?.sexType}</p>
           <p className="country">Korea</p>
-          <p className="dateOfIssue">{parseDate(user?.validDate)}</p>
+          <p className="dateOfIssue">{parseDate(user?.createDate)}</p>
           <p className="type">{user?.roleType}</p>
           <p className="validUntil">{parseDate(user?.validDate)}</p>
           <p className="series">{`FLT-0${user?.id}`}</p>

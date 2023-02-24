@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import Weather from "./Weather";
+import instance from "../utils/instance";
+import { useEffect } from "react";
 
 const StyleWrap = styled.div`
   .container {
@@ -82,15 +84,17 @@ const StyleWrap = styled.div`
 `;
 
 function UserInfo() {
+  useEffect(() => {
+    instance.post("/api/user");
+  }, []);
+
   return (
     <StyleWrap>
       <div className="container">
         <Weather />
         <h1 className="title">회원수정</h1>
         <br />
-        {/* <h1 className="title-1">회원정보 변경 페이지 입니다.</h1> */}
         <form className="content">
-          {/* <img src={`${process.env.PUBLIC_URL}/images/ic-user-normal.png`} alt="" /> */}
           <table>
             <tbody>
               <tr>

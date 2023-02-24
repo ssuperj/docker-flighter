@@ -181,7 +181,6 @@ const Join = (props: any) => {
   const [allCheck, setAllCheck] = useState(false);
   const [ageCheck, setAgeCheck] = useState(false);
   const [useCheck, setUseCheck] = useState(false);
-  const [marketingCheck, setMarketingCheck] = useState(false);
   const navigate = useNavigate();
 
   const allBtnEvent = () => {
@@ -189,12 +188,10 @@ const Join = (props: any) => {
       setAllCheck(true);
       setAgeCheck(true);
       setUseCheck(true);
-      setMarketingCheck(true);
     } else {
       setAllCheck(false);
       setAgeCheck(false);
       setUseCheck(false);
-      setMarketingCheck(false);
     }
   };
 
@@ -214,21 +211,13 @@ const Join = (props: any) => {
     }
   };
 
-  const marketingBtnEvent = () => {
-    if (marketingCheck === false) {
-      setMarketingCheck(true);
-    } else {
-      setMarketingCheck(false);
-    }
-  };
-
   useEffect(() => {
-    if (ageCheck === true && useCheck === true && marketingCheck === true) {
+    if (ageCheck === true && useCheck === true) {
       setAllCheck(true);
     } else {
       setAllCheck(false);
     }
-  }, [ageCheck, useCheck, marketingCheck]);
+  }, [ageCheck, useCheck]);
 
   // -------------------------------------------------------------------------------------------------- //
 
@@ -363,22 +352,24 @@ const Join = (props: any) => {
     if (validateForm()) {
       const data = makeJoinData();
 
-      fetch("/join", {
+      fetch("/api/join", {
         method: "post",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(data),
       })
-        .then((res) => res.text())
-        .then((text) => {
+        .then((res) => {
           navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
 
   const MailValidate = async (email: string) => {
-    await fetch("/join/validate", {
+    await fetch("/api/join/validate", {
       method: "post",
       body: email,
     })
@@ -527,12 +518,7 @@ const Join = (props: any) => {
                   &nbsp;위의 개인정보 수집 및 이용에 대한 안내에 동의합니다. <span className="blue">(필수)</span>
                 </label>
               </div>
-              <div className="form_agreement_item">
-                <input type="checkbox" id="check3" checked={marketingCheck} onChange={marketingBtnEvent} />
-                <label htmlFor="check3">
-                  &nbsp;마케팅 동의 <span className="gray">(선택)</span>
-                </label>
-              </div>
+
               <div className="form_agreement_all">
                 <input type="checkbox" id="all-check" checked={allCheck} onChange={allBtnEvent} />
                 <label htmlFor="all-check">

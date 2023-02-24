@@ -13,7 +13,7 @@ const MailModal = (props: any) => {
 
   // function
   const clickSendMail = async (email: string) => {
-    fetch("/join/confirm", {
+    fetch("/api/join/confirm", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

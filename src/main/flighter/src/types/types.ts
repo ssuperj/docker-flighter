@@ -8,6 +8,7 @@ interface User {
   validDate: string;
   sexType: "MALE" | "FEMALE";
   roleType: "USER" | "ADMIN";
+  totalTicket: number;
 }
 
 type PaymentProps = {
@@ -17,21 +18,29 @@ type PaymentProps = {
     merchant_uid: string;
     name: string;
     amount: string;
-    price: number;
     buyer_name: string;
-    airLine: string;
-    flight: string;
-    departure: string;
-    depCode: string;
-    destination: string;
-    desCode: string;
-    departureDate: string;
-    startTime: string;
-    endTime: string;
     passengers: number;
-    adult: number;
-    youth: number;
-    child: number;
+    ticketDto: {
+      airLine: string;
+      price: number;
+      adult: number;
+      youth: number;
+      child: number;
+    };
+    seatDtos: {
+      seatNo: string;
+      seatType: string;
+    }[];
+    flightDto: {
+      flight: string;
+      departure: string;
+      depCode: string;
+      destination: string;
+      desCode: string;
+      departureDate: string;
+      startTime: string;
+      endTime: string;
+    };
   };
 };
 

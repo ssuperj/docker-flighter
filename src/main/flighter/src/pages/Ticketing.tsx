@@ -4,6 +4,7 @@ import Coupang from "../components/Coupang";
 import Payment from "./Payment";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import instance from "../utils/instance";
 
 const StyleWrap = styled.div`
   .container {
@@ -398,9 +399,45 @@ function Ticketing() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [passengers, setPassengers] = useState(Object);
+  const [seats, setSeats]: any = useState([]);
   const [seatType, setSeatType] = useState("");
 
+  function getRandomSeatNo(seatType: string, reservedSeats: Array<string>) {
+    const seatLetter = seatType.substring(0, 1);
+    let seatNumber = Math.floor(Math.random() * 100) + 1;
+    let seatNo = `${seatLetter}${seatNumber.toString().padStart(2, "0")}`;
+
+    while (reservedSeats.includes(seatNo)) {
+      seatNumber = Math.floor(Math.random() * 100) + 1;
+      seatNo = `${seatLetter}${seatNumber.toString().padStart(2, "0")}`;
+    }
+
+    return seatNo;
+  }
+
+  function countPassengers(passengers: object): number {
+    return Object.keys(passengers).reduce((acc, key) => acc + parseInt(location.state.passengers[key]), 0);
+  }
+
   useEffect(() => {
+    let reservedSeats: any[] = [];
+    instance
+      .get(`/api/seat/${location.state.airCode}`)
+      .then((response) => response.data)
+      .then((data) => {
+        reservedSeats = data;
+      });
+
+    const count = countPassengers(location.state.passengers);
+    setSeats(
+      [...new Array(count)].map(() => {
+        return {
+          seatNo: getRandomSeatNo(location.state.seatType, reservedSeats),
+          seatType: location.state.seatType,
+        };
+      })
+    );
+
     setAirline(location.state.airline);
     setAirCode(location.state.airCode);
     setDistance(Math.ceil((location.state.distance * 0.001) / 800));
@@ -433,18 +470,18 @@ function Ticketing() {
     ),
     buyer_name: "park",
     passengers: parseInt(passengers.adult) + parseInt(passengers.youth) + parseInt(passengers.child),
-    ticketDataDto: {
+    ticketDto: {
       airLine: airline,
-      price: distance * 130000 * passengers.adult + distance * 80000 * passengers.youth + distance * 50000 * passengers.child,
+      price:
+        distance * 130000 * passengers.adult +
+        distance * 80000 * passengers.youth +
+        distance * 50000 * passengers.child,
       adult: passengers.adult,
       youth: passengers.youth,
       child: passengers.child,
     },
-    seatDataDto: {
-      seatNo: "A12",
-      seatType: seatType,
-    },
-    flightDataDto: {
+    seatDtos: seats,
+    flightDto: {
       flight: airCode,
       departure: departure,
       depCode: depCode,
@@ -453,7 +490,7 @@ function Ticketing() {
       departureDate: dateTime,
       startTime: startDate,
       endTime: end,
-    }
+    },
   };
 
   return (

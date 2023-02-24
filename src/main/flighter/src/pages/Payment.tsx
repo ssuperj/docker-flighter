@@ -1,38 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-use-history";
-
-type PaymentProps = {
-  paymentData: {
-    pg: string;
-    pay_method: string;
-    merchant_uid: string;
-    name: string;
-    amount: string;
-    buyer_name: string;
-    passengers: number;
-    ticketDataDto: {
-      airLine: string;
-      price: number;
-      adult: number;
-      youth: number;
-      child: number;
-    };
-    seatDataDto: {
-      seatNo: string;
-      seatType: string;
-    };
-    flightDataDto: {
-      flight: string;
-      departure: string;
-      depCode: string;
-      destination: string;
-      desCode: string;
-      departureDate: string;
-      startTime: string;
-      endTime: string;
-    };
-  };
-};
+import { PaymentProps } from "../types/types";
+import instance from "../utils/instance";
 
 const Payment = ({ paymentData }: PaymentProps) => {
   const paymentDataJson = JSON.stringify(paymentData);
@@ -55,14 +24,17 @@ const Payment = ({ paymentData }: PaymentProps) => {
     // const { IMP }: any = window;
     // IMP.init("imp55188063");
     // IMP.request_pay(paymentData, callback);
-    fetch("/api/payment/complete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: paymentDataJson,
-    });
-    history.push("/flighter/paycomplete");
+    console.log(paymentDataJson);
+    instance.post("/api/reserve", paymentData);
+
+    // fetch("/api/payment/complete", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: paymentDataJson,
+    // });
+    // history.push("/flighter/paycomplete");
   };
 
   const callback = (response: any) => {

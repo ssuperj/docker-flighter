@@ -249,7 +249,7 @@ function Login() {
 
   const authenticateToServer = (emailValue?: string, passwordValue?: string) => {
     axios({
-      url: "/login",
+      url: "/api/login",
       method: "post",
       data: {
         email: emailValue,

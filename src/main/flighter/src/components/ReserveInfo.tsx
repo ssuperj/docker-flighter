@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Weather from "./Weather";
 import TicketDetail from "./TicketDetail";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import instance from "../utils/instance";
 
 const StyleWrap = styled.div`
@@ -127,32 +126,10 @@ const StyleWrap = styled.div`
 
 const ReserveInfo = () => {
   const [tickets, setTickets]: any = useState([]);
-  // const [seats, setSeats]: any = useState([]);
-  // const [flights, setFlights]: any = useState([]);
-  const [userId, setUserId] = useState(1);
-
-  // useEffect(() => {
-  //   const fetchTickets = async () => {
-  //     const response = await fetch('/mypage/' + userId);
-  //     const data = await response.json();
-  //     setTickets(data);
-  //   };
-  //   fetchTickets();
-  // }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("/mypage/" + userId)
-  //     .then((response) => response.data)
-  //     .then((data) => {
-  //       setTickets(data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
 
   useEffect(() => {
     instance
-      .get("/mypage")
+      .get("/api/ticket")
       .then((response) => response.data)
       .then((data) => {
         setTickets(data);
@@ -178,43 +155,37 @@ const ReserveInfo = () => {
             </div>
           ) : (
             <>
-              {/* {flights.map((flight: any) => (
-            <div>
-              {seats.map((seat: any) => (
-                <div> */}
               {tickets.map((ticket: any) => (
-                <div key={ticket.id}>
+                <div>
                   <TicketDetail
                     render={() => (
                       <div className="reserve">
                         <div className="reserveInfo-head">
-                          <div className="reserveInfo-1">항공편 : {ticket.flight}</div>
-                          <div className="reserveInfo-2">{ticket.departureDate}</div>
+                          <div className="reserveInfo-1">항공편 : {ticket.flight.flight}</div>
+                          <div className="reserveInfo-2">{ticket.flight.departureDate}</div>
                         </div>
                         <div className="reserveInfo-body">
                           <div className="reserveInfo-3">
-                            <p className="p-h">{ticket.departure}</p>
-                            {/* <p className="p-b">{ticket.startTime}</p> */}
-                            <p className="p-b">{ticket.depCode}</p>
+                            <p className="p-h">{ticket.flight.departure}</p>
+                            <p className="p-b">{ticket.flight.depCode}</p>
                           </div>
                           <img src={`${process.env.PUBLIC_URL}/images/ic-airplane-take-off-black.png`} alt="" />
                           <div className="reserveInfo-4">
-                            <p className="p-h">{ticket.destination}</p>
-                            {/* <p className="p-b">{ticket.endTime}</p> */}
-                            <p className="p-b">{ticket.desCode}</p>
+                            <p className="p-h">{ticket.flight.destination}</p>
+                            <p className="p-b">{ticket.flight.desCode}</p>
                           </div>
                         </div>
                       </div>
                     )}
                     airLine={ticket.airLine}
-                    flight={ticket.flight}
-                    departure={ticket.departure}
-                    depCode={ticket.depCode}
-                    destination={ticket.destination}
-                    desCode={ticket.desCode}
-                    departureDate={ticket.departureDate}
-                    startTime={ticket.startTime}
-                    endTime={ticket.endTime}
+                    flight={ticket.flight.flight}
+                    departure={ticket.flight.departure}
+                    depCode={ticket.flight.depCode}
+                    destination={ticket.flight.destination}
+                    desCode={ticket.flight.desCode}
+                    departureDate={ticket.flight.departureDate}
+                    startTime={ticket.flight.startTime}
+                    endTime={ticket.flight.endTime}
                     price={ticket.price}
                     adult={ticket.adult}
                     youth={ticket.youth}
@@ -223,10 +194,6 @@ const ReserveInfo = () => {
                   ></TicketDetail>
                 </div>
               ))}
-              {/* </div>
-              ))}
-              </div>
-              ))} */}
             </>
           )}
         </div>
