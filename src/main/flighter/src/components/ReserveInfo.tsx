@@ -3,6 +3,7 @@ import Weather from "./Weather";
 import TicketDetail from "./TicketDetail";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import instance from "../utils/instance";
 
 const StyleWrap = styled.div`
   .weather_list {
@@ -137,9 +138,19 @@ const ReserveInfo = () => {
   //   fetchTickets();
   // }, []);
 
+  // useEffect(() => {
+  //   axios
+  //     .get("/mypage/" + userId)
+  //     .then((response) => response.data)
+  //     .then((data) => {
+  //       setTickets(data);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
+
   useEffect(() => {
-    axios
-      .get("/mypage/" + userId)
+    instance
+      .get("/mypage")
       .then((response) => response.data)
       .then((data) => {
         setTickets(data);

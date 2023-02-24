@@ -7,8 +7,11 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Entity
@@ -47,4 +50,11 @@ public class Users {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
+
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
+
+    @Column
+    @Formula("(SELECT COUNT(*) FROM ticket)")
+    private int totalTicket;
 }

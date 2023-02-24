@@ -44,7 +44,7 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     @JsonIgnoreProperties({"hibernateLazyInitializer"})
-    private Users users;
+    private Users user;
 
     @CreationTimestamp
     private Timestamp reservationTime;

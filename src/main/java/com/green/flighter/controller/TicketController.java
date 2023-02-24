@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping
 public class TicketController {
 
     private final TicketService ticketService;
@@ -26,7 +27,7 @@ public class TicketController {
     public String ticketing(@RequestBody Ticket ticket, @RequestBody Seat seat) {
         Users user1 = userRepository.findById(1L).get();
 
-        ticket.setUsers(user1);
+        ticket.setUser(user1);
 //        ticket.setSeats(seats);
 
         System.out.println(ticket);
@@ -42,5 +43,10 @@ public class TicketController {
 
             return new ResponseEntity<>(tickets, HttpStatus.OK);
 
+    }
+
+    @GetMapping
+    public String getTicket() {
+        return "hello";
     }
 }

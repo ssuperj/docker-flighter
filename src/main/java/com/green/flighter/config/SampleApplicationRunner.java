@@ -19,7 +19,7 @@ public class SampleApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // 더미 데이터 생성
-        Users user = new Users(1L, "poqwer95@gmail.com", "!rhkdrms95", "고광근", LocalDate.of(1995, 7, 4), null, null, null, SexType.MALE, null);
+        Users user = new Users(1L, "poqwer95@gmail.com", "!rhkdrms95", "고광근", LocalDate.of(1995, 7, 4), null, null, null, SexType.MALE, null, null, 0);
 
         // 데이터베이스에 저장
         joinService.joinUser(user);

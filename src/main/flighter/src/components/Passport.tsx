@@ -173,14 +173,20 @@ const StyledWrap = styled.div`
 function UserInfo() {
   const [user, setUser] = useState<User | undefined>(undefined);
 
+  const parseDate = (date: any) => {
+    const parsedDate = new Date(date || "")
+      .toLocaleDateString("en", { year: "2-digit", month: "2-digit", day: "2-digit" })
+      .replace(/\./g, "-");
+    return parsedDate;
+  };
+
   useEffect(() => {
     instance
-      .post("/user")
+      .get("/user")
       .then((response) => response.data)
       .then((data) => {
         const resUser = data;
         setUser(resUser);
-        console.log(user);
       });
   }, [setUser]);
 
@@ -210,11 +216,12 @@ function UserInfo() {
           <p className="birth">{user?.birth}</p>
           <p className="sex">{user?.sexType}</p>
           <p className="country">Korea</p>
-          <p className="dateOfIssue">{user?.createDate}</p>
+          <p className="dateOfIssue">{parseDate(user?.validDate)}</p>
           <p className="type">{user?.roleType}</p>
-          <p className="validUntil">{user?.validDate}</p>
-          <p className="series">mola</p>
-          <p className="signature">mola</p>
+          <p className="validUntil">{parseDate(user?.validDate)}</p>
+          <p className="series">{`FLT-0${user?.id}`}</p>
+          {/**서명 추후 업데이트 예정 */}
+          <p className="signature">EMPTY</p>
         </div>
       </div>
     </StyledWrap>

@@ -36,9 +36,7 @@ const Login = () => {
     instance
       .post("/test")
       .then((response) => response.data)
-      .then((data) => {
-        console.log(data);
-      });
+      .then((data) => {});
   }, []);
 
   return <></>;

@@ -1,32 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-use-history";
 import { useAuth } from "../hooks/useAuth";
-
-type PaymentProps = {
-  paymentData: {
-    pg: string;
-    pay_method: string;
-    merchant_uid: string;
-    name: string;
-    amount: string;
-    price: number;
-    buyer_name: string;
-    airLine: string;
-    flight: string;
-    departure: string;
-    depCode: string;
-    destination: string;
-    desCode: string;
-    departureDate: string;
-    startTime: string;
-    endTime: string;
-    passengers: number;
-    adult: number;
-    youth: number;
-    child: number;
-  };
-};
+import { PaymentProps } from "../types/types";
 
 const Payment = ({ paymentData }: PaymentProps) => {
   const paymentDataJson = JSON.stringify(paymentData);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Weather from "../components/Weather";
 import Coupang from "../components/Coupang";
-import Payment from "../components/Payment";
+import Payment from "./Payment";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 

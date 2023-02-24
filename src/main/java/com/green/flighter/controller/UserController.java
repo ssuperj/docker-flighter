@@ -18,7 +18,7 @@ public class UserController {
     private final UserService userService;
     private final JwtTokenUtils jwtTokenUtils;
 
-    @PostMapping
+    @GetMapping
     public ResponseEntity<UserDto> getUser(HttpServletRequest request) {
         String token = jwtTokenUtils.resolveToken(request);
         Users user = userService.findUserByToken(token);
