@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
     private final JwtTokenUtils jwtTokenUtils;
 
     @GetMapping
-    public ResponseEntity<UserDto> getUser(HttpServletRequest request) {
+    public ResponseEntity<UserDto> findUser(HttpServletRequest request) {
         String token = jwtTokenUtils.resolveToken(request);
         Users user = userService.findUserByToken(token);
-        UserDto userDto = UserDto.fromUser(user);
+        UserDto userDto = UserDto.fromUser(user, false);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.green.flighter.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +8,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "flight")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class Flight {
 
     @Id
     @GeneratedValue(generator = "SEQ_GENERATOR4", strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String flight;

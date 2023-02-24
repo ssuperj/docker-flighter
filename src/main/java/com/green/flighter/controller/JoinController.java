@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/join")
+@RequestMapping("/api/join")
 @RequiredArgsConstructor
 public class JoinController {
 
@@ -77,6 +77,6 @@ public class JoinController {
     @PostMapping
     public ResponseEntity<Object> joinUser(@RequestBody Users user) {
         joinService.joinUser(user);
-        return new ResponseEntity<>("good", HttpStatus.OK);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

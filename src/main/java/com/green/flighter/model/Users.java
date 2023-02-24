@@ -1,5 +1,7 @@
 package com.green.flighter.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.green.flighter.enums.RoleType;
 import com.green.flighter.enums.SexType;
 import jakarta.persistence.*;
@@ -8,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
+import org.springframework.security.core.Transient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name = "SEQ_GENERATOR", sequenceName = "SEQ", allocationSize = 1)
@@ -54,7 +58,6 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private List<Ticket> tickets;
 
-    @Column
-    @Formula("(SELECT COUNT(*) FROM ticket)")
+    @Formula("(SELECT COUNT(*) FROM ticket t WHERE t.user_id = id)")
     private int totalTicket;
 }

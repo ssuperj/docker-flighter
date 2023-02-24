@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/login/**", "/join/**").permitAll()
+                        .requestMatchers("/api/login/**", "/api/join/**").permitAll()
                         .anyRequest().authenticated()
                         .and()
                         .addFilterBefore(new JwtAuthenticationFilter(JwtTokenProvider, jwtTokenUtils), UsernamePasswordAuthenticationFilter.class));
