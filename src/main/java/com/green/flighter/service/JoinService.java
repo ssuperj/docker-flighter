@@ -30,6 +30,7 @@ public class JoinService {
         user.setBirth(user.getBirth().plusDays(1));
         user.setValidDate(LocalDateTime.now().plus(5, ChronoUnit.YEARS));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoleType(RoleType.USER);
         userRepository.save(user);
     }
 }

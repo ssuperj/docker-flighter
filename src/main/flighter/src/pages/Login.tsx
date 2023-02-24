@@ -1,19 +1,20 @@
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
-import Weather from "../components/Weather";
-import Coupang from "../components/Coupang";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { FormEvent, useRef } from "react";
-import GoogleLoginButton from "../components/login/GoogleLoginButton";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-use-history";
+import styled from "styled-components";
 import GithubLoginButton from "../components/login/GithubLoginButton";
+import GoogleLoginButton from "../components/login/GoogleLoginButton";
+import Weather from "../components/Weather";
+import { useAuth } from "../hooks/useAuth";
+import { saveToken, saveUser } from "../redux/actions";
 import store from "../redux/store";
-import { saveToken } from "../redux/actions";
 
 const StyleWrap = styled.div`
+  padding-top: 200px;
   .container {
-    margin-top: 200px;
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -23,6 +24,7 @@ const StyleWrap = styled.div`
     border-radius: 50px;
     width: 400px;
     height: 500px;
+    position: relative;
 
     svg {
       width: 32px;
@@ -46,7 +48,8 @@ const StyleWrap = styled.div`
     .link {
       width: 235px;
       color: white;
-      top: 400px;
+      position: absolute;
+      bottom: 10px;
       margin-left: 73px;
     }
 
@@ -220,7 +223,7 @@ const StyleWrap = styled.div`
 
       .link {
         margin-left: 38px;
-        top: 380px;
+        bottom: 0px;
       }
     }
 
@@ -233,6 +236,7 @@ const StyleWrap = styled.div`
 function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleLoginFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -256,8 +260,8 @@ function Login() {
       .then((data) => {
         const token = data;
         store.dispatch(saveToken(token));
-        const currentState = store.getState();
-        console.log(currentState.token);
+
+        navigate(-1);
       })
       .catch((error) => {
         console.log(error);
@@ -272,7 +276,7 @@ function Login() {
           <FontAwesomeIcon icon={faPaperPlane} size="2x" />
           &nbsp; Flighter &nbsp;
         </h1>
-        <form action="" onSubmit={handleLoginFormSubmit}>
+        <form className="login-form" action="" onSubmit={handleLoginFormSubmit}>
           <div className="input-box">
             <label htmlFor="">
               <img className="ico-id" src={`${process.env.PUBLIC_URL}/images/ic-user-48.png`} alt="" />

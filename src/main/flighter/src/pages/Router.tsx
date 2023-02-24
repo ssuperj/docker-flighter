@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import styled from "styled-components";
 import Search from "./Search";
 import Hello from "../components/test/Hello";
+import { useAuth } from "../hooks/useAuth";
 
 const BodyWrap = styled.div`
   height: auto;
@@ -20,19 +21,21 @@ const BodyWrap = styled.div`
 `;
 
 const AppRouter = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header />
       <BodyWrap>
         <Routes>
           <Route path="/" element={<Main />}></Route>
-          <Route path="/mypage/*" element={<MyPage />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/join" element={<Join />}></Route>
           <Route path="/search/*" element={<Search />}></Route>
           <Route path="/payment" element={<Ticketing />}></Route>
           <Route path="/paycomplete" element={<Paycomplete />}></Route>
           <Route path="/hello" element={<Hello />}></Route>
+          {isAuthenticated && <Route path="/mypage/*" element={<MyPage />}></Route>}
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BodyWrap>

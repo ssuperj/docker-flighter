@@ -11,6 +11,9 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { textShaking } from "./styles/AnimationStyles";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import store from "../redux/store";
+import { saveToken } from "../redux/actions";
 
 const StyledWrap = styled.div`
   .navbar {
@@ -128,8 +131,12 @@ const StyledWrap = styled.div`
 `;
 
 function NavScroll() {
+  // hooks
   const [searchData, setSearchData] = useState("");
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
+  // functions
   const keyDown = (event: any) => {
     if (event.keyCode === 13) {
       event.preventDefault();
@@ -139,7 +146,9 @@ function NavScroll() {
     }, 1);
   };
 
-  const navigate = useNavigate();
+  const logout = () => {
+    store.dispatch(saveToken("{}"));
+  };
 
   const clickNav1 = () => {
     const nav = 1;
@@ -158,6 +167,9 @@ function NavScroll() {
     navigate("/mypage", { state: { nav: nav } });
   };
 
+  // components
+  const LoginBox = () => (isAuthenticated ? <div onClick={logout}>Logout</div> : <div>Login</div>);
+
   return (
     <StyledWrap>
       <Navbar expand="lg">
@@ -175,32 +187,36 @@ function NavScroll() {
                 Home
               </Link>
               <Link to="/login" className="nav-link">
-                Login
+                <LoginBox />
               </Link>
-              <NavDropdown
-                title="My Page"
-                id="navbarScrollingDropdown"
-                onClick={(event) => {
-                  const parent: any = event.currentTarget.parentNode;
-                  setTimeout(() => {
-                    parent.scrollTop = 65;
-                  }, 100);
-                }}
-              >
-                <NavDropdown.Item as="span" onClick={clickNav1}>
-                  My passport
-                </NavDropdown.Item>
-                <NavDropdown.Item as="span" onClick={clickNav2}>
-                  Reserve info
-                </NavDropdown.Item>
-                <NavDropdown.Item as="span" onClick={clickNav3}>
-                  User info
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item as="span" onClick={clickNav4}>
-                  Withdrawal
-                </NavDropdown.Item>
-              </NavDropdown>
+              {isAuthenticated ? (
+                <NavDropdown
+                  title="My Page"
+                  id="navbarScrollingDropdown"
+                  onClick={(event) => {
+                    const parent: any = event.currentTarget.parentNode;
+                    setTimeout(() => {
+                      parent.scrollTop = 65;
+                    }, 100);
+                  }}
+                >
+                  <NavDropdown.Item as="span" onClick={clickNav1}>
+                    My passport
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as="span" onClick={clickNav2}>
+                    Reserve info
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as="span" onClick={clickNav3}>
+                    User info
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as="span" onClick={clickNav4}>
+                    Withdrawal
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <></>
+              )}
             </Nav>
             <Form className="d-flex">
               <Form.Control type="search" placeholder="Search" aria-label="Search" onKeyDown={keyDown} />

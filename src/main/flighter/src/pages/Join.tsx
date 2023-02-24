@@ -352,7 +352,6 @@ const Join = (props: any) => {
       birth: new Date(birthValue),
       sexType: sexTypeValue,
     };
-    console.log(data);
     return data;
   };
 
@@ -361,7 +360,7 @@ const Join = (props: any) => {
    */
   const sendData = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!validateForm()) {
+    if (validateForm()) {
       const data = makeJoinData();
 
       fetch("/join", {
@@ -373,7 +372,6 @@ const Join = (props: any) => {
       })
         .then((res) => res.text())
         .then((text) => {
-          console.log(text);
           navigate("/");
         });
     }

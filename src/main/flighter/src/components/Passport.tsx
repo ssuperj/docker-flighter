@@ -1,4 +1,7 @@
+import axios from "axios";
+import { useEffect } from "react";
 import styled from "styled-components";
+import instance from "../utils/instance";
 import Weather from "./Weather";
 
 const StyledWrap = styled.div`
@@ -16,7 +19,7 @@ const StyledWrap = styled.div`
     position: absolute;
     margin-top: 10px;
     font-size: 18px;
-    color: var(--color-r-m) ;
+    color: var(--color-r-m);
     font-family: var(--font-bd);
     opacity: 0.8;
   }
@@ -100,7 +103,6 @@ const StyledWrap = styled.div`
 
   @media (max-width: 450px) {
     .container {
-
       .img {
         width: 411px;
       }
@@ -167,11 +169,7 @@ function UserInfo() {
       <Weather />
       <div className="container">
         <span>MY PASSPORT</span>
-        <img
-          className="img"
-          src={`${process.env.PUBLIC_URL}/images/mypage-passport2-normal.png`}
-          alt="passport"
-        />
+        <img className="img" src={`${process.env.PUBLIC_URL}/images/mypage-passport2-normal.png`} alt="passport" />
         <div className="stampBox">
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />

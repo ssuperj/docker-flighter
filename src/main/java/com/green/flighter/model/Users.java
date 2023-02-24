@@ -44,7 +44,7 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private SexType sexType;
 
-    @ColumnDefault("USER")
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 }

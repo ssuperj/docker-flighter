@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
-import GithubLoginButton from "../login/GithubLoginButton";
-import GoogleLoginButton from "../login/GoogleLoginButton";
-import Counter from "./Counter";
+import { useEffect } from "react";
+import instance from "../../utils/instance";
 
 const Login = () => {
-  const [hello, setHello] = useState("");
-
   useEffect(() => {
     /*     // Query 요청의 경우
     fetch("/graphql", {
@@ -24,26 +20,22 @@ const Login = () => {
       },
       body: JSON.stringify({ query: "mutation { createBlog { blogId, userId } }" }),
     }).then((response) => response.json()); */
+    // console.log(token);
+    // fetch("/graphql", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ query: "{ getMember }" }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((text) => {
+    //     console.log(text);
+    //   });
 
-    fetch("/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query: "{ getMember }" }),
-    })
-      .then((response) => response.json())
-      .then((text) => {
-        console.log(text);
-      });
+    instance.post("/test");
   }, []);
 
-  return (
-    <>
-      <Counter />
-      <GithubLoginButton />
-      <GoogleLoginButton />
-    </>
-  );
+  return <></>;
 };
 export default Login;

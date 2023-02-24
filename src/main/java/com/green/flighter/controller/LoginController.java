@@ -22,10 +22,4 @@ public class LoginController {
         TokenInfo tokenInfo = loginService.login(loginRequestDto);
         return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
     }
-
-    @GetMapping
-    public String loginSubmit2(@RequestParam String text) {
-        log.info(text);
-        return text;
-    }
 }

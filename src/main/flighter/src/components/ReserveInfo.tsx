@@ -147,10 +147,6 @@ const ReserveInfo = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  useEffect(() => {
-    // console.log(tickets)
-  }, [tickets]);
-
   return (
     <StyleWrap>
       <Weather />
