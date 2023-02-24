@@ -58,6 +58,8 @@ function MyPageNav(props: any) {
   const nav4 = () => setNav(4);
   const location = useLocation();
 
+  useEffect(() => {});
+
   useEffect(() => {
     setNav(location?.state?.nav);
   }, [location?.state?.nav]);

@@ -76,7 +76,6 @@ public class JoinController {
 
     @PostMapping
     public ResponseEntity<Object> joinUser(@RequestBody Users user) {
-        log.warn(user.toString());
         joinService.joinUser(user);
         return new ResponseEntity<>("good", HttpStatus.OK);
     }

@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { User } from "../types/types";
 import instance from "../utils/instance";
 import Weather from "./Weather";
 
@@ -119,6 +120,12 @@ const StyledWrap = styled.div`
         width: 390px;
         margin-top: 315px;
         font-size: 12px;
+        .profile {
+          position: absolute;
+          margin: 40px;
+          width: 50px;
+          height: 50px;
+        }
 
         .name {
           padding-top: 66px;
@@ -164,6 +171,19 @@ const StyledWrap = styled.div`
 `;
 
 function UserInfo() {
+  const [user, setUser] = useState<User | undefined>(undefined);
+
+  useEffect(() => {
+    instance
+      .post("/user")
+      .then((response) => response.data)
+      .then((data) => {
+        const resUser = data;
+        setUser(resUser);
+        console.log(user);
+      });
+  }, [setUser]);
+
   return (
     <StyledWrap>
       <Weather />
@@ -185,14 +205,14 @@ function UserInfo() {
           <img className="stamp" src={`${process.env.PUBLIC_URL}/images/mypage-sticker3-normal.png`} alt="stamp" />
         </div>
         <div className="info">
-          {/* <img className="profile" src={`${process.env.PUBLIC_URL}/images/mypage-profile2-normal.png`} alt="profile" /> */}
-          <p className="name">Part JungHeum</p>
-          <p className="birth">1996. 06. 18</p>
-          <p className="sex">Male</p>
+          <img className="profile" src={`${process.env.PUBLIC_URL}/images/mypage-profile-default.webp`} alt="profile" />
+          <p className="name">{user?.name}</p>
+          <p className="birth">{user?.birth}</p>
+          <p className="sex">{user?.sexType}</p>
           <p className="country">Korea</p>
-          <p className="dateOfIssue">2023.02.01</p>
-          <p className="type">mola</p>
-          <p className="validUntil">2028.02.01</p>
+          <p className="dateOfIssue">{user?.createDate}</p>
+          <p className="type">{user?.roleType}</p>
+          <p className="validUntil">{user?.validDate}</p>
           <p className="series">mola</p>
           <p className="signature">mola</p>
         </div>

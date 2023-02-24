@@ -1,6 +1,7 @@
 package com.green.flighter.config.auth;
 
 import com.green.flighter.model.Users;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,10 @@ public class PrincipalDetail implements UserDetails {
 
     public PrincipalDetail(Users user) {
         this.user = user;
+    }
+
+    public Long getId() {
+        return user.getId();
     }
 
     @Override

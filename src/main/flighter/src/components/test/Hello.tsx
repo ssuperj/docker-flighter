@@ -33,7 +33,12 @@ const Login = () => {
     //     console.log(text);
     //   });
 
-    instance.post("/test");
+    instance
+      .post("/test")
+      .then((response) => response.data)
+      .then((data) => {
+        console.log(data);
+      });
   }, []);
 
   return <></>;

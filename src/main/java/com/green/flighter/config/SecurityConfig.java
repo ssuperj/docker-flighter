@@ -3,6 +3,7 @@ package com.green.flighter.config;
 
 import com.green.flighter.config.jwt.JwtAuthenticationFilter;
 import com.green.flighter.config.jwt.JwtTokenProvider;
+import com.green.flighter.config.jwt.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtTokenProvider JwtTokenProvider;
+    private final JwtTokenUtils jwtTokenUtils;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,7 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/login/**", "/join/**").permitAll()
                         .anyRequest().authenticated()
                         .and()
-                        .addFilterBefore(new JwtAuthenticationFilter(JwtTokenProvider), UsernamePasswordAuthenticationFilter.class));
+                        .addFilterBefore(new JwtAuthenticationFilter(JwtTokenProvider, jwtTokenUtils), UsernamePasswordAuthenticationFilter.class));
 //                        .requestMatchers("/**").permitAll());
         return http.build();
     }

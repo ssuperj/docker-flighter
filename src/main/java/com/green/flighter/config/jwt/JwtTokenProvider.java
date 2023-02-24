@@ -1,5 +1,6 @@
 package com.green.flighter.config.jwt;
 
+import com.green.flighter.config.auth.PrincipalDetail;
 import com.green.flighter.dto.TokenInfo;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -42,6 +43,7 @@ public class JwtTokenProvider {
         Date accessTokenExpiresIn = new Date(now + 86400000);
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
+                .claim("id", ((PrincipalDetail) authentication.getPrincipal()).getId())
                 .claim("auth", authorities)
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
