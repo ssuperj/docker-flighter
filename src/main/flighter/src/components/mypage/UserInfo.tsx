@@ -6,6 +6,8 @@ import { FormEventHandler, useEffect, useRef, useState } from "react";
 import { User } from "../../types/types";
 import Modals from "../utils/Modals";
 import { useNavigate } from "react-router-dom";
+import store from "../../redux/store";
+import { saveToken } from "../../redux/actions";
 
 const StyleWrap = styled.div`
   .container {
@@ -91,9 +93,10 @@ function UserInfo() {
    * Hooks
    */
   const [user, setUser] = useState<null | User>(null);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [modalTitle, setModalTitle] = useState("");
   const [modalText, setModalText] = useState("");
+  const [modalNavigate, setModalNavigate] = useState(false);
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmRef = useRef<HTMLInputElement>(null);
   const passwordNewRef = useRef<HTMLInputElement>(null);
@@ -105,6 +108,7 @@ function UserInfo() {
    * useEffect
    */
   useEffect(() => {
+    setShow(false);
     instance
       .get("/api/user")
       .then((response) => response.data)
@@ -123,86 +127,78 @@ function UserInfo() {
    */
   const handleUserModifySubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
-    requestPassword();
-    requestImage();
-  };
 
-  const requestPassword = () => {
     const password = passwordRef.current?.value;
     const passwordConfirm = passwordConfirmRef.current?.value;
     const passwordNew = passwordNewRef.current?.value;
-
-    if (!isValidPassword(password) || !isValidPassword(passwordConfirm) || !isValidPassword(passwordNew)) {
-      failValidate(true, "유효성 실패", "비밀번호 숫자+영문자+특수문자 8자리 이상 입력 해주세요.");
-      return;
-    }
-
-    if (password !== passwordConfirm) {
-      failValidate(true, "유효성 실패", "현재 비밀번호와 비밀번호 확인이 다릅니다.");
-      return;
-    }
-
-    instance
-      .patch("/api/user/password", {
-        password: password,
-        passwordNew: passwordNew,
-      })
-      .then(() => {
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const requestImage = () => {
-    const password = passwordRef.current?.value;
-    const passwordConfirm = passwordConfirmRef.current?.value;
-    const file = fileRef.current?.files?.[0] ?? null;
-
-    if (!isValidPassword(password) || !isValidPassword(passwordConfirm)) {
-      failValidate(true, "유효성 실패", "비밀번호 숫자+영문자+특수문자 8자리 이상 입력 해주세요.");
-      return;
-    }
-
-    if (password !== passwordConfirm) {
-      failValidate(true, "유효성 실패", "현재 비밀번호와 비밀번호 확인이 다릅니다.");
-      return;
-    }
-
-    if (!file) {
-      console.log("No file selected");
-      return;
-    }
+    const file: any = fileRef.current?.files?.[0] ?? null;
 
     const formData = new FormData();
     formData.append("file", file);
 
     instance
-      .post("/api/user/image", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      .post("/api/user/image", formData)
+      .then((imageResponse) => {
+        if (imageResponse.status === 200) {
+          instance
+            .patch("/api/user/password", {
+              password: password,
+              passwordNew: passwordNew,
+            })
+            .then((passwordResponse) => {
+              console.log("passwordResponse" + passwordResponse.status);
+              if (passwordResponse.status === 200) {
+                validate(true, "회원정보 수정", "회원정보가 수정 되었습니다.", true);
+              } else {
+                console.error("비밀번호 변경 실패");
+              }
+            })
+            .catch((error) => {
+              validate(true, "회원정보 수정", "이미지가 수정 되었습니다.", false);
+            });
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        if (doubleCheckPassword(password ?? "", passwordNew ?? "", passwordConfirm ?? "")) {
+          instance
+            .patch("/api/user/password", {
+              password: password,
+              passwordNew: passwordNew,
+            })
+            .then((passwordResponse) => {
+              console.log("passwordResponse" + passwordResponse.status);
+              if (passwordResponse.status === 200) {
+                validate(true, "회원정보 수정", "비밀번호가 수정 되었습니다.", true);
+              } else {
+                console.error("비밀번호 변경 실패");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
       });
   };
 
-  /**
-   *
-   * @param password
-   * @returns
-   */
   const isValidPassword = (password: string | undefined): boolean => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/~?])(?=.*[0-9]).{8,30}$/;
+    const passwordRegex =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[a-zA-Z\d~!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,30}$/;
     return passwordRegex.test(password ?? "");
   };
 
-  /**
-   *
-   * @param event
-   */
+  const doubleCheckPassword = (password: string, passwordNew: string, passwordConfirm: string) => {
+    if (!isValidPassword(password) || !isValidPassword(passwordNew) || !isValidPassword(passwordConfirm)) {
+      validate(true, "유효성 실패", "비밀번호 숫자+영문자+특수문자 8자리 이상 입력 해주세요.", false);
+      return false;
+    }
+
+    if (passwordNew !== passwordConfirm) {
+      validate(true, "유효성 실패", "변경 비밀번호와 비밀번호 확인이 일치하지 않습니다.", false);
+      return false;
+    }
+    return true;
+  };
+
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ?? null;
     const reader = new FileReader();
@@ -225,23 +221,20 @@ function UserInfo() {
     reader.readAsDataURL(file);
   };
 
-  /**
-   *
-   * @param isShow
-   * @param title
-   * @param text
-   */
-  const failValidate = (isShow: true, title: string, text: string) => {
+  const validate = (isShow: boolean, title: string, text: string, isNavigate: boolean) => {
     setShow(isShow);
     setModalTitle(title);
     setModalText(text);
+    setModalNavigate(isNavigate);
   };
 
-  /**
-   *
-   */
   const showModalHandler = () => {
-    setShow(false);
+    if (modalNavigate) {
+      navigate("/login");
+      store.dispatch(saveToken("{}"));
+    } else {
+      setShow(false);
+    }
   };
 
   return (
@@ -277,19 +270,7 @@ function UserInfo() {
                   <input type="password" placeholder="현재 비밀번호를 입력해주세요." id="password" ref={passwordRef} />
                 </td>
               </tr>
-              <tr>
-                <th>
-                  <label>비밀번호 확인</label>
-                </th>
-                <td>
-                  <input
-                    type="password"
-                    placeholder="비밀번호를 한번 더 입력해주세요."
-                    id="password-confirm"
-                    ref={passwordConfirmRef}
-                  />
-                </td>
-              </tr>
+
               <tr>
                 <th>
                   <label>변경 비밀번호</label>
@@ -300,6 +281,19 @@ function UserInfo() {
                     placeholder="변경하실 비밀번호를 입력해주세요."
                     id="password-new"
                     ref={passwordNewRef}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label>비밀번호 확인</label>
+                </th>
+                <td>
+                  <input
+                    type="password"
+                    placeholder="비밀번호를 한번 더 입력해주세요."
+                    id="password-confirm"
+                    ref={passwordConfirmRef}
                   />
                 </td>
               </tr>

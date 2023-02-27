@@ -17,6 +17,11 @@ public class SeatService {
 
     private final SeatRepository seatRepository;
 
+    @Transactional
+    public void saveSeat(Seat seat) {
+        seatRepository.save(seat);
+    }
+
     @Transactional(readOnly = true)
     public boolean isExistSeats(List<SeatDto> seatDtos) {
         return seatDtos.stream().anyMatch(seatDto -> seatRepository.existsBySeatNo(seatDto.getSeatNo()));

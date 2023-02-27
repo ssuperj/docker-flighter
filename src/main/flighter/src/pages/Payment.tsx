@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-use-history";
+import { useAuth } from "../hooks/useAuth";
 import { PaymentProps } from "../types/types";
 import instance from "../utils/instance";
 
 const Payment = ({ paymentData }: PaymentProps) => {
   const history = useHistory();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const jquery = document.createElement("script");
@@ -43,7 +45,7 @@ const Payment = ({ paymentData }: PaymentProps) => {
 
   return (
     <>
-      <button onClick={onClickPayment}>결제하기</button>
+      <button onClick={isAuthenticated ? onClickPayment : () => history.push("/flighter/login")}>결제하기</button>
     </>
   );
 };

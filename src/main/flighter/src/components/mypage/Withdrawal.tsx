@@ -2,11 +2,11 @@ import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import Weather from "../utils/Weather";
 import ModalParam from "../utils/ModalParam";
-import { FormEventHandler, MouseEventHandler, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import instance from "../../utils/instance";
 import { saveToken } from "../../redux/actions";
 import store from "../../redux/store";
-import { useHistory } from "react-router-use-history";
+import { useNavigate } from "react-router-dom";
 
 const StyleWrap = styled.div`
   .weather_list {
@@ -76,8 +76,8 @@ const StyleWrap = styled.div`
 function Withdrawal() {
   const [isNotValidate, setIsNotValidate] = useState(true);
   const [isWithdraw, setIsWithdraw] = useState(false);
-  const history = useHistory();
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleValidatePassword = () => {
     instance
@@ -86,12 +86,11 @@ function Withdrawal() {
       })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
           setIsNotValidate(false);
         }
       })
       .catch((err) => {
-        console.log(err);
+        setIsNotValidate(true);
       });
   };
 
@@ -99,8 +98,15 @@ function Withdrawal() {
     instance
       .delete("/api/user")
       .then((res) => {
-        store.dispatch(saveToken("{}"));
-        history.replace("/flighter");
+        if (res && res.status === 200) {
+          setIsWithdraw(true);
+          setTimeout(() => {
+            navigate("/");
+            store.dispatch(saveToken("{}"));
+          }, 2000);
+        } else {
+          console.log(res.status);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -112,7 +118,12 @@ function Withdrawal() {
       <Weather />
       <div className="container">
         <h1 className="title">회원탈퇴</h1>
-        <form className="content">
+        <form
+          className="content"
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
           {isWithdraw ? (
             <>
               <img
@@ -162,6 +173,7 @@ function Withdrawal() {
                 isWithdraw={true}
                 handleWithdraw={handleWithdraw}
                 isNotValidate={isNotValidate}
+                setIsNotValidate={setIsNotValidate}
               />
             </>
           )}

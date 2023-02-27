@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
@@ -22,15 +22,22 @@ function ModalParam(props: any) {
   const handleClose = (): void => {
     copyText();
     setShow(false);
+    props.setIsNotValidate(true);
   };
 
   const handleWithdraw = () => {
     props.handleWithdraw();
   };
 
+  useEffect(() => {
+    if (!props.isNotValidate && props.isNotValidate !== undefined) {
+      setShow(true);
+    }
+  }, [props.isNotValidate]);
+
   return (
     <ModalWrap>
-      <div onClick={!props.isNotValidate ? handleShow : () => {}} className="btn__modal">
+      <div onClick={props.isWithdraw ? () => {} : handleShow} className="btn__modal">
         {props.render()}
       </div>
       <Modal show={show} onHide={handleClose}>

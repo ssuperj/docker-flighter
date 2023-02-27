@@ -88,7 +88,7 @@ public class SampleApplicationRunner implements ApplicationRunner {
 
                 joinService.joinUser(user);
 //                flightService.saveFlight(flight);
-//                ticketService.saveTicket(ticket);
+//                ticketService.saveTicket(tickets);
 //                seatService.saveSeat(seat);
         }
 
