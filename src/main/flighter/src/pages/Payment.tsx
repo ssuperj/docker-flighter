@@ -4,7 +4,6 @@ import { PaymentProps } from "../types/types";
 import instance from "../utils/instance";
 
 const Payment = ({ paymentData }: PaymentProps) => {
-  const paymentDataJson = JSON.stringify(paymentData);
   const history = useHistory();
 
   useEffect(() => {
@@ -21,34 +20,21 @@ const Payment = ({ paymentData }: PaymentProps) => {
   }, []);
 
   const onClickPayment = () => {
-    // const { IMP }: any = window;
-    // IMP.init("imp55188063");
-    // IMP.request_pay(paymentData, callback);
-    console.log(paymentDataJson);
-    instance.post("/api/reserve", paymentData);
-
-    // fetch("/api/payment/complete", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: paymentDataJson,
+    const { IMP }: any = window;
+    IMP.init("imp55188063");
+    IMP.request_pay(paymentData, callback);
+    // instance.post("/api/reserve", paymentData).then((data) => {
+    //   alert("결제가 완료되었습니다");
+    //   history.replace("/flighter/paycomplete");
     // });
-    // history.push("/flighter/paycomplete");
   };
 
   const callback = (response: any) => {
-    const { success, error_msg, imp_uid, merchant_uid, pay_method, paid_amount, status } = response;
+    const { success, error_msg } = response;
     if (success) {
-      fetch("/api/payment/complete", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: paymentDataJson,
-      }).then((data) => {
+      instance.post("/api/reserve", paymentData).then((data) => {
         alert("결제가 완료되었습니다");
-        history.push("/flighter/paycomplete");
+        history.replace("/flighter/paycomplete");
       });
     } else {
       alert(`결제 실패 : ${error_msg}`);

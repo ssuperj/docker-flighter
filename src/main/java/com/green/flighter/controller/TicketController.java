@@ -29,6 +29,6 @@ public class TicketController {
          String token = jwtTokenUtils.resolveToken(request);
          Long userId = jwtTokenUtils.getUserId(token);
          List<TicketDto> ticketDtos = ticketService.findTicketsByUserId(userId);
-     return new ResponseEntity<>(ticketDtos, HttpStatus.OK);
+         return new ResponseEntity<>(ticketDtos, HttpStatus.OK);
      }
 }

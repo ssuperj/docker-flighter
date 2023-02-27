@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Flickr from "./Flickr";
 import styled from "styled-components";
 
 const ModalWrap = styled.div`

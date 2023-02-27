@@ -29,8 +29,8 @@ public class ReserveService {
 
     @Transactional
     public void reserve(Users user, ReserveData reserveData) {
-        log.warn(reserveData.toString());
-        Flight flight = FlightDto.toFlight(reserveData.getFlightDto());
+        Flight flight = flightRepository.findByFlight(reserveData.getFlightDto().getFlight())
+                .orElseGet(()->FlightDto.toFlight(reserveData.getFlightDto()));
         Ticket ticket = TicketDto.toTicket(reserveData.getTicketDto());
         List<Seat> seatList = SeatDto.toSeat(reserveData.getSeatDtos());
 

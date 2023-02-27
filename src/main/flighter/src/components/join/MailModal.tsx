@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/esm/Modal";
-import sgMail from "@sendgrid/mail";
 
 const MailModal = (props: any) => {
   //variable

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
-import Coupang from "../components/Coupang";
-import Agreement1 from "../components/Agreement1";
-import Agreement2 from "../components/Agreement2";
-import Weather from "../components/Weather";
+import Coupang from "../components/utils/Coupang";
+import Agreement1 from "../components/join/AgreementRule";
+import Agreement2 from "../components/join/AgreementPrivacy";
+import Weather from "../components/utils/Weather";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import MailModal from "../components/join/MailModal";
 
@@ -275,7 +275,7 @@ const Join = (props: any) => {
 
   // 비밀번호
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/~?])(?=.*[0-9]).{8,30}$/;
     const passwordCurrent = e.target.value;
     setPassword(passwordCurrent);
 

@@ -5,12 +5,12 @@ function Modals(props: any) {
   return (
     <>
       <Modal show={props.show}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{props.text}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.toggleModalHandler}>
+          <Button variant="secondary" onClick={props.showModalHandler}>
             Close
           </Button>
         </Modal.Footer>

@@ -1,16 +1,13 @@
 package com.green.flighter.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.green.flighter.enums.RoleType;
 import com.green.flighter.enums.SexType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
-import org.springframework.security.core.Transient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SequenceGenerator(name = "SEQ_GENERATOR", sequenceName = "SEQ", allocationSize = 1)
+@ToString(exclude = {"tickets"})
 public class Users {
 
     @Id

@@ -5,7 +5,7 @@ import Passport from "./Passport";
 import ReserveInfo from "./ReserveInfo";
 import UserInfo from "./UserInfo";
 import Withdrawal from "./Withdrawal";
-import Coupang from "./Coupang";
+import Coupang from "../utils/Coupang";
 import { useLocation } from "react-router-dom";
 
 const StyledWrap = styled.div`
@@ -51,18 +51,19 @@ const MyPageWrap = styled.div`
 `;
 
 function MyPageNav(props: any) {
+  const location = useLocation();
   const [nav, setNav] = useState(1);
+
+  useEffect(() => {
+    setNav(location.state.nav);
+  }, [location.state.nav]);
+
   const nav1 = () => setNav(1);
   const nav2 = () => setNav(2);
   const nav3 = () => setNav(3);
   const nav4 = () => setNav(4);
-  const location = useLocation();
 
-  useEffect(() => {});
-
-  useEffect(() => {
-    setNav(location?.state?.nav);
-  }, [location?.state?.nav]);
+  console.log(location.state.nav);
 
   return (
     <div>

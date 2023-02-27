@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import BlueBg from "../components/BlueBg";
-import Loading from "../components/Loading";
-import SearchView from "../components/SearchView";
-import Weathers1 from "../components/Weather1";
+import BlueBg from "../components/utils/BlueBg";
+import Loading from "../components/utils/Loading";
+import SearchView from "../components/search/SearchView";
+import Weathers1 from "../components/utils/WeatherSub";
 
 /**
  * API에서 받아올 페이지가 더 있는지 확인

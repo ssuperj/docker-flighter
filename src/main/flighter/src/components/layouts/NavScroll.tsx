@@ -8,12 +8,12 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { textShaking } from "./styles/AnimationStyles";
+import { textShaking } from "../styles/AnimationStyles";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
-import store from "../redux/store";
-import { saveToken } from "../redux/actions";
+import { useAuth } from "../../hooks/useAuth";
+import store from "../../redux/store";
+import { saveToken } from "../../redux/actions";
 
 const StyledWrap = styled.div`
   .navbar {
@@ -162,10 +162,6 @@ function NavScroll() {
     const nav = 3;
     navigate("/mypage", { state: { nav: nav } });
   };
-  const clickNav4 = () => {
-    const nav = 4;
-    navigate("/mypage", { state: { nav: nav } });
-  };
 
   // components
   const LoginBox = () => (isAuthenticated ? <div onClick={logout}>Logout</div> : <div>Login</div>);
@@ -208,10 +204,6 @@ function NavScroll() {
                   </NavDropdown.Item>
                   <NavDropdown.Item as="span" onClick={clickNav3}>
                     User info
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as="span" onClick={clickNav4}>
-                    Withdrawal
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (

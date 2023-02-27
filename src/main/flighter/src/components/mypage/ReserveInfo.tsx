@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Weather from "./Weather";
+import Weather from "../utils/Weather";
 import TicketDetail from "./TicketDetail";
 import { useEffect, useState } from "react";
-import instance from "../utils/instance";
+import instance from "../../utils/instance";
 
 const StyleWrap = styled.div`
   .weather_list {

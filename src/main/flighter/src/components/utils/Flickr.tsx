@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 const Flickr = (props: any) => {
+  const [show, setShow] = useState(false);
   const [img, setImg] = useState("");
 
   const flickrApiKey = "854856240225808378005467c75ea795";
@@ -20,10 +21,15 @@ const Flickr = (props: any) => {
         } else {
           setImg(imageUrls);
         }
+        setShow(true);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [flickrApiUrl]);
 
-  return <img src={img} className={"my-3"} width="200" alt={props.query} style={{ borderRadius: "10px" }}></img>;
+  return show ? (
+    <img src={img} className={"my-3"} width="200" alt={props.query} style={{ borderRadius: "10px" }} />
+  ) : (
+    <div>Loading</div>
+  );
 };
 export default Flickr;

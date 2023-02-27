@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 const Agreement1 = () => {
   return (
     <textarea

@@ -143,7 +143,6 @@ function Weathers() {
   const [nextDay2, setNextDay2] = useState(Object);
   const [nextDay3, setNextDay3] = useState(Object);
   const [nextDay4, setNextDay4] = useState(Object);
-  const [fixed, setFixed] = useState(false);
   const location = UseGeoLocation();
 
   if (location.coordinates) {
@@ -264,5 +263,3 @@ function Weathers() {
   );
 }
 export default Weathers;
-
-// navigator.geolocation.getCurrentPosition(Weathers, onGeoError);

@@ -44,4 +44,10 @@ type PaymentProps = {
   };
 };
 
-export type { User, PaymentProps };
+interface FormData {
+  password?: string;
+  passwordConfirm?: string;
+  passwordNew?: string;
+}
+
+export type { User, PaymentProps, FormData };

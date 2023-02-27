@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cloud, cloud_a, cloud_b, cloud_c, cloud_d, plainfly } from "./styles/AnimationStyles";
+import { cloud, cloud_a, cloud_b, cloud_c, cloud_d, plainfly } from "../styles/AnimationStyles";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -420,7 +420,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const BlueBg = (props: any) => {
+const BlueBg = () => {
   return (
     <Wrapper>
       <div className="container__bg">

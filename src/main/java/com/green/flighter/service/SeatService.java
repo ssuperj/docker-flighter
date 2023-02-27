@@ -19,7 +19,7 @@ public class SeatService {
 
     @Transactional(readOnly = true)
     public boolean isExistSeats(List<SeatDto> seatDtos) {
-        return seatDtos.stream().allMatch(seatDto -> seatRepository.existsBySeatNo(seatDto.getSeatNo()));
+        return seatDtos.stream().anyMatch(seatDto -> seatRepository.existsBySeatNo(seatDto.getSeatNo()));
     }
 
     @Transactional(readOnly = true)

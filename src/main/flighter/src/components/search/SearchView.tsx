@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import NowDate from "./ResultInput";
+import NowDate from "../utils/ResultInput";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import Flickr from "./Flickr";
+import Flickr from "../utils/Flickr";
 
 const SearchView = (props: any) => {
   const location = useLocation();

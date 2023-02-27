@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import ModalParam from "./ModalParam";
+import ModalParam from "../utils/ModalParam";
 
 const FooterCopyWrap = styled.div`
   color: white;

@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { User } from "../types/types";
-import instance from "../utils/instance";
-import Weather from "./Weather";
+import { User } from "../../types/types";
+import instance from "../../utils/instance";
+import Weather from "../utils/Weather";
 
 const StyledWrap = styled.div`
   .weather_list {
@@ -188,6 +187,7 @@ function UserInfo() {
         const resUser = data;
         setUser(resUser);
       });
+    console.log(user?.image);
   }, [setUser]);
 
   return (
@@ -204,7 +204,7 @@ function UserInfo() {
         <div className="info">
           <img
             className="profile"
-            src={`${process.env.PUBLIC_URL}/images/${user?.image ?? `mypage-profile-default.webp`}`}
+            src={`${process.env.PUBLIC_URL}/images/profile/${user?.image ?? `mypage-profile-default.webp`}`}
             alt="profile"
           />
           <p className="name">{user?.name}</p>

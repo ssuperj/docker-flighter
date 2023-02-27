@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import CheckBox from "./CheckBox";
+import CheckBox from "../utils/CheckBox";
 import SearchDrop from "./SearchDrop";
 import SearchList from "./SearchList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightArrowLeft, faUser, faChild, faBaby } from "@fortawesome/free-solid-svg-icons";
-import { textShaking, fadeOut } from "./styles/AnimationStyles";
-import Calendar from "./Calendar";
+import { textShaking, fadeOut } from "../styles/AnimationStyles";
+import Calendar from "../utils/Calendar";
 import SearchGroup from "./SearchGroup";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";

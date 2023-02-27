@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
+//@Component
 public class SampleApplicationRunner implements ApplicationRunner {
 
         private final JoinService joinService;
@@ -38,7 +38,7 @@ public class SampleApplicationRunner implements ApplicationRunner {
                 Users user = Users.builder()
                         .id(1L)
                         .email("poqwer95@gmail.com")
-                        .password("1234")
+                        .password("!rhkdrms95")
                         .name("고광근")
                         .birth(LocalDate.of(1995, 7, 4))
                         .sexType(SexType.MALE)

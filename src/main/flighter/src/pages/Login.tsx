@@ -7,7 +7,7 @@ import { useHistory } from "react-router-use-history";
 import styled from "styled-components";
 import GithubLoginButton from "../components/login/GithubLoginButton";
 import GoogleLoginButton from "../components/login/GoogleLoginButton";
-import Weather from "../components/Weather";
+import Weather from "../components/utils/Weather";
 import { useAuth } from "../hooks/useAuth";
 import { saveToken, saveUser } from "../redux/actions";
 import store from "../redux/store";

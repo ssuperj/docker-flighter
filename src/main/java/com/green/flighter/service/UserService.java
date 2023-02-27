@@ -1,12 +1,13 @@
 package com.green.flighter.service;
 
-import com.green.flighter.config.jwt.JwtTokenProvider;
 import com.green.flighter.config.jwt.JwtTokenUtils;
 import com.green.flighter.dto.LoginRequestDto;
+import com.green.flighter.dto.PasswordDto;
 import com.green.flighter.model.Users;
 import com.green.flighter.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,28 +20,38 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final JwtTokenUtils JwtTokenUtils;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Transactional
-    public Users findUserByEmail(LoginRequestDto loginRequestDto) {
-        Users user =  userRepository.findByEmail(loginRequestDto.getEmail())
-                .orElseThrow(()->
-                        new NoSuchElementException("해당 이메일을 가진 사용자를 찾을 수 없습니다.")
-                );
-        return user;
-    }
-
-    @Transactional
-    public String findEmailByToken(String token) {
-        String username = JwtTokenUtils.getEmail(token);
-        // User 객체를 UserDto로 변환하여 반환
-        return username;
-    }
-
-    @Transactional
+    @Transactional(readOnly = true)
     public Users findUserByToken(String token) {
         Long userId = JwtTokenUtils.getUserId(token);
         Users user = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException(String.format("해당 id:%d 사용자가 없습니다.", userId)));
         return user;
+    }
+
+    @Transactional(readOnly = true)
+    public Users findUserByUserId(Long userId) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new NoSuchElementException(String.format("해당 id:%d 사용자가 없습니다.", userId)));
+        return user;
+    }
+
+    @Transactional
+    public void modifyPassword(Users user, PasswordDto passwordDto) {
+        String encodedPassword = bCryptPasswordEncoder.encode(passwordDto.getPasswordNew());
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void saveProfileImage(Users user, String image) {
+        user.setImage(image);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void dropUser(Users user) {
+        userRepository.delete(user);
     }
 }

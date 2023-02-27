@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Weather from "../components/Weather";
-import Coupang from "../components/Coupang";
+import Weather from "../components/utils/Weather";
+import Coupang from "../components/utils/Coupang";
 import Payment from "./Payment";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -400,39 +400,45 @@ function Ticketing() {
   const [endDate, setEndDate] = useState("");
   const [passengers, setPassengers] = useState(Object);
   const [seats, setSeats]: any = useState([]);
-  const [seatType, setSeatType] = useState("");
-
-  function getRandomSeatNo(seatType: string, reservedSeats: Array<string>) {
-    const seatLetter = seatType.substring(0, 1);
-    let seatNumber = Math.floor(Math.random() * 100) + 1;
-    let seatNo = `${seatLetter}${seatNumber.toString().padStart(2, "0")}`;
-
-    while (reservedSeats.includes(seatNo)) {
-      seatNumber = Math.floor(Math.random() * 100) + 1;
-      seatNo = `${seatLetter}${seatNumber.toString().padStart(2, "0")}`;
-    }
-
-    return seatNo;
-  }
+  const [reservedSeats, setReservedSeats] = useState([]);
 
   function countPassengers(passengers: object): number {
     return Object.keys(passengers).reduce((acc, key) => acc + parseInt(location.state.passengers[key]), 0);
   }
 
   useEffect(() => {
-    let reservedSeats: any[] = [];
-    instance
-      .get(`/api/seat/${location.state.airCode}`)
-      .then((response) => response.data)
-      .then((data) => {
-        reservedSeats = data;
-      });
+    const getRandomSeatNo = (seatType: string, reservedSeats: Array<string>, previousSeatNo?: string) => {
+      const seatLetter = seatType.substring(0, 1);
+      let seatNumber = Math.ceil(Math.random() * 100);
+      let seatNo = `${seatLetter}${seatNumber.toString().padStart(2, "0")}`;
+
+      while (reservedSeats.includes(seatNo) || seatNo === previousSeatNo) {
+        seatNumber = Math.ceil(Math.random() * 100);
+        seatNo = `${seatLetter}${seatNumber.toString().padStart(2, "0")}`;
+      }
+
+      if (reservedSeats.length >= 100) {
+        throw new Error("All seats are taken");
+      }
+
+      return seatNo;
+    };
+
+    const fetchReservedSeats = async () => {
+      const response = await instance.get(`/api/seat/${location.state.airCode}`);
+      const data = response.data;
+      setReservedSeats(data);
+    };
+
+    fetchReservedSeats();
 
     const count = countPassengers(location.state.passengers);
+
     setSeats(
-      [...new Array(count)].map(() => {
+      [...new Array(count)].map((_, index, arr) => {
+        const previousSeatNo: any = index > 0 ? arr[index - 1]?.seatNo : undefined;
         return {
-          seatNo: getRandomSeatNo(location.state.seatType, reservedSeats),
+          seatNo: getRandomSeatNo(location.state.seatType, reservedSeats, previousSeatNo),
           seatType: location.state.seatType,
         };
       })
@@ -449,7 +455,6 @@ function Ticketing() {
     setStartDate(location.state.startDate);
     setEndDate(location.state.endDate);
     setPassengers(location.state.passengers);
-    setSeatType(location.state.seatType);
   }, []);
 
   let endHour = (parseInt(startDate[0] + startDate[1]) + distance).toString().padStart(2, "0");

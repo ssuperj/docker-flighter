@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 
 const ModalWrap = styled.div`
+  display: inline-block;
   .btn__modal {
     cursor: pointer;
     &:hover {
@@ -14,12 +15,17 @@ const ModalWrap = styled.div`
 
 function ModalParam(props: any) {
   const [show, setShow] = useState(false);
+
   const handleShow = () => setShow(true);
   const EMAIL = "poqwer95@naver.com";
   const copyText = () => navigator.clipboard.writeText(EMAIL);
-  const handleClose = () => {
-    setShow(false);
+  const handleClose = (): void => {
     copyText();
+    setShow(false);
+  };
+
+  const handleWithdraw = () => {
+    props.handleWithdraw();
   };
 
   return (
@@ -28,7 +34,7 @@ function ModalParam(props: any) {
         {props.render()}
       </div>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{props.content}</Modal.Body>
@@ -36,7 +42,7 @@ function ModalParam(props: any) {
           <Button
             variant="primary"
             style={{ backgroundColor: "var(--color-l-m)", border: "none" }}
-            onClick={handleClose}
+            onClick={props.isWithdraw ? handleWithdraw : handleClose}
           >
             {props.btnContent}
           </Button>
