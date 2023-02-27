@@ -63,8 +63,6 @@ function MyPageNav(props: any) {
   const nav3 = () => setNav(3);
   const nav4 = () => setNav(4);
 
-  console.log(location.state.nav);
-
   return (
     <div>
       <StyledWrap>

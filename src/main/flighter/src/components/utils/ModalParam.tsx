@@ -30,7 +30,7 @@ function ModalParam(props: any) {
 
   return (
     <ModalWrap>
-      <div onClick={handleShow} className="btn__modal">
+      <div onClick={!props.isNotValidate ? handleShow : () => {}} className="btn__modal">
         {props.render()}
       </div>
       <Modal show={show} onHide={handleClose}>

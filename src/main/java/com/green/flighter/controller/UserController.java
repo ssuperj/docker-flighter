@@ -46,11 +46,20 @@ public class UserController {
         return new ResponseEntity<>("Drop user success", HttpStatus.OK);
     }
 
+    @PostMapping("/password")
+    public ResponseEntity<String> validatePassword(HttpServletRequest request, @RequestBody PasswordDto passwordDto){
+        Users user = getUser(request);
+        boolean isMatched = bCryptPasswordEncoder.matches(passwordDto.getPassword(), user.getPassword());
+        if (isMatched) {
+            return new ResponseEntity<>("confirmed password", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not same password", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PatchMapping("/password")
     public ResponseEntity<String> changePassword(HttpServletRequest request, @RequestBody PasswordDto passwordDto) {
-        String token = jwtTokenUtils.resolveToken(request);
-        Long userId = jwtTokenUtils.getUserId(token);
-        Users user = userService.findUserByUserId(userId);
+        Users user = getUser(request);
         boolean isMatched = bCryptPasswordEncoder.matches(passwordDto.getPassword(), user.getPassword());
         if (isMatched) {
             userService.modifyPassword(user, passwordDto);
@@ -95,5 +104,11 @@ public class UserController {
         } catch (IOException e) {
             return new ResponseEntity<>("Failed to delete image", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private Users getUser(HttpServletRequest request) {
+        String token = jwtTokenUtils.resolveToken(request);
+        Long userId = jwtTokenUtils.getUserId(token);
+        return userService.findUserByUserId(userId);
     }
 }

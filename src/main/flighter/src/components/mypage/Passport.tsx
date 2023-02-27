@@ -187,7 +187,6 @@ function UserInfo() {
         const resUser = data;
         setUser(resUser);
       });
-    console.log(user?.image);
   }, [setUser]);
 
   return (

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import Weather from "../utils/Weather";
 import ModalParam from "../utils/ModalParam";
-import { FormEventHandler, MouseEventHandler, useState } from "react";
+import { FormEventHandler, MouseEventHandler, useRef, useState } from "react";
 import instance from "../../utils/instance";
 import { saveToken } from "../../redux/actions";
 import store from "../../redux/store";
@@ -74,18 +74,31 @@ const StyleWrap = styled.div`
 `;
 
 function Withdrawal() {
+  const [isNotValidate, setIsNotValidate] = useState(true);
   const [isWithdraw, setIsWithdraw] = useState(false);
   const history = useHistory();
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-    console.log(event);
+  const handleValidatePassword = () => {
+    instance
+      .post("/api/user/password", {
+        password: passwordRef.current?.value,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setIsNotValidate(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleWithdraw = () => {
     instance
       .delete("/api/user")
       .then((res) => {
-        console.log(res);
         store.dispatch(saveToken("{}"));
         history.replace("/flighter");
       })
@@ -127,7 +140,7 @@ function Withdrawal() {
                 탈퇴하기를 눌러주세요.
               </p>
               <br />
-              <input className="input" type="password" id="password" />
+              <input className="input" type="password" id="password" ref={passwordRef} />
               <ModalParam
                 render={() => (
                   <Button
@@ -138,6 +151,7 @@ function Withdrawal() {
                       margin: "0 0 4px 5px",
                     }}
                     variant="secondary"
+                    onClick={handleValidatePassword}
                   >
                     탈퇴하기
                   </Button>
@@ -147,6 +161,7 @@ function Withdrawal() {
                 btnContent="탈퇴하기"
                 isWithdraw={true}
                 handleWithdraw={handleWithdraw}
+                isNotValidate={isNotValidate}
               />
             </>
           )}

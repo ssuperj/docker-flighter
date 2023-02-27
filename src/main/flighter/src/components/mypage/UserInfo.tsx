@@ -153,7 +153,6 @@ function UserInfo() {
       .catch((err) => {
         console.log(err);
       });
-    console.log(123);
   };
 
   const requestImage = () => {
