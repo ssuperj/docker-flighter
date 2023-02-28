@@ -317,7 +317,11 @@ function UserInfo() {
                       />
                       <img
                         id="preview"
-                        src={`${process.env.PUBLIC_URL}/images/profile/${user?.image ?? `mypage-profile-default.webp`}`}
+                        src={
+                          user?.image?.slice(0, 5) === "https"
+                            ? user.image
+                            : `${process.env.PUBLIC_URL}/images/profile/${user?.image ?? `mypage-profile-default.webp`}`
+                        }
                         alt="preview"
                         width="180"
                         height="180"

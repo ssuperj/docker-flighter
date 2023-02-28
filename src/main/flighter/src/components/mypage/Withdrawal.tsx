@@ -17,6 +17,7 @@ const StyleWrap = styled.div`
     justify-content: center;
     text-align: center;
     width: auto;
+    height: 700px;
 
     .title {
       margin-top: 60px;
@@ -148,7 +149,8 @@ function Withdrawal() {
               <p className="p-b">회원탈퇴 페이지입니다.</p>
               <p className="p">
                 탈퇴를 원하시면 회원님의 비밀번호를 입력하시고, <br />
-                탈퇴하기를 눌러주세요.
+                탈퇴하기를 눌러주세요. <br />
+                소셜 유저는 홈페이지에서 탈퇴
               </p>
               <br />
               <input className="input" type="password" id="password" ref={passwordRef} />

@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/api/login/**", "/api/join/**", "/api/auth/**", "/graphiql" , "/graphql" , "/graphql/schema").permitAll()
+                        .requestMatchers("/api/login/**", "/api/join/**", "/api/auth/**","/api/graphql/**", "/graphiql").permitAll()
                         .anyRequest().authenticated()
                         .and()
                         .addFilterBefore(new JwtAuthenticationFilter(JwtTokenProvider, jwtTokenUtils), UsernamePasswordAuthenticationFilter.class));

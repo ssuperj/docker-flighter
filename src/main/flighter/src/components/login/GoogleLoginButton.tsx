@@ -1,38 +1,45 @@
-import { GoogleOAuthProvider, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import { gql } from "@apollo/client";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import axios from "axios";
+import { useHistory } from "react-router-use-history";
+import client from "../../client";
+import { saveToken } from "../../redux/actions";
+import store from "../../redux/store";
 
 const GoogleLoginButton = () => {
+  const history = useHistory();
   const CLIENT_ID = "854205480647-eqg6781nbamokgh9j8o74g2qhr1bvjsg.apps.googleusercontent.com";
 
-  const query = `query {
-    getMember(id: 1) {
-      id
-      name
-      age
+  const SAVE_OR_LOGIN_USER_BY_GOOGLE = gql`
+    mutation saveOrLoginUserByGoogle($sub: String!, $email: String!, $name: String!, $picture: String!) {
+      saveOrLoginUserByGoogle(sub: $sub, email: $email, name: $name, picture: $picture) {
+        grantType
+        accessToken
+        refreshToken
+      }
     }
-  }`;
+  `;
 
   const responseGoogle = (response: any) => {
     const ID_TOKEN = response.credential;
     axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${ID_TOKEN}`).then((response) => {
       if (response.status === 200) {
-        const data = response.data;
-        console.log(data);
-        axios.post("/api/auth/google", data);
+        const { sub, email, name, picture } = response.data;
+        const variables = { sub, email, name, picture };
+
+        client
+          .mutate({
+            mutation: SAVE_OR_LOGIN_USER_BY_GOOGLE,
+            variables: variables,
+          })
+          .then((result) => {
+            const token = result.data.saveOrLoginUserByGoogle;
+            store.dispatch(saveToken(token));
+            history.go(-1);
+          });
       }
     });
   };
-
-  fetch("/api/graphql/auth/google", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query }),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data));
 
   return (
     <GoogleOAuthProvider clientId={CLIENT_ID}>

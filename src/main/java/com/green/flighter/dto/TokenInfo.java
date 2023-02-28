@@ -11,4 +11,8 @@ public class TokenInfo {
     private String grantType;
     private String accessToken;
     private String refreshToken;
+
+    public String getToken() {
+        return "?grantType=" + grantType + "&accessToken=" + accessToken + "&refreshToken=" + refreshToken;
+    }
 }

@@ -1,7 +1,11 @@
+import { useHistory } from "react-router-use-history";
+import { saveToken } from "../../redux/actions";
+import store from "../../redux/store";
+
 const GithubLoginButton = () => {
   const CLIENT_ID = "3d06fe1176e4f9b067e7";
-  const CLIENT_PWD = "1b9f9013e4af367aff5f55525528c9f19cd58f2b";
   const REDIRECT_URI = "http://localhost:8080/api/auth/github";
+  const history = useHistory();
 
   const handleLogin = () => {
     const url = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=user`;
@@ -9,8 +13,38 @@ const GithubLoginButton = () => {
     const height = 600;
     const xPos = window.screen.width / 2 - width / 2;
     const yPos = window.screen.height / 2 - height / 2;
+    const childWindow = window.open(url, "_blink", `width=${width},height=${height},left=${xPos},top=${yPos}`);
 
-    window.open(url, "_blink", `width=${width},height=${height},left=${xPos},top=${yPos}`);
+    let grantType;
+    let accessToken;
+    let refreshToken;
+    let token: any;
+
+    childWindow?.addEventListener("message", (event) => {
+      if (event.origin !== window.origin) {
+        return;
+      }
+      if (childWindow.opener) {
+        childWindow.opener.postMessage(childWindow.location.search, window.origin);
+      }
+    });
+
+    window.addEventListener("message", (event) => {
+      if (event.origin !== window.origin) {
+        return;
+      }
+      const searchParams = new URLSearchParams(event.data);
+      grantType = searchParams.get("grantType");
+      accessToken = searchParams.get("accessToken");
+      refreshToken = searchParams.get("refreshToken");
+      token = { grantType, accessToken, refreshToken };
+      childWindow?.close();
+    });
+
+    childWindow?.addEventListener("unload", () => {
+      store.dispatch(saveToken(token));
+      history.go(-1);
+    });
   };
 
   return (

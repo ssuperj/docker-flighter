@@ -27,14 +27,14 @@ const AppRouter = () => {
       <Header />
       <BodyWrap>
         <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/join" element={<Join />}></Route>
-          <Route path="/search/*" element={<Search />}></Route>
-          <Route path="/payment" element={<Ticketing />}></Route>
-          <Route path="/paycomplete" element={<Paycomplete />}></Route>
+          <Route path="/" element={<Main />} />
+          {!isAuthenticated && <Route path="/login" element={<Login />} />}
+          <Route path="/join" element={<Join />} />
+          <Route path="/search/*" element={<Search />} />
+          <Route path="/payment" element={<Ticketing />} />
+          <Route path="/paycomplete" element={<Paycomplete />} />
           {isAuthenticated && <Route path="/mypage/*" element={<MyPage />} />}
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BodyWrap>
       <Footer />

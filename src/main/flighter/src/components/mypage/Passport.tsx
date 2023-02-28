@@ -203,17 +203,21 @@ function UserInfo() {
         <div className="info">
           <img
             className="profile"
-            src={`${process.env.PUBLIC_URL}/images/profile/${user?.image ?? `mypage-profile-default.webp`}`}
+            src={
+              user?.image?.slice(0, 5) === "https"
+                ? user.image
+                : `${process.env.PUBLIC_URL}/images/profile/${user?.image ?? `mypage-profile-default.webp`}`
+            }
             alt="profile"
           />
-          <p className="name">{user?.name}</p>
-          <p className="birth">{user?.birth}</p>
-          <p className="sex">{user?.sexType}</p>
+          <p className="name">{user?.name ?? "EMPTY"}</p>
+          <p className="birth">{user?.birth ?? "EMPTY"}</p>
+          <p className="sex">{user?.sexType ?? "EMPTY"}</p>
           <p className="country">Korea</p>
-          <p className="dateOfIssue">{parseDate(user?.createDate)}</p>
+          <p className="dateOfIssue">{parseDate(user?.createDate) ?? "EMPTY"}</p>
           <p className="type">{user?.roleType}</p>
-          <p className="validUntil">{parseDate(user?.validDate)}</p>
-          <p className="series">{`FLT-0${user?.id}`}</p>
+          <p className="validUntil">{parseDate(user?.validDate) ?? "EMPTY"}</p>
+          <p className="series">{`FLT-0${user?.id}` ?? "EMPTY"}</p>
           {/**서명 추후 업데이트 예정 */}
           <p className="signature">EMPTY</p>
         </div>

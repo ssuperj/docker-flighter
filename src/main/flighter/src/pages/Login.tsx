@@ -260,7 +260,6 @@ function Login() {
       .then((data) => {
         const token = data;
         store.dispatch(saveToken(token));
-
         navigate(-1);
       })
       .catch((error) => {
