@@ -1,7 +1,7 @@
 const GithubLoginButton = () => {
   const CLIENT_ID = "3d06fe1176e4f9b067e7";
   const CLIENT_PWD = "1b9f9013e4af367aff5f55525528c9f19cd58f2b";
-  const REDIRECT_URI = "http://localhost:3000/auth/github/callback";
+  const REDIRECT_URI = "http://localhost:8080/api/auth/github";
 
   const handleLogin = () => {
     const url = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=user`;
@@ -23,8 +23,8 @@ const GithubLoginButton = () => {
           display: "inline-flex",
           alignItems: "center",
           color: "rgba(0, 0, 0, 1)",
-          boxShadow: "rgba(0, 0, 0, 0.4) 0px 2px 2px 0px, rgba(0, 0, 0, 0.4) 0px 0px 1px 0px",
-          padding: "0px",
+          boxShadow: "0px 0px 1px",
+          padding: "0px 32px",
           borderRadius: "2px",
           border: "1px solid transparent",
           fontSize: "14px",

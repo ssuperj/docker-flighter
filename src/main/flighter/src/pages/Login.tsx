@@ -312,9 +312,9 @@ function Login() {
 
       <div className="other-container">
         <div className="line">OR</div>
-        <div className="social">
+        <div className="social d-flex flex-wrap justify-content-center">
           <GoogleLoginButton />
-          <div className="btn-social m-3"></div>
+          <div className="btn-social m-2"></div>
           <GithubLoginButton />
         </div>
       </div>

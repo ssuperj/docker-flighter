@@ -24,7 +24,7 @@
     jsonpointer "^5.0.0"
     leven "^3.1.0"
 
-"@apollo/client@^3.7.5":
+"@apollo/client@^3.7.9":
   version "3.7.9"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.7.9.tgz#459454dc4a7c81adaa66e13e626ce41f633dc862"
   integrity sha512-YnJvrJOVWrp4y/zdNvUaM8q4GuSHCEIecsRDTJhK/veT33P/B7lfqGJ24NeLdKMj8tDEuXYF7V0t+th4+rgC+Q==
@@ -1898,6 +1898,11 @@
   integrity sha512-NmhoilMDyIfQiOSdQgxpVH2tC2u85Y0mVijtBNbI9kcDYLEiW/r6vKYVKtkyU+C4qobXhGMPfZ70PTc0lysSVA==
   dependencies:
     "@swc/helpers" "^0.4.14"
+
+"@react-oauth/google@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.8.0.tgz#e95c9e2ef28f0da6d5de223e48c391a12eb4f821"
+  integrity sha512-xmIhYvvaBSblOzo3Fqv762lqub92SOFR8eRR7QpPyFPZEXZcOymaMuEkRSUKUrbu+9wfB8qtOaGMRJzrN7U2PA==
 
 "@reduxjs/toolkit@^1.9.3":
   version "1.9.3"
@@ -5410,6 +5415,11 @@ functions-have-names@^1.2.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
+
+gapi-script@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/gapi-script/-/gapi-script-1.2.0.tgz#8106ad0abb36661ce4fab62ef6efada288d7169e"
+  integrity sha512-NKTVKiIwFdkO1j1EzcrWu/Pz7gsl1GmBmgh+qhuV2Ytls04W/Eg5aiBL91SCiBM9lU0PMu7p1hTVxhh1rPT5Lw==
 
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
