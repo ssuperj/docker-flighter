@@ -16,6 +16,7 @@ declare module "*.png";
 declare module "*.jpg";
 declare module "*.jpeg";
 declare module "react-github-login";
+declare module "@react-oauth/google";
 
 interface Window {
   gapi: string;

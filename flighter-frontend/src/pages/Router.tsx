@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../components/layouts/Header";
 import Main from "./Main";
 import MyPage from "./MyPage";
@@ -10,8 +10,6 @@ import NotFound from "../errors/NotFound";
 import Footer from "../components/layouts/Footer";
 import styled from "styled-components";
 import Search from "./Search";
-import { useAuth } from "../hooks/useAuth";
-import { useEffect } from "react";
 
 const BodyWrap = styled.div`
   height: auto;

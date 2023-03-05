@@ -402,6 +402,7 @@ function Ticketing() {
   const [seats, setSeats]: any = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function countPassengers(passengers: object): number {
     return Object.keys(passengers).reduce((acc, key) => acc + parseInt(location.state.passengers[key]), 0);
   }
@@ -455,7 +456,22 @@ function Ticketing() {
     setStartDate(location.state.startDate);
     setEndDate(location.state.endDate);
     setPassengers(location.state.passengers);
-  }, []);
+  }, [
+    countPassengers,
+    location.state.airCode,
+    location.state.airline,
+    location.state.dateTime,
+    location.state.depCode,
+    location.state.departure,
+    location.state.desCode,
+    location.state.destination,
+    location.state.distance,
+    location.state.endDate,
+    location.state.passengers,
+    location.state.seatType,
+    location.state.startDate,
+    reservedSeats,
+  ]);
 
   let endHour = (parseInt(startDate[0] + startDate[1]) + distance).toString().padStart(2, "0");
 

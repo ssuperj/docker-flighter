@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class SampleApplicationRunner implements ApplicationRunner {
                 Users user = Users.builder()
                         .id(1L)
                         .email("poqwer95@gmail.com")
-                        .password("!rhkdrms95")
+                        .password("todnqjrj1!")
                         .name("고광근")
                         .birth(LocalDate.of(1995, 7, 4))
                         .sexType(SexType.MALE)

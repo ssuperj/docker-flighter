@@ -1,6 +1,6 @@
 import NavScroll from "./NavScroll";
 
-function Header(props: any) {
+function Header() {
   return (
     <>
       <NavScroll></NavScroll>

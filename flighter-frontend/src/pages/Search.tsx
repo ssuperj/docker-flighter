@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import BlueBg from "../components/utils/BlueBg";
 import Loading from "../components/utils/Loading";
@@ -16,7 +16,7 @@ const pageTest = (itemCount: number, pageNo: number) => {
 const API_KEY =
   "B4w%2BouwgattOuQ%2BoVlzGaVpUoH6qYQmr9GjQ1zou%2Fvr2JR4h5%2BRE%2F%2FxNNeygDB2UUbswLZwhkNXAS%2BRojIqpoA%3D%3D";
 
-const Search = (props: any) => {
+const Search = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const state = location.state;
@@ -36,7 +36,7 @@ const Search = (props: any) => {
   const DOMESTIC_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getDflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}&pageNo=${pageNo}`;
   const INTERNATIONAL_API_URL = `https://proxy.cors.sh/http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList?serviceKey=${API_KEY}&schDeptCityCode=${departure}&schArrvCityCode=${destination}&schDate=${startDate}&pageNo=${pageNo}`;
 
-  const mainApi = async () => {
+  const mainApi = useCallback(async () => {
     await fetch(isDomestic ? DOMESTIC_API_URL : INTERNATIONAL_API_URL, {
       headers: {
         "x-cors-api-key": "temp_f725bd4bd754e5de9c60ee709a5ede89",
@@ -71,7 +71,7 @@ const Search = (props: any) => {
           },
         });
       });
-  };
+  }, [DOMESTIC_API_URL, INTERNATIONAL_API_URL, isDomestic, navigate]);
 
   const clickMoreBtn = (event: any) => {
     setPageNo((prev) => prev + 1);
@@ -79,7 +79,7 @@ const Search = (props: any) => {
 
   useEffect(() => {
     mainApi();
-  }, []);
+  }, [mainApi]);
 
   return (
     <>

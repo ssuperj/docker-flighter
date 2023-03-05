@@ -23,7 +23,7 @@ const MainWrap = styled.div`
     height: 800px;
   }
 `;
-const Main = (props: any) => {
+const Main = () => {
   return (
     <MainWrap>
       <MainTitle />

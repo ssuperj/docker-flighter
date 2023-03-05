@@ -12,7 +12,7 @@ const StyleWrap = styled.div`
     width: 70%;
     height: 500px;
     border-top: 1px solid pink;
-    border-bottom: 1px solid pink;;
+    border-bottom: 1px solid pink;
     margin-top: 200px;
 
     img {
@@ -29,14 +29,14 @@ const StyleWrap = styled.div`
     }
     div {
       margin-top: 20px;
-        button:first-child {
-          background-Color: var(--color-r-m);
-          border: none;
-          opacity: 0.8;
+      button:first-child {
+        background-color: var(--color-r-m);
+        border: none;
+        opacity: 0.8;
       }
       a:last-child {
         button {
-          background-Color: white;
+          background-color: white;
           color: black;
           border: 1px solid black;
           margin-left: 10px;
@@ -46,13 +46,14 @@ const StyleWrap = styled.div`
   }
 `;
 
-const Paycomplete = (props: any) => {
-
+const Paycomplete = () => {
   const navigate = useNavigate();
 
-  const clickNav = () => {const nav = 2;
-  navigate("/mypage", {state: { nav: nav }})};
-  
+  const clickNav = () => {
+    const nav = 2;
+    navigate("/mypage", { state: { nav: nav } });
+  };
+
   return (
     <StyleWrap>
       <div className="container">
@@ -61,7 +62,9 @@ const Paycomplete = (props: any) => {
         <p>저희 플라이터를 이용해주셔서 감사합니다.</p>
         <div>
           <Button onClick={clickNav}>예약내역보기</Button>
-          <Link to="/"><Button>홈으로</Button></Link>
+          <Link to="/">
+            <Button>홈으로</Button>
+          </Link>
         </div>
       </div>
     </StyleWrap>

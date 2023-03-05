@@ -49,7 +49,7 @@ const MyPageWrap = styled.div`
   justify-content: center;
 `;
 
-function MyPageNav(props: any) {
+function MyPageNav() {
   const [nav, setNav] = useState(1);
 
   const nav1 = () => setNav(1);
