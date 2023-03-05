@@ -25,7 +25,7 @@ function CopyRIght() {
   return (
     <FooterCopyWrap>
       <p>&#169; 2023 Copyright Flighter</p>
-      <Link to="https://github.com/ssuperj/flighter">
+      <Link to="https://github.com/ssuperj/docker-flighter">
         <FontAwesomeIcon icon={faGithub} size="2x" />
       </Link>
       <Link to="https://www.google.com/search?q=flighter">

@@ -47,6 +47,6 @@ logging:
 jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
 path:
-  image: src/main/flighter/public/images/profile
+  image: src/main/flighter-frontend/public/images/profile
 front:
   url: http://localhost:3030

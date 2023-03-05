@@ -27,7 +27,7 @@ const Payment = ({ paymentData }: PaymentProps) => {
     IMP.request_pay(paymentData, callback);
     // instance.post("/api/reserve", paymentData).then((data) => {
     //   alert("결제가 완료되었습니다");
-    //   history.replace("/flighter/paycomplete");
+    //   history.replace(`${process.env.PUBLIC_URL}/paycomplete`);
     // });
   };
 
@@ -36,7 +36,7 @@ const Payment = ({ paymentData }: PaymentProps) => {
     if (success) {
       instance.post("/api/reserve", paymentData).then((data) => {
         alert("결제가 완료되었습니다");
-        history.replace("/flighter/paycomplete");
+        history.replace(`${process.env.PUBLIC_URL}/paycomplete`);
       });
     } else {
       alert(`결제 실패 : ${error_msg}`);
@@ -45,7 +45,9 @@ const Payment = ({ paymentData }: PaymentProps) => {
 
   return (
     <>
-      <button onClick={isAuthenticated ? onClickPayment : () => history.push("/flighter/login")}>결제하기</button>
+      <button onClick={isAuthenticated ? onClickPayment : () => history.push(`${process.env.PUBLIC_URL}/login`)}>
+        결제하기
+      </button>
     </>
   );
 };
