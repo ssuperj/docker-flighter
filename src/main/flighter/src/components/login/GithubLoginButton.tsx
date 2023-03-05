@@ -4,7 +4,7 @@ import store from "../../redux/store";
 
 const GithubLoginButton = () => {
   const CLIENT_ID = "3d06fe1176e4f9b067e7";
-  const REDIRECT_URI = "http://localhost:8080/api/auth/github";
+  const REDIRECT_URI = "http://localhost:8090/api/auth/github";
   const history = useHistory();
 
   const handleLogin = () => {

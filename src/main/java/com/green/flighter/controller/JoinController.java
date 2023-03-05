@@ -39,21 +39,21 @@ public class JoinController {
     public ResponseEntity<Object> confirmSend(@RequestBody String email) {
         final String RANDOM_STR = UUID.randomUUID().toString().toUpperCase().substring(0,7);
 
-        final String SEND_EMAIL = "poqwer95@naver.com";
+        final String SEND_EMAIL = "rhrhkdrms95@gmail.com";
         final String RECEIVE_EMAIL = email;
 
         Properties properties = new Properties();
-        properties.put("mail.transport.protocol", "smtp");
-        properties.put("mail.smtp.host", "smtp.naver.com");
-        properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.transport.protocol", "smtp");
         properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
 
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(SEND_EMAIL, "qlalfdldi12!@");
+                return new PasswordAuthentication(SEND_EMAIL, "shltjvkzireathjt");
             }
         });
 

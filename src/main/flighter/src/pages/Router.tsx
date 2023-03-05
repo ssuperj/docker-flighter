@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Header from "../components/layouts/Header";
 import Main from "./Main";
 import MyPage from "./MyPage";
@@ -11,6 +11,7 @@ import Footer from "../components/layouts/Footer";
 import styled from "styled-components";
 import Search from "./Search";
 import { useAuth } from "../hooks/useAuth";
+import { useEffect } from "react";
 
 const BodyWrap = styled.div`
   height: auto;
@@ -20,20 +21,18 @@ const BodyWrap = styled.div`
 `;
 
 const AppRouter = () => {
-  const { isAuthenticated } = useAuth();
-
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header />
       <BodyWrap>
         <Routes>
           <Route path="/" element={<Main />} />
-          {!isAuthenticated && <Route path="/login" element={<Login />} />}
+          <Route path="/login/*" element={<Login />} />
           <Route path="/join" element={<Join />} />
           <Route path="/search/*" element={<Search />} />
           <Route path="/payment" element={<Ticketing />} />
           <Route path="/paycomplete" element={<Paycomplete />} />
-          {isAuthenticated && <Route path="/mypage/*" element={<MyPage />} />}
+          <Route path="/mypage/*" element={<MyPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BodyWrap>

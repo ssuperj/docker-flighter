@@ -1,15 +1,14 @@
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { FormEvent, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useHistory } from "react-router-use-history";
+import { FormEvent, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import GithubLoginButton from "../components/login/GithubLoginButton";
 import GoogleLoginButton from "../components/login/GoogleLoginButton";
 import Weather from "../components/utils/Weather";
 import { useAuth } from "../hooks/useAuth";
-import { saveToken, saveUser } from "../redux/actions";
+import { saveToken } from "../redux/actions";
 import store from "../redux/store";
 
 const StyleWrap = styled.div`
@@ -237,6 +236,7 @@ function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const handleLoginFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -246,6 +246,10 @@ function Login() {
 
     authenticateToServer(emailValue, passwordValue);
   };
+
+  useEffect(() => {
+    isAuthenticated && navigate("/");
+  }, [navigate, isAuthenticated]);
 
   const authenticateToServer = (emailValue?: string, passwordValue?: string) => {
     axios({
