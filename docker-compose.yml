@@ -1,33 +1,23 @@
 version: "3"
 services:
-  postgre:
-    build: ./postgre-db
+  postgres:
+    build: ./postgres-db
     ports:
-      - "3306:3306"
+      - "5432:5432"
     restart: always
 
   frontend:
     build: ./flighter-frontend
     ports:
-      - "27017:27017"
+      - "3000:3000"
     restart: always
 
   backend:
     build: ./flighter-backend
     depends_on:
-      - mysql
+      - postgres
     ports:
       - "8090:8090"
     restart: always
-    # command: ["./bin/wait-for-it.sh", "mysql", "3306", "--", "java", "-jar", "myapp.jar"]
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/my_db?useSSL=false&allowPublicKeyRetrieval=true
-
-  chatapp:
-    build: ./chatapp
-    ports:
-      - "8100:8100"
-    restart: always
-    # command: ["./bin/wait-for-it.sh", "mongodb", "27017", "--", "java", "-jar", "myapp.jar"]
-    environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/chatdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/my_db
