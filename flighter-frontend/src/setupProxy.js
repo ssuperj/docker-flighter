@@ -6,6 +6,9 @@ module.exports = function (app) {
     createProxyMiddleware({
       target: process.env.REACT_APP_API_BACKEND_URL,
       changeOrigin: true,
+      dnsPrefetch: true,
+      // DNS 서버를 지정할 경우 다음과 같이 설정합니다.
+      dnsResolver: "8.8.8.8",
     })
   );
 };

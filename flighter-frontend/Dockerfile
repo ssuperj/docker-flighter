@@ -1,6 +1,6 @@
 FROM ssuperj/node18
 
-WORKDIR /app
+WORKDIR /flighter-frontend
 
 COPY package*.json ./
 

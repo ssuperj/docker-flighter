@@ -41,7 +41,7 @@ public class Ticket {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seat> seats = new ArrayList<>();
+    private List<Seat> seats;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")

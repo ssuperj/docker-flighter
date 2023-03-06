@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.time.LocalDateTime;
@@ -95,7 +96,16 @@ public class UserController {
             String imageName = format + file.getOriginalFilename();
 
             Path targetPath = Paths.get(baseUrl,  imageName);
-            Files.createDirectories(targetPath.getParent());
+
+
+            File file1 = new File("/haha.txt");
+            file1.createNewFile();
+            log.warn("baseUrl : " + baseUrl);
+            log.warn(tempPath.toString());
+            log.warn(targetPath.toString());
+
+            Path directories = Files.createDirectories(targetPath.getParent());
+            log.warn(directories.toString());
             Files.move(tempPath, targetPath, StandardCopyOption.REPLACE_EXISTING);
 
             userService.saveProfileImage(user,imageName);
