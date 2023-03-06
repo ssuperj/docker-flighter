@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     hikari:
-      maximum-pool-size: '4'
+      maximum-pool-size: 4
     username: poqwer95
-    password: 1234
+    password: todnqjrj1!
     url: jdbc:postgresql://localhost:5432/my_db
   jpa:
     hibernate:

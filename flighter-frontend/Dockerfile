@@ -1,9 +1,12 @@
 FROM ssuperj/node18
 
 WORKDIR /app
+
 COPY package*.json ./
 
-RUN npm install
+RUN yarn
+
+COPY . .
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

@@ -5,12 +5,16 @@ services:
     ports:
       - "5432:5432"
     restart: always
+    env_file:
+      - ./development/.env
 
   frontend:
     build: ./flighter-frontend
     ports:
       - "3000:3000"
     restart: always
+    env_file:
+      - ./development/.env
 
   backend:
     build: ./flighter-backend
@@ -19,5 +23,17 @@ services:
     ports:
       - "8090:8090"
     restart: always
+    env_file:
+      - ./development/.env
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/my_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/my_db
+
+  # nginx:
+  #   build: ./nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   restart: always
+  #   depends_on:
+  #     - frontend
+  #     - backend
