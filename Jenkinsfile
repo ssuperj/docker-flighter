@@ -41,11 +41,10 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cat /etc/resolv.conf'
-                // sh 'echo "!rhkdrms95" | sudo -S usermod -aG sudo $USER'
                 sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd'
-                sh 'sudo apt-get install -y systemd-resolved'
-                sh 'systemd-resolve --flush-caches'
-                sh 'echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null'
+                // sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd-'
+                // sh 'systemd-resolve --flush-caches'
+                sh 'echo "nameserver 8.8.8.8" | echo "!rhkdrms95" | sudo -S tee /etc/resolv.conf > /dev/null'
                 sh 'cd $WORK_SPACE/docker-flighter/flighter-backend && ./gradlew clean build -x test'
             }
         }
