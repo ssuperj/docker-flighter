@@ -7,6 +7,11 @@ services:
     restart: always
     env_file:
       - ./development/.env
+    # networks:
+    #   - my_network
+    environment:
+      - POSTGRES=postgres
+      - POSTGRES_PORT=5432
 
   frontend:
     build: ./flighter-frontend
@@ -17,6 +22,13 @@ services:
       - ./development/.env
     volumes:
       - ./flighter-frontend/public/images:/flighter-frontend/public/images
+    # networks:
+    #   - my_network
+    depends_on:
+      - backend
+    environment:
+      - FRONTEND=frontend
+      - FRONTEND_PORT=3000
 
   backend:
     build: ./flighter-backend
@@ -29,15 +41,34 @@ services:
       - ./development/.env
     volumes:
       - ./flighter-frontend/public/images:/flighter-frontend/public/images
+    # networks:
+    #   - my_network
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/my_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/my_db
+      - BACKEND=backend
+      - BACKEND_PORT=8090
 
-  # nginx:
-  #   build: ./nginx
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   restart: always
-  #   depends_on:
-  #     - frontend
-  #     - backend
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    depends_on:
+      - frontend
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    # networks:
+    #   - my_network
+    # extra_hosts:
+      # - host.docker.internal:host-gateway
+
+# networks:
+#   my_network:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 172.20.0.0/16
+
+

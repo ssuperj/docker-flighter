@@ -1,0 +1,42 @@
+#Server Configuration
+server:
+  port: 8090
+
+#Sptring Configuration
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+      hibernate:
+        format_sql: true
+    open-in-view: true
+  graphql:
+    graphiql:
+      enabled: true
+    schema:
+      printer:
+        enabled: true
+    path: /api/graphql
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  devtools:
+    restart:
+      enabled: false
+
+logging:
+  file:
+    path: /tmp
+  level:
+    org.springframework.security: debug
+
+#env
+path:
+  image: ./../flighter-frontend/public/images/profile

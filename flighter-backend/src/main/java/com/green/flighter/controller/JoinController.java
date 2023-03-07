@@ -38,8 +38,7 @@ public class JoinController {
     @PostMapping("/confirm")
     public ResponseEntity<Object> confirmSend(@RequestBody String email) {
         final String RANDOM_STR = UUID.randomUUID().toString().toUpperCase().substring(0,7);
-
-        final String SEND_EMAIL = "rhrhkdrms95@gmail.com";
+        final String SEND_EMAIL = "roqkfdyd95@gmail.com";
         final String RECEIVE_EMAIL = email;
 
         Properties properties = new Properties();
@@ -53,7 +52,7 @@ public class JoinController {
 
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(SEND_EMAIL, "shltjvkzireathjt");
+                return new PasswordAuthentication(SEND_EMAIL, "wclzjftybzefwkbu");
             }
         });
 

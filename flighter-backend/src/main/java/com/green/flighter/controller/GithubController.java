@@ -34,26 +34,36 @@ import java.util.Map;
 @RequestMapping("/api/auth/github")
 public class GithubController {
 
-    private static final String CLIENT_ID = "3d06fe1176e4f9b067e7";
-    private static final String CLIENT_PWD = "1b9f9013e4af367aff5f55525528c9f19cd58f2b";
-    private static final String REDIRECT_URI = "http://localhost:8090/api/auth/github";
+    private static final String CLIENT_ID = System.getenv("CLIENT_ID");
+    private static final String CLIENT_PWD = System.getenv("CLIENT_PWD");
+    private static final String REDIRECT_URI = System.getenv("REDIRECT_URI");
+    private static final String FRONTEND = System.getenv("FRONTEND");
 
     private final UserService userService;
     private final LoginService loginService;
 
     @GetMapping
     public String saveOrLoginUserByGithub(@RequestParam String code) {
+        log.warn("CLIENT_ID" + CLIENT_ID);
+        log.warn("CLIENT_PWD" + CLIENT_PWD);
+        log.warn("REDIRECT_URI" + REDIRECT_URI);
         String accessToken = getAccessToken(code);
+
         GithubUserDto githubUserDto = getGithubUserDto(accessToken);
 
-        log.warn(githubUserDto.getEmail());
         if(userService.validateDupleEmail(githubUserDto.getEmail())) {
              String tokenQueryString = loginService.login(new LoginRequestDto(githubUserDto.getEmail(), githubUserDto.getId())).getToken();
-            return "redirect:http://localhost:3000/flighter" + tokenQueryString;
+            String URL = String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
+            log.warn("URL" + URL);
+            return URL;
         }
+
+        log.warn("id" +  githubUserDto.getId() + "email" + githubUserDto.getEmail() +  "login" + githubUserDto.getLogin() + "url" + githubUserDto.getAvatarUrl());
         userService.saveUserByGoogleOrGithub(githubUserDto.getId(), githubUserDto.getEmail(), githubUserDto.getLogin(), githubUserDto.getAvatarUrl());
         String tokenQueryString = loginService.login(new LoginRequestDto(githubUserDto.getEmail(), githubUserDto.getId())).getToken();
-        return "redirect:http://localhost:3000/flighter"+ tokenQueryString;
+        String URL = String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
+        log.warn("URL" + URL);
+        return URL;
     }
 
     private static GithubUserDto getGithubUserDto(String accessToken) {

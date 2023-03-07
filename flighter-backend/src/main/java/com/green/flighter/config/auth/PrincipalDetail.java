@@ -1,7 +1,6 @@
 package com.green.flighter.config.auth;
 
 import com.green.flighter.model.Users;
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

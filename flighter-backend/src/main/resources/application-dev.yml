@@ -1,0 +1,24 @@
+#data
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    username: poqwer95
+    password: todnqjrj1!
+    url: jdbc:postgresql://localhost:5432/my_db
+
+#env
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+
+#github
+CLIENT_ID: cab06d864733bbd31a13
+CLIENT_PWD: 57381ec95b0e13a13975dada79ccbdffcd383654
+REDIRECT_URI: http://localhost:8090/api/auth/github
+FRONTEND: localhost
+
+#github
+#CLIENT_ID: cab06d864733bbd31a13
+#CLIENT_PWD: 57381ec95b0e13a13975dada79ccbdffcd383654
+#REDIRECT_URI: fly.system3g.win:8090/api/auth/github
+#FRONTEND: fly.system3g.win
