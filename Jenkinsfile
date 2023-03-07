@@ -42,6 +42,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cat /etc/resolv.conf'
+                sh 'apt-get install systemd'
                 sh 'systemd-resolve --flush-caches'
                 sh 'echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null'
                 sh 'cd $WORK_SPACE/docker-flighter/flighter-backend && ./gradlew clean build -x test'
