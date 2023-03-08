@@ -41,7 +41,7 @@ pipeline {
                 sh 'cd $WORK_SPACE/docker-flighter && docker-compose up -d'
 
             }
-        }
+        
 
         // stage('Build') {
             // steps {
@@ -86,4 +86,6 @@ pipeline {
 }
 
 
+
+}
 
