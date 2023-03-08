@@ -40,7 +40,6 @@ pipeline {
             }
         }
 
-
         // stage('Build') {
             // steps {
                 // sh 'cat /etc/resolv.conf'
