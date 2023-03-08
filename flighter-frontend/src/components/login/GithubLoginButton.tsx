@@ -3,10 +3,11 @@ import { saveToken } from "../../redux/actions";
 import store from "../../redux/store";
 
 const GithubLoginButton = () => {
-  const currentHostname = window.location.hostname;
+  const BACKEND = process.env.BACKEND || window.location.hostname;
+  const BACKEND_PORT = process.env.BACKEND_PORT || "8090";
 
   const CLIENT_ID = "3d06fe1176e4f9b067e7";
-  const REDIRECT_URI = `http://${currentHostname}:8090/api/auth/github`;
+  const REDIRECT_URI = `http://${BACKEND}:${BACKEND_PORT}/api/auth/github`;
   const history = useHistory();
 
   const handleLogin = () => {
