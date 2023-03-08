@@ -35,16 +35,15 @@ pipeline {
                 sh 'docker rmi -f docker-flighter-postgres'
                 sh 'docker rmi -f docker-flighter-frontend'
                 sh 'docker rmi -f docker-flighter-backend'
-                sh 'docker rmi -f docker-flighter-chatapp'
             }
         }
         stage('Build') {
             steps {
-                sh 'cat /etc/resolv.conf'
-                sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd'
+                // sh 'cat /etc/resolv.conf'
+                // sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd'
                 // sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd-'
                 // sh 'systemd-resolve --flush-caches'
-                sh 'echo "nameserver 8.8.8.8" | echo "!rhkdrms95" | sudo -S tee /etc/resolv.conf > /dev/null'
+                // sh 'echo "nameserver 8.8.8.8" | echo "!rhkdrms95" | sudo -S tee /etc/resolv.conf > /dev/null'
                 sh 'cd $WORK_SPACE/docker-flighter/flighter-backend && ./gradlew clean build -x test'
             }
         }
