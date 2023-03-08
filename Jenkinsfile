@@ -50,6 +50,7 @@ pipeline {
 
                     def deploy = {
                         sh '''
+                        cd $WORK_SPACE/flighter-backend && docker-compose up -d
                         envFile=$(cat .env)
                         email=$(echo "$envFile" | grep '^ADMIN_EMAIL=' | cut -d= -f2-)
                         password=$(echo "$envFile" | grep '^ADMIN_PASSWORD=' | cut -d= -f2-)
