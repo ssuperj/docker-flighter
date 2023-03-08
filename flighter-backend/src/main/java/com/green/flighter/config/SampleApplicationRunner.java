@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
+//@Component
 public class SampleApplicationRunner implements ApplicationRunner {
 
         private final JoinService joinService;
