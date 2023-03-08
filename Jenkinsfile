@@ -27,7 +27,7 @@ pipeline {
         //     }
         // }
         
-        
+
         stage('PreBuild') {
             steps {
                 sh 'java -version'
@@ -78,3 +78,6 @@ pipeline {
         }
     }
 }
+
+
+
