@@ -59,7 +59,6 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.4",
-    "@types/rellax": "^1.7.4",
     "@types/styled-components": "^5.1.26"
   },
   "scripts": {
