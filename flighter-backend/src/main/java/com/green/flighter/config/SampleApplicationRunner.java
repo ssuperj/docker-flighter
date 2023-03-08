@@ -7,26 +7,23 @@ import com.green.flighter.model.Flight;
 import com.green.flighter.model.Seat;
 import com.green.flighter.model.Ticket;
 import com.green.flighter.model.Users;
-import com.green.flighter.service.FlightService;
-import com.green.flighter.service.JoinService;
-import com.green.flighter.service.SeatService;
-import com.green.flighter.service.TicketService;
+import com.green.flighter.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Slf4j
 @RequiredArgsConstructor
-//@Component
+@Component
 public class SampleApplicationRunner implements ApplicationRunner {
 
         private final JoinService joinService;
+        private final UserService userService;
         private final FlightService flightService;
         private final TicketService ticketService;
         private final SeatService seatService;
@@ -34,11 +31,10 @@ public class SampleApplicationRunner implements ApplicationRunner {
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
-                // 더미 데이터 생성
 
                 Users user = Users.builder()
                         .id(1L)
-                        .email("poqwer95@gmail.com")
+                        .email("poqwer95@naver.com")
                         .password("todnqjrj1!")
                         .name("고광근")
                         .birth(LocalDate.of(1995, 7, 4))
@@ -87,7 +83,10 @@ public class SampleApplicationRunner implements ApplicationRunner {
                 flight.getTickets().add(ticket);
                 flight.getSeats().add(seat);
 
-                joinService.joinUser(user);
+
+                if(!userService.validateDupleEmail(user.getEmail())){
+                        joinService.joinUser(user);
+                }
 //                flightService.saveFlight(flight);
 //                ticketService.saveTicket(tickets);
 //                seatService.saveSeat(seat);

@@ -33,4 +33,5 @@ public class JoinService {
         user.setRoleType(RoleType.USER);
         userRepository.save(user);
     }
+
 }
