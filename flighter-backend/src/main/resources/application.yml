@@ -1,50 +1,5 @@
-#Server Configuration
-server:
-  port: 8090
+# application datasource 정보는 application-dev.yml 보안문제로 .gitignore 되있음
 
-#Datasource Configuration
 spring:
-  datasource:
-    hikari:
-      maximum-pool-size: 4
-    username: poqwer95
-    password: todnqjrj1!
-    url: jdbc:postgresql://localhost:5432/my_db
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      jakarta:
-        persistence:
-          sharedCache:
-            mode: ENABLE_SELECTIVE
-      hibernate:
-        format_sql: true
-    open-in-view: true
-  graphql:
-    graphiql:
-      enabled: true
-    schema:
-      printer:
-        enabled: true
-    path: /api/graphql
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-  devtools:
-    restart:
-      enabled: false
-
-logging:
-  file:
-    path: /tmp
-  level:
-    org.springframework.security: debug
-
-#env
-jwt:
-  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
-path:
-  image: ./../flighter-frontend/public/images/profile
+  profiles:
+    active: common, dev

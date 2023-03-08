@@ -34,9 +34,9 @@ import java.util.Map;
 @RequestMapping("/api/auth/github")
 public class GithubController {
 
-    private static final String CLIENT_ID = "3d06fe1176e4f9b067e7";
-    private static final String CLIENT_PWD = "1b9f9013e4af367aff5f55525528c9f19cd58f2b";
-    private static final String REDIRECT_URI = "http://localhost:8090/api/auth/github";
+    private static final String CLIENT_ID = System.getenv("CLIENT_ID");
+    private static final String CLIENT_PWD = System.getenv("CLIENT_PWD");
+    private static final String REDIRECT_URI = System.getenv("REDIRECT_URI");
 
     private final UserService userService;
     private final LoginService loginService;
