@@ -8,9 +8,10 @@ pipeline {
     }
     environment {
         WORK_SPACE = "/home/$USER/agent/workspace"
-        BASE_URL = "http://localhost"
+        BASE_URL = "http://10.211.55.4"
         JAVA_HOME = "/home/parallels/agent/tools/hudson.model.JDK/jdk17-agent" // JDK가 설치된 경로에 맞게 설정
         PATH = "$JAVA_HOME/bin:$PATH"
+        ACCESS_TOKEN = ""
     }
     stages {
         // stage('Test Backend') {
@@ -40,25 +41,33 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // sh 'cat /etc/resolv.conf'
-                // sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd'
-                // sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd-'
-                // sh 'systemd-resolve --flush-caches'
-                // sh 'echo "nameserver 8.8.8.8" | echo "!rhkdrms95" | sudo -S tee /etc/resolv.conf > /dev/null'
                 sh 'cd $WORK_SPACE/docker-flighter/flighter-backend && ./gradlew clean build -x test'
             }
         }
         stage('Deploy') {
             steps {
               script {
+
                     def deploy = {
                         sh '''
-                            cd $WORK_SPACE/docker-flighter && docker-compose up -d
-                            until $(curl --output /dev/null --silent --head --fail $BASE_URL:8090); do
-                                printf '.'
-                                sleep 5
-                            done
+                        def envFile = readFile('.env')
+                        def email = envFile.split("\n").find { it.startsWith('ADMIN_EMAIL=') }?.split('=')[1] ?: ''
+                        def password = envFile.split("\n").find { it.startsWith('ADMIN_PASSWORD=') }?.split('=')[1] ?: ''
+                        echo ${email}
+                        echo ${password}
+                        echo ${BASE_URL}
+
+                        while true; do
+                            ACCESS_TOKEN=$(curl -s -H "Content-Type: application/json" -d '{ "email": "'${email}'", "password": "'${password}'" }' ${BASE_URL}/api/login | jq -r '.accessToken')
+                            if [ -n "$ACCESS_TOKEN" ]; then
+                                echo "Successfully received the JWT token."
+                                break
+                            fi
+                            printf '.'
+                            sleep 5
+                        done    
                         '''
+                        // sh "curl -X POST -H 'Authorization:Bearer ${token}' ${serverUrl}/deploy"
                     }
                     
                     try {
