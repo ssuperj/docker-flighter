@@ -44,7 +44,7 @@ pipeline {
                 sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd'
                 // sh 'echo "!rhkdrms95" | sudo -S apt-get install -y systemd-'
                 // sh 'systemd-resolve --flush-caches'
-                sh 'echo "nameserver 8.8.8.8" | sudo -S tee /etc/resolv.conf > /dev/null'
+                sh 'echo "nameserver 8.8.8.8" | echo "!rhkdrms95" | sudo -S tee /etc/resolv.conf > /dev/null'
                 sh 'cd $WORK_SPACE/docker-flighter/flighter-backend && ./gradlew clean build -x test'
             }
         }
@@ -78,3 +78,5 @@ pipeline {
         }
     }
 }
+
+
