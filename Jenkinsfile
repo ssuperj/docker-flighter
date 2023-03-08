@@ -37,6 +37,9 @@ pipeline {
                 // sh 'docker rmi -f docker-flighter-postgres'
                 sh 'docker rmi -f docker-flighter-frontend'
                 // sh 'docker rmi -f docker-flighter-backend'
+                
+                sh 'cd $WORK_SPACE/docker-flighter && docker-compose up -d'
+
             }
         }
 
