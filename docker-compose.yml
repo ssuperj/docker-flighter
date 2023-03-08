@@ -7,8 +7,8 @@ services:
     restart: always
     env_file:
       - ./development/.env
-    dns:
-      - 8.8.8.8
+    networks:
+      - my_network
 
   frontend:
     build: ./flighter-frontend
@@ -19,8 +19,8 @@ services:
       - ./development/.env
     volumes:
       - ./flighter-frontend/public/images:/flighter-frontend/public/images
-    dns:
-      - 8.8.8.8
+    networks:
+      - my_network
 
   backend:
     build: ./flighter-backend
@@ -35,8 +35,16 @@ services:
       - ./flighter-frontend/public/images:/flighter-frontend/public/images
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/my_db
-    dns:
-      - 8.8.8.8
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
 
   # nginx:
   #   build: ./nginx
