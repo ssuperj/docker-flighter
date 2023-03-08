@@ -2,9 +2,11 @@ FROM ssuperj/node18
 
 WORKDIR /flighter-frontend
 
-# COPY package*.json ./
+COPY package*.json ./
 
 COPY . .
+
+RUN yarn cache clean
 
 RUN yarn install --production=false
 
