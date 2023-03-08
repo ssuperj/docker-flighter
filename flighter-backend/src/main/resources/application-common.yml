@@ -40,4 +40,3 @@ logging:
 #env
 path:
   image: ./../flighter-frontend/public/images/profile
-

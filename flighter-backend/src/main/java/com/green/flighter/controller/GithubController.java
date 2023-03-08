@@ -37,6 +37,7 @@ public class GithubController {
     private static final String CLIENT_ID = System.getenv("CLIENT_ID");
     private static final String CLIENT_PWD = System.getenv("CLIENT_PWD");
     private static final String REDIRECT_URI = System.getenv("REDIRECT_URI");
+    private static final String FRONTEND = System.getenv("FRONTEND");
 
     private final UserService userService;
     private final LoginService loginService;
@@ -52,11 +53,11 @@ public class GithubController {
         log.warn(githubUserDto.getEmail());
         if(userService.validateDupleEmail(githubUserDto.getEmail())) {
              String tokenQueryString = loginService.login(new LoginRequestDto(githubUserDto.getEmail(), githubUserDto.getId())).getToken();
-            return "redirect:http://localhost:3000/flighter" + tokenQueryString;
+            return String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
         }
         userService.saveUserByGoogleOrGithub(githubUserDto.getId(), githubUserDto.getEmail(), githubUserDto.getLogin(), githubUserDto.getAvatarUrl());
         String tokenQueryString = loginService.login(new LoginRequestDto(githubUserDto.getEmail(), githubUserDto.getId())).getToken();
-        return "redirect:http://localhost:3000/flighter"+ tokenQueryString;
+        return String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
     }
 
     private static GithubUserDto getGithubUserDto(String accessToken) {

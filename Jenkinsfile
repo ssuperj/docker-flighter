@@ -47,7 +47,6 @@ pipeline {
         stage('Deploy') {
             steps {
               script {
-
                     def deploy = {
                         sh '''
                         cd $WORK_SPACE/docker-flighter && docker-compose up -d
