@@ -77,7 +77,9 @@ pipeline {
                                 echo "Caught TLS handshake timeout error. Retrying deploy..."
                                 deploy()
                             } else {
-                                echo "123"
+                                echo 12
+                                printf(e.getMessage())
+                                echo 34
                             }
                         }
                     }
