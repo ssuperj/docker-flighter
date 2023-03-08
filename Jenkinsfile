@@ -68,7 +68,6 @@ pipeline {
                             printf '.'
                             sleep 5
                         done
-                        echo ${ACCESS_TOKEN}
                         '''
                         // sh "curl -X POST -H 'Authorization:Bearer ${token}' ${serverUrl}/deploy"
                     }
