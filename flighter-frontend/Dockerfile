@@ -16,7 +16,7 @@ RUN yarn config set registry https://registry.npmjs.org/
 
 RUN yarn cache clean
 
-RUN yarn install
+RUN yarn install --registry=https://registry.npmjs.org/
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
