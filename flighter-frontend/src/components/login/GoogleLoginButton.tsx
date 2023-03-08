@@ -32,7 +32,7 @@ const GoogleLoginButton = () => {
             mutation: SAVE_OR_LOGIN_USER_BY_GOOGLE,
             variables: variables,
           })
-          .then((result) => {
+          .then((result: any) => {
             const token = result.data.saveOrLoginUserByGoogle;
             store.dispatch(saveToken(token));
             history.go(-1);
