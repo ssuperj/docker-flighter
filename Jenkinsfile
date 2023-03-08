@@ -1,6 +1,7 @@
 pipeline {
     agent { 
-        label 'parallels'
+        // label 'parallels'
+        any
     }
     // tools {
     //     jdk 'jdk17-agent'
@@ -39,7 +40,7 @@ pipeline {
             }
         }
 
-        
+
         // stage('Build') {
             // steps {
                 // sh 'cat /etc/resolv.conf'
