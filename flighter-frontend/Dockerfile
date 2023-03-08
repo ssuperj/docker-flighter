@@ -6,9 +6,15 @@ COPY package*.json ./
 
 COPY . .
 
+RUN pwd
+
+RUN yarn -v
+
+RUN node -v
+
 RUN yarn cache clean
 
-RUN yarn install --production=false
+RUN y install --production=false
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
