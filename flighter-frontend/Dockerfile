@@ -14,7 +14,7 @@ RUN node -v
 
 RUN yarn cache clean
 
-RUN y install --production=false
+RUN yarn install --registry=https://registry.yarnpkg.com/
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
