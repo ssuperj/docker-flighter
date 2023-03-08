@@ -43,6 +43,9 @@ public class GithubController {
 
     @GetMapping
     public String saveOrLoginUserByGithub(@RequestParam String code) {
+        log.warn("CLIENT_ID" + CLIENT_ID);
+        log.warn("CLIENT_PWD" + CLIENT_PWD);
+        log.warn("REDIRECT_URI" + REDIRECT_URI);
         String accessToken = getAccessToken(code);
         GithubUserDto githubUserDto = getGithubUserDto(accessToken);
 
