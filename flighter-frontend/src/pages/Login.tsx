@@ -5,7 +5,7 @@ import { FormEvent, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import GithubLoginButton from "../components/login/GithubLoginButton";
-// import GoogleLoginButton from "../components/login/GoogleLoginButton";
+import GoogleLoginButton from "../components/login/GoogleLoginButton";
 import Weather from "../components/utils/Weather";
 import { useAuth } from "../hooks/useAuth";
 import { saveToken } from "../redux/actions";
@@ -316,7 +316,7 @@ function Login() {
       <div className="other-container">
         <div className="line">OR</div>
         <div className="social d-flex flex-wrap justify-content-center">
-          {/* <GoogleLoginButton /> */}
+          <GoogleLoginButton />
           <div className="btn-social m-2"></div>
           <GithubLoginButton />
         </div>
