@@ -6,7 +6,7 @@ WORKDIR /flighter-frontend
 
 COPY . .
 
-RUN yarn
+RUN yarn install --production=false
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
