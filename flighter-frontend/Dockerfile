@@ -2,11 +2,11 @@ FROM ssuperj/node18
 
 WORKDIR /flighter-frontend
 
-COPY package*.json ./
-
-RUN yarn
+# COPY package*.json ./
 
 COPY . .
+
+RUN yarn
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
