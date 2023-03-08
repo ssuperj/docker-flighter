@@ -50,6 +50,7 @@ public class GithubController {
         String accessToken = getAccessToken(code);
         GithubUserDto githubUserDto = getGithubUserDto(accessToken);
 
+        log.warn("234");
         if(userService.validateDupleEmail(githubUserDto.getEmail())) {
              String tokenQueryString = loginService.login(new LoginRequestDto(githubUserDto.getEmail(), githubUserDto.getId())).getToken();
             String URL = String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
