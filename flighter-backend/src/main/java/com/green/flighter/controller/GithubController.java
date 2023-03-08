@@ -53,11 +53,15 @@ public class GithubController {
         log.warn(githubUserDto.getEmail());
         if(userService.validateDupleEmail(githubUserDto.getEmail())) {
              String tokenQueryString = loginService.login(new LoginRequestDto(githubUserDto.getEmail(), githubUserDto.getId())).getToken();
-            return String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
+            String URL = String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
+            log.warn("URL" + URL);
+            return URL;
         }
         userService.saveUserByGoogleOrGithub(githubUserDto.getId(), githubUserDto.getEmail(), githubUserDto.getLogin(), githubUserDto.getAvatarUrl());
         String tokenQueryString = loginService.login(new LoginRequestDto(githubUserDto.getEmail(), githubUserDto.getId())).getToken();
-        return String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
+        String URL = String.format("http://%s:3000/fligher%s", FRONTEND, tokenQueryString);
+        log.warn("URL" + URL);
+        return URL;
     }
 
     private static GithubUserDto getGithubUserDto(String accessToken) {
