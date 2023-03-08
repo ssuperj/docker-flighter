@@ -8,6 +8,7 @@ COPY . .
 
 RUN pwd
 
+
 RUN yarn -v
 
 RUN node -v
