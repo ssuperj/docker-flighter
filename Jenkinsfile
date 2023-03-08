@@ -50,9 +50,10 @@ pipeline {
 
                     def deploy = {
                         sh '''
-                        def envFile = readFile('.env')
-                        def email = envFile.split("\n").find { it.startsWith('ADMIN_EMAIL=') }?.split('=')[1] ?: ''
-                        def password = envFile.split("\n").find { it.startsWith('ADMIN_PASSWORD=') }?.split('=')[1] ?: ''
+                        envFile=$(cat .env)
+                        email=$(echo "$envFile" | grep '^ADMIN_EMAIL=' | cut -d= -f2-)
+                        password=$(echo "$envFile" | grep '^ADMIN_PASSWORD=' | cut -d= -f2-)
+                        
                         echo ${email}
                         echo ${password}
                         echo ${BASE_URL}
