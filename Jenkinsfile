@@ -41,8 +41,7 @@ pipeline {
                 sh 'cd $WORK_SPACE/docker-flighter && docker-compose up -d'
 
             }
-        
-
+    
         // stage('Build') {
             // steps {
                 // sh 'cat /etc/resolv.conf'
