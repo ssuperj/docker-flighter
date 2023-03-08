@@ -38,6 +38,8 @@ pipeline {
                 // sh 'docker rmi -f docker-flighter-backend'
             }
         }
+
+        
         // stage('Build') {
             // steps {
                 // sh 'cat /etc/resolv.conf'
@@ -48,7 +50,7 @@ pipeline {
                 // sh 'cd $WORK_SPACE/docker-flighter/flighter-backend && ./gradlew clean build -x test'
             // }
         // }
-        
+
         stage('Deploy') {
             steps {
               script {
