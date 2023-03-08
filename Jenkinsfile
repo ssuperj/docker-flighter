@@ -1,7 +1,7 @@
 pipeline {
     agent { 
-        // label 'parallels'
-        any
+        label 'parallels'
+        // any
     }
     // tools {
     //     jdk 'jdk17-agent'
