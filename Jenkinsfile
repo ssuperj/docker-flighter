@@ -54,34 +54,34 @@ pipeline {
             // }
         // }
 
-        stage('Deploy') {
-            steps {
-              script {
-                    def deploy = {
-                        sh '''
-                            cd $WORK_SPACE/docker-flighter && docker-compose up -d
-                            until $(curl --output /dev/null --silent --head --fail $BASE_URL:8090); do
-                                printf '.'
-                                sleep 5
-                            done
-                        '''
-                    }
+        // stage('Deploy') {
+        //     steps {
+        //       script {
+        //             def deploy = {
+        //                 sh '''
+        //                     cd $WORK_SPACE/docker-flighter && docker-compose up -d
+        //                     until $(curl --output /dev/null --silent --head --fail $BASE_URL:8090); do
+        //                         printf '.'
+        //                         sleep 5
+        //                     done
+        //                 '''
+        //             }
                     
-                    try {
-                        deploy()
-                    } catch (Exception e) {
-                        retry(3) {
-                            if (e.getMessage().contains("TLS handshake timeout")) {
-                                echo "Caught TLS handshake timeout error. Retrying deploy..."
-                                deploy()
-                            } else {
-                                throw e
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //             try {
+        //                 deploy()
+        //             } catch (Exception e) {
+        //                 retry(3) {
+        //                     if (e.getMessage().contains("TLS handshake timeout")) {
+        //                         echo "Caught TLS handshake timeout error. Retrying deploy..."
+        //                         deploy()
+        //                     } else {
+        //                         throw e
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
 
