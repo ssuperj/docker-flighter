@@ -10,17 +10,17 @@ services:
   #   networks:
   #     - my_network
 
-  # frontend:
-  #   build: ./flighter-frontend
-  #   ports:
-  #     - "3000:3000"
-  #   restart: always
-  #   env_file:
-  #     - ./development/.env
-  #   volumes:
-  #     - ./flighter-frontend/public/images:/flighter-frontend/public/images
-  #   networks:
-  #     - my_network
+  frontend:
+    build: ./flighter-frontend
+    ports:
+      - "3000:3000"
+    restart: always
+    env_file:
+      - ./development/.env
+    volumes:
+      - ./flighter-frontend/public/images:/flighter-frontend/public/images
+    networks:
+      - my_network
 
   # backend:
   #   build: ./flighter-backend
