@@ -78,7 +78,8 @@ pipeline {
                         deploy()
                     } catch (Exception e) {
                         retry(3) {
-                            if (e.getMessage().contains("TLS handshake timeout")) {
+                            printf(e.getMessage())
+                            if (e.printStackTrace().contains("TLS handshake timeout")) {
                                 echo "Caught TLS handshake timeout error. Retrying deploy..."
                                 deploy()
                             } else {
